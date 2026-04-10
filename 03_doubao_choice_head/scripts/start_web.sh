@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT_DIR/../shared/common_env.sh"
+resolve_python
+resolve_model_dir BASE_MODEL_7B Qwen2.5-7B-Instruct
+
+if [[ -z "${ADAPTER_DIR:-}" ]]; then
+  LATEST_RUN="$(ls -td "$ROOT_DIR"/runs/* 2>/dev/null | head -1)"
+  if [[ -z "$LATEST_RUN" ]]; then
+    echo "未找到 runs 目录，请先训练或通过 ADAPTER_DIR 指定。"
+    exit 1
+  fi
+  ADAPTER_DIR="$(find "$LATEST_RUN/outputs" -type d -path '*/stage2_sft/best' | head -1)"
+fi
+
+if [[ -z "$ADAPTER_DIR" || ! -d "$ADAPTER_DIR" ]]; then
+  echo "未找到 stage2 adapter 目录，请检查训练结果。"
+  exit 1
+fi
+
+HOST="${HOST:-127.0.0.1}"
+PORT="${PORT:-7863}"
+
+exec "$PY" "$SHARED_DIR/serve_model_app.py" \
+  --base_model "$BASE_MODEL_7B" \
+  --adapter_dir "$ADAPTER_DIR" \
+  --adapter_root "$ROOT_DIR/runs" \
+  --host "$HOST" \
+  --port "$PORT" \
+  --title "Doubao Choice-Head"

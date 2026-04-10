@@ -1,0 +1,16 @@
+{
+  "name": "qwen7b_baseline_gt_sft",
+  "model_name": "./Qwen2.5-7B-Instruct",
+  "data_path": "data/train.jsonl",
+  "val_path": "data/val.jsonl",
+  "test_path": "data/test.jsonl",
+  "output_dir": "outputs",
+  "num_epochs": 5,
+  "batch_size": 4,
+  "gradient_accumulation_steps": 1,
+  "learning_rate": 0.0002,
+  "rank": 16,
+  "lora_alpha": 32,
+  "alpha": 0.0,
+  "seed": 42
+}

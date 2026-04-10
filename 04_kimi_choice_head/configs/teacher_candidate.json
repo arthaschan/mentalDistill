@@ -1,0 +1,5 @@
+{
+  "model": "moonshot-v1-32k",
+  "api_base": "https://api.moonshot.cn/v1",
+  "api_key_env": "MOONSHOT_API_KEY"
+}

@@ -1,0 +1,17 @@
+{
+  "deepseek_v3": {
+    "model": "deepseek-chat",
+    "api_base": "https://api.deepseek.com/v1",
+    "api_key_env": "DEEPSEEK_API_KEY"
+  },
+  "doubao": {
+    "model": "doubao-pro-32k",
+    "api_base": "https://ark.cn-beijing.volces.com/api/v3",
+    "api_key_env": "DOUBAO_API_KEY"
+  },
+  "moonshot_v1_32k": {
+    "model": "moonshot-v1-32k",
+    "api_base": "https://api.moonshot.cn/v1",
+    "api_key_env": "MOONSHOT_API_KEY"
+  }
+}

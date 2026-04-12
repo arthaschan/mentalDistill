@@ -1,0 +1,1283 @@
+{
+  "ensemble_acc": 79.51807228915662,
+  "ensemble_correct": 66,
+  "total": 83,
+  "n_models": 7,
+  "individual": [
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_7/best",
+      "acc": 77.10843373493977
+    },
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_8/best",
+      "acc": 77.10843373493977
+    },
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_11/best",
+      "acc": 80.72289156626506
+    },
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_42/best",
+      "acc": 80.72289156626506
+    },
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_55/best",
+      "acc": 77.10843373493977
+    },
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_77/best",
+      "acc": 78.3132530120482
+    },
+    {
+      "adapter": "/home/student/arthas/mentalDistill/11_multi_seed_ensemble/outputs/seed_123/best",
+      "acc": 79.51807228915662
+    }
+  ],
+  "per_sample": [
+    {
+      "question_idx": 0,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 1,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 2,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 3,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 4,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 5,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 6,
+      "gt": "E",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": false
+    },
+    {
+      "question_idx": 7,
+      "gt": "C",
+      "votes": [
+        "C",
+        "A",
+        "C",
+        "C",
+        "A",
+        "A",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 8,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 9,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 10,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 11,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 12,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 13,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 14,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 15,
+      "gt": "E",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": false
+    },
+    {
+      "question_idx": 16,
+      "gt": "A",
+      "votes": [
+        "B",
+        "E",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": false
+    },
+    {
+      "question_idx": 17,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 18,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "C",
+        "A",
+        "C",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 19,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 20,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 21,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 22,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 23,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 24,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 25,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 26,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 27,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 28,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 29,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 30,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 31,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 32,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 33,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 34,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 35,
+      "gt": "D",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": false
+    },
+    {
+      "question_idx": 36,
+      "gt": "E",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": false
+    },
+    {
+      "question_idx": 37,
+      "gt": "A",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": false
+    },
+    {
+      "question_idx": 38,
+      "gt": "B",
+      "votes": [
+        "A",
+        "A",
+        "C",
+        "A",
+        "C",
+        "A",
+        "C"
+      ],
+      "ensemble_pred": "A",
+      "correct": false
+    },
+    {
+      "question_idx": 39,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 40,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 41,
+      "gt": "B",
+      "votes": [
+        "A",
+        "A",
+        "B",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": false
+    },
+    {
+      "question_idx": 42,
+      "gt": "E",
+      "votes": [
+        "A",
+        "A",
+        "E",
+        "E",
+        "E",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": false
+    },
+    {
+      "question_idx": 43,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 44,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 45,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 46,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 47,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 48,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 49,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 50,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 51,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 52,
+      "gt": "E",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": false
+    },
+    {
+      "question_idx": 53,
+      "gt": "E",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": false
+    },
+    {
+      "question_idx": 54,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 55,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 56,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 57,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    },
+    {
+      "question_idx": 58,
+      "gt": "C",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": false
+    },
+    {
+      "question_idx": 59,
+      "gt": "E",
+      "votes": [
+        "B",
+        "B",
+        "D",
+        "B",
+        "D",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": false
+    },
+    {
+      "question_idx": 60,
+      "gt": "B",
+      "votes": [
+        "A",
+        "B",
+        "A",
+        "B",
+        "A",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 61,
+      "gt": "C",
+      "votes": [
+        "B",
+        "B",
+        "C",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": false
+    },
+    {
+      "question_idx": 62,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 63,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 64,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 65,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 66,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 67,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 68,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 69,
+      "gt": "C",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": false
+    },
+    {
+      "question_idx": 70,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 71,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 72,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 73,
+      "gt": "B",
+      "votes": [
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B",
+        "B"
+      ],
+      "ensemble_pred": "B",
+      "correct": true
+    },
+    {
+      "question_idx": 74,
+      "gt": "D",
+      "votes": [
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 75,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 76,
+      "gt": "B",
+      "votes": [
+        "E",
+        "E",
+        "D",
+        "E",
+        "D",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": false
+    },
+    {
+      "question_idx": 77,
+      "gt": "D",
+      "votes": [
+        "D",
+        "E",
+        "D",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "ensemble_pred": "D",
+      "correct": true
+    },
+    {
+      "question_idx": 78,
+      "gt": "D",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": false
+    },
+    {
+      "question_idx": 79,
+      "gt": "A",
+      "votes": [
+        "B",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 80,
+      "gt": "A",
+      "votes": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "ensemble_pred": "A",
+      "correct": true
+    },
+    {
+      "question_idx": 81,
+      "gt": "E",
+      "votes": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ],
+      "ensemble_pred": "E",
+      "correct": true
+    },
+    {
+      "question_idx": 82,
+      "gt": "C",
+      "votes": [
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C"
+      ],
+      "ensemble_pred": "C",
+      "correct": true
+    }
+  ]
+}

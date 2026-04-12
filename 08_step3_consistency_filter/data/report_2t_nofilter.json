@@ -1,0 +1,26 @@
+{
+  "total": 672,
+  "fused": 672,
+  "gt_fallback": 0,
+  "fused_ratio": 1.0,
+  "high_thresh": 0.0,
+  "low_thresh": 0.0,
+  "downweight_factor": 0.5,
+  "gt_agreement": 0.9688,
+  "mean_entropy": 0.1271,
+  "mean_consistency": 0.9791,
+  "teacher_stats": {
+    "Doubao": {
+      "high": 672,
+      "mid": 0,
+      "low": 0,
+      "missing": 0
+    },
+    "DeepSeek": {
+      "high": 672,
+      "mid": 0,
+      "low": 0,
+      "missing": 0
+    }
+  }
+}

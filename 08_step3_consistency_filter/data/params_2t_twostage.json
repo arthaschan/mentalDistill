@@ -1,0 +1,13 @@
+[{
+    "name": "2t_twostage",
+    "alpha_stage1": 0.35,
+    "learning_rate_stage1": 1.2e-4,
+    "learning_rate_stage2": 1.2e-4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 2,
+    "seed": 42,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 8
+}]

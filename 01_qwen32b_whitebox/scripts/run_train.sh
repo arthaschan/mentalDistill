@@ -11,8 +11,8 @@ cd "$ROOT_DIR"
 mkdir -p outputs logs
 
 "$PY" "$SHARED_DIR/train_whitebox_distill.py" \
-  --teacher_model_name "$BASE_MODEL_32B" \
-  --student_model_name "$BASE_MODEL_7B" \
+  --teacher_model "$BASE_MODEL_32B" \
+  --student_model "$BASE_MODEL_7B" \
   --data_path "$ROOT_DIR/data/train.jsonl" \
   --val_path "$ROOT_DIR/data/val.jsonl" \
   --test_path "$ROOT_DIR/data/test.jsonl" \

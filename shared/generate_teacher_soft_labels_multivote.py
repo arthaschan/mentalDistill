@@ -6,7 +6,9 @@ import os
 import random
 import re
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import requests
@@ -189,6 +191,8 @@ def main():
     parser.add_argument("--cooldown_sec", type=float, default=0.0)
     parser.add_argument("--temperature", type=float, default=0.9)
     parser.add_argument("--extra_votes", type=int, default=4)
+    parser.add_argument("--concurrency", type=int, default=1,
+                        help="Max concurrent API calls per sample (1=sequential)")
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
@@ -203,6 +207,19 @@ def main():
 
     out_path = Path(args.output)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # PID lockfile to prevent multiple writers on the same output
+    lock_path = out_path.with_suffix(".pid")
+    if lock_path.exists():
+        old_pid = lock_path.read_text().strip()
+        if old_pid.isdigit() and Path(f"/proc/{old_pid}").exists():
+            print(f"[ABORT] another instance (PID {old_pid}) is writing to {out_path}", flush=True)
+            print(f"  Kill it first or delete {lock_path}", flush=True)
+            sys.exit(1)
+    lock_path.write_text(str(os.getpid()))
+
+    import atexit
+    atexit.register(lambda: lock_path.unlink(missing_ok=True))
 
     done_keys = set()
     existing_valid = 0
@@ -226,6 +243,8 @@ def main():
     valid = 0
     failed = 0
 
+    write_lock = threading.Lock()
+
     mode = "a" if (args.resume and out_path.exists()) else "w"
     with open(out_path, mode, encoding="utf-8") as wf:
         for i, item in enumerate(rows, start=1):
@@ -241,7 +260,8 @@ def main():
 
             raws = []
             try:
-                for _ in range(max(0, args.extra_votes)):
+                def _do_one_call(_idx):
+                    """Single API call for one vote."""
                     raw = call_openai_compatible(
                         candidate=candidate,
                         system_prompt=system_prompt,
@@ -255,12 +275,53 @@ def main():
                         rate_limit_cooldown_sec=args.rate_limit_cooldown_sec,
                         jitter_sec=args.jitter_sec,
                     )
-                    raws.append(raw)
-                    v = extract_answer_letter(raw)
-                    if v in OPTION_LETTERS:
-                        votes.append(v)
-                    if args.request_interval_sec > 0:
-                        time.sleep(args.request_interval_sec)
+                    return _idx, raw
+
+                n_votes = max(0, args.extra_votes)
+                workers = min(max(1, args.concurrency), n_votes) if n_votes > 0 else 1
+
+                if workers <= 1:
+                    # Sequential path (original behaviour)
+                    for _ in range(n_votes):
+                        raw = call_openai_compatible(
+                            candidate=candidate,
+                            system_prompt=system_prompt,
+                            user_prompt=prompt,
+                            timeout_sec=args.timeout_sec,
+                            max_tokens=args.max_tokens,
+                            max_retries=args.max_retries,
+                            temperature=args.temperature,
+                            base_backoff_sec=args.base_backoff_sec,
+                            retry_backoff_mult=args.retry_backoff_mult,
+                            rate_limit_cooldown_sec=args.rate_limit_cooldown_sec,
+                            jitter_sec=args.jitter_sec,
+                        )
+                        raws.append(raw)
+                        v = extract_answer_letter(raw)
+                        if v in OPTION_LETTERS:
+                            votes.append(v)
+                        if args.request_interval_sec > 0:
+                            time.sleep(args.request_interval_sec)
+                else:
+                    # Concurrent path: fire all votes in parallel
+                    with ThreadPoolExecutor(max_workers=workers) as pool:
+                        futures = {pool.submit(_do_one_call, vi): vi for vi in range(n_votes)}
+                        results = [None] * n_votes
+                        for fut in as_completed(futures):
+                            vi = futures[fut]
+                            try:
+                                _, raw = fut.result()
+                                results[vi] = raw
+                            except Exception as e:
+                                results[vi] = f"[ERR] {e}"
+                    for raw in results:
+                        if raw is None or str(raw).startswith("[ERR]"):
+                            raws.append(str(raw))
+                            continue
+                        raws.append(raw)
+                        v = extract_answer_letter(raw)
+                        if v in OPTION_LETTERS:
+                            votes.append(v)
 
                 if not votes:
                     failed += 1
@@ -273,8 +334,15 @@ def main():
                 item2["TeacherRawVotes"] = raws
                 item2["TeacherDist"] = dist
                 item2["TeacherAnswer"] = maj
-                item2["Answer"] = maj
-                wf.write(json.dumps(item2, ensure_ascii=False) + "\n")
+                # NB: keep item["Answer"] (ground truth) unchanged
+                item2["OriginalAnswer"] = item.get("Answer", "")
+                line_str = json.dumps(item2, ensure_ascii=False) + "\n"
+                # Validate JSON integrity before writing
+                json.loads(line_str)
+                with write_lock:
+                    wf.write(line_str)
+                    wf.flush()
+                    os.fsync(wf.fileno())
 
                 valid += 1
                 done_keys.add(sample_key(item))
@@ -286,6 +354,9 @@ def main():
                     "question": str(item.get("Question") or item.get("question") or "")[:120],
                 }
                 print("[ERR]", json.dumps(err_item, ensure_ascii=False), flush=True)
+
+            if valid > 0 and valid % 5 == 0:
+                print(f"[SAMPLE] i={i}/{len(rows)} valid={valid} failed={failed}", flush=True)
 
             if args.cooldown_every > 0 and i % args.cooldown_every == 0:
                 time.sleep(args.cooldown_sec)

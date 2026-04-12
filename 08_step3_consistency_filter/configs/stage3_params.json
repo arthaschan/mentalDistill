@@ -1,0 +1,41 @@
+{
+  "teachers": {
+    "doubao": {
+      "multivote_file": "03_doubao_choice_head/data/teacher_train_multivote.jsonl",
+      "accuracy": 98.80,
+      "weight": 0.528
+    },
+    "deepseek": {
+      "multivote_file": "02_deepseek_v3_choice_head/data/teacher_train_multivote.jsonl",
+      "accuracy": 87.95,
+      "weight": 0.472
+    }
+  },
+  "consistency_filter": {
+    "high_thresh": 0.78,
+    "low_thresh": 0.56,
+    "downweight_factor": 0.5
+  },
+  "training": {
+    "alpha": 0.9,
+    "learning_rate": 1e-4,
+    "num_epochs": 6,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "seed": 42,
+    "warmup_ratio": 0.1,
+    "use_cosine_schedule": true
+  },
+  "sweep_configs": [
+    {"label": "2t_real_a09",   "alpha": 0.9, "lr": 1e-4, "epochs": 6, "seed": 42, "note": "baseline: 2-teacher real labels"},
+    {"label": "2t_real_a07",   "alpha": 0.7, "lr": 1e-4, "epochs": 6, "seed": 42, "note": "lower GT weight"},
+    {"label": "2t_real_a05",   "alpha": 0.5, "lr": 1e-4, "epochs": 6, "seed": 42, "note": "balanced"},
+    {"label": "2t_real_a09_s11","alpha": 0.9, "lr": 1e-4, "epochs": 6, "seed": 11, "note": "seed robustness"},
+    {"label": "2t_real_a09_s8", "alpha": 0.9, "lr": 1e-4, "epochs": 6, "seed": 8,  "note": "seed robustness"},
+    {"label": "2t_nofilter",   "alpha": 0.9, "lr": 1e-4, "epochs": 6, "seed": 42, "note": "no consistency filter (ablation)", "high_thresh": 0.0, "low_thresh": 0.0},
+    {"label": "2t_strict",     "alpha": 0.9, "lr": 1e-4, "epochs": 6, "seed": 42, "note": "strict filter", "high_thresh": 0.89, "low_thresh": 0.67},
+    {"label": "2t_twostage",   "alpha": 0.35, "lr": 1.2e-4, "s1_epochs": 1, "s2_epochs": 2, "seed": 42, "note": "two-stage like DeepSeek best"}
+  ]
+}

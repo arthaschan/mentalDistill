@@ -1,0 +1,93 @@
+[
+  {
+    "name": "2stg_a035_lr12_s1e1_s2e2_seed42",
+    "seed": 42,
+    "learning_rate_stage1": 1.2e-4,
+    "learning_rate_stage2": 1.2e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 2,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "2stg_a035_lr12_s1e1_s2e2_seed11",
+    "seed": 11,
+    "learning_rate_stage1": 1.2e-4,
+    "learning_rate_stage2": 1.2e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 2,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "2stg_a035_lr12_s1e1_s2e2_seed2",
+    "seed": 2,
+    "learning_rate_stage1": 1.2e-4,
+    "learning_rate_stage2": 1.2e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 2,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "2stg_a035_lr10_s1e2_s2e3_seed42",
+    "seed": 42,
+    "learning_rate_stage1": 1e-4,
+    "learning_rate_stage2": 1e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "num_epochs_stage1": 2,
+    "num_epochs_stage2": 3,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "2stg_a035_lr10_s1e2_s2e3_seed11",
+    "seed": 11,
+    "learning_rate_stage1": 1e-4,
+    "learning_rate_stage2": 1e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "num_epochs_stage1": 2,
+    "num_epochs_stage2": 3,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "2stg_a050_lr12_s1e1_s2e2_seed42",
+    "seed": 42,
+    "learning_rate_stage1": 1.2e-4,
+    "learning_rate_stage2": 1.2e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 2,
+    "alpha_stage1": 0.50
+  },
+  {
+    "name": "2stg_a050_lr12_s1e1_s2e2_seed11",
+    "seed": 11,
+    "learning_rate_stage1": 1.2e-4,
+    "learning_rate_stage2": 1.2e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 2,
+    "alpha_stage1": 0.50
+  }
+]

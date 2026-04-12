@@ -14,9 +14,29 @@ night_logs/
 # Generated teacher/distillation artifacts
 **/data/teacher_*.jsonl
 **/data/train_head_distill.jsonl
+**/data/train_head_distill_clean.jsonl
+**/data/train_cot_sft.jsonl
 **/data/distill_dataset_report.txt
 **/data/*generated*.jsonl
+
+# Model weights / checkpoints (never commit)
+*.safetensors
+*.ckpt
+*.pth
+*.bin
+
+# RAG index cache
+shared/rag_index/
 
 # Local editor / Python noise
 **/__pycache__/
 **/*.pyc
+.ipynb_checkpoints/
+nohup.out
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

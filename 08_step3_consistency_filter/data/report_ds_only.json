@@ -1,0 +1,20 @@
+{
+  "total": 672,
+  "fused": 653,
+  "gt_fallback": 19,
+  "fused_ratio": 0.9717,
+  "high_thresh": 0.78,
+  "low_thresh": 0.56,
+  "downweight_factor": 0.5,
+  "gt_agreement": 0.8765,
+  "mean_entropy": 0.0501,
+  "mean_consistency": 0.9794,
+  "teacher_stats": {
+    "DeepSeek": {
+      "high": 617,
+      "mid": 36,
+      "low": 19,
+      "missing": 0
+    }
+  }
+}

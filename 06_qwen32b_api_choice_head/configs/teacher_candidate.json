@@ -1,0 +1,5 @@
+{
+  "model": "qwen2.5-32b-instruct",
+  "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "api_key_env": "DASHSCOPE_API_KEY"
+}

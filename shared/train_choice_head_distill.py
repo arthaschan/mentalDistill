@@ -11,7 +11,7 @@ import torch.nn.functional as F
 from peft import LoraConfig, PeftModel, get_peft_model
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, get_cosine_schedule_with_warmup
 
 
 OPTION_LETTERS = ["A", "B", "C", "D", "E"]
@@ -211,6 +211,10 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--deterministic", action="store_true")
     parser.add_argument("--resume_from", type=str, default="")
+    parser.add_argument("--warmup_ratio", type=float, default=0.1,
+                        help="Fraction of total steps for linear warmup (0=no warmup)")
+    parser.add_argument("--use_cosine_schedule", action="store_true",
+                        help="Use cosine LR schedule with warmup")
     args = parser.parse_args()
 
     set_global_seed(args.seed, args.deterministic)
@@ -259,6 +263,15 @@ def main():
 
     optim = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=0.01)
     accum_steps = max(1, args.gradient_accumulation_steps)
+    total_optim_steps = (len(dl) + accum_steps - 1) // accum_steps * args.num_epochs
+    warmup_steps = int(total_optim_steps * args.warmup_ratio) if args.use_cosine_schedule else 0
+    scheduler = None
+    if args.use_cosine_schedule:
+        scheduler = get_cosine_schedule_with_warmup(optim, num_warmup_steps=warmup_steps, num_training_steps=total_optim_steps)
+        print(f"[SCHED] cosine schedule: {total_optim_steps} total steps, {warmup_steps} warmup steps")
+
+    best_val_acc = -1.0
+    best_val_epoch = -1
 
     global_step = 0
     for ep in range(args.num_epochs):
@@ -288,6 +301,8 @@ def main():
             if ((i + 1) % accum_steps == 0) or (i + 1 == len(dl)):
                 torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 optim.step()
+                if scheduler is not None:
+                    scheduler.step()
                 optim.zero_grad(set_to_none=True)
                 global_step += 1
 
@@ -301,11 +316,30 @@ def main():
         if args.val_path:
             val_acc = evaluate_generation(model, tokenizer, args.val_path, device)
             print(f"[VAL] epoch={ep + 1} acc={val_acc:.2f}%")
+            if val_acc > best_val_acc:
+                best_val_acc = val_acc
+                best_val_epoch = ep + 1
+                best_dir = os.path.join(args.output_dir, "best")
+                os.makedirs(best_dir, exist_ok=True)
+                model.save_pretrained(best_dir)
+                tokenizer.save_pretrained(best_dir)
 
     model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
 
-    if args.test_path:
+    # Evaluate test set at best val epoch checkpoint
+    if args.test_path and best_val_epoch > 0:
+        print(f"[BEST] val_acc={best_val_acc:.2f}% at epoch {best_val_epoch}")
+        best_dir = os.path.join(args.output_dir, "best")
+        if os.path.isdir(best_dir):
+            best_base = AutoModelForCausalLM.from_pretrained(args.model_name, torch_dtype=torch.bfloat16, trust_remote_code=True)
+            best_model = PeftModel.from_pretrained(best_base, best_dir)
+            best_model = best_model.to(device)
+            test_acc = evaluate_generation(best_model, tokenizer, args.test_path, device)
+            print(f"[TEST-BEST] epoch={best_val_epoch} test_acc={test_acc:.2f}%")
+            del best_model, best_base
+            torch.cuda.empty_cache()
+    elif args.test_path:
         test_acc = evaluate_generation(model, tokenizer, args.test_path, device)
         print(f"测试集准确率: {test_acc:.2f}%")
 

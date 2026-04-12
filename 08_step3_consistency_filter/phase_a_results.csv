@@ -1,0 +1,5 @@
+label,alpha,lr,epochs,seed,val_best,test_acc
+ds_real_a09_s42,0.9,1e-4,6,42,75.68,79.52
+ds_real_a05_s42,0.5,1e-4,6,42,74.32,74.70
+ds_real_a01_s42,0.1,1e-4,6,42,74.32,74.70
+ds_real_a01_s8,0.1,1e-4,6,8,77.03,75.90

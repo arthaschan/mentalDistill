@@ -32,7 +32,9 @@ export REQUEST_INTERVAL_SEC="${REQUEST_INTERVAL_SEC:-8}"
 export RATE_LIMIT_COOLDOWN_SEC="${RATE_LIMIT_COOLDOWN_SEC:-300}"
 export COOLDOWN_EVERY="${COOLDOWN_EVERY:-30}"
 export COOLDOWN_SEC="${COOLDOWN_SEC:-120}"
-bash "$ROOT_DIR/04_kimi_choice_head/scripts/generate_teacher_labels.sh"
+bash "$ROOT_DIR/06_qwen32b_api_choice_head/scripts/generate_teacher_labels.sh"
+bash "$ROOT_DIR/09_qwen7b_selfdistill/scripts/generate_teacher_labels.sh"
+bash "$ROOT_DIR/10_qwen14b_selfdistill/scripts/generate_teacher_labels.sh"
 EOF
 )
 

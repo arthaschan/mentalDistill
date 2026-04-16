@@ -1,0 +1,41 @@
+[
+  {
+    "name": "fulldata_14b_s11",
+    "seed": 11,
+    "learning_rate_stage1": 1e-4,
+    "learning_rate_stage2": 1e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 0,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "fulldata_14b_s42",
+    "seed": 42,
+    "learning_rate_stage1": 1e-4,
+    "learning_rate_stage2": 1e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 0,
+    "alpha_stage1": 0.35
+  },
+  {
+    "name": "fulldata_14b_s8",
+    "seed": 8,
+    "learning_rate_stage1": 1e-4,
+    "learning_rate_stage2": 1e-4,
+    "rank": 16,
+    "lora_alpha": 32,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_epochs_stage1": 1,
+    "num_epochs_stage2": 0,
+    "alpha_stage1": 0.35
+  }
+]

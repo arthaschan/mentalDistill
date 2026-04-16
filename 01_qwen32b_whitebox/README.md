@@ -98,3 +98,36 @@ bash scripts/start_best_web.sh
 
 - 该方案对 GPU 显存最敏感
 - 迁移到独立项目后，优先验证模型路径和显存是否足够
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+# 下载 7B 学生模型
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+
+# 下载 32B 教师模型
+huggingface-cli download Qwen/Qwen2.5-32B-Instruct --local-dir models/Qwen2.5-32B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+export BASE_MODEL_32B="/your/path/to/models/Qwen2.5-32B-Instruct"
+```
+
+> **显存需求**：白盒蒸馏需同时加载 32B 教师 + 7B 学生，峰值约 90GB，需 H100 95GB 级别 GPU。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

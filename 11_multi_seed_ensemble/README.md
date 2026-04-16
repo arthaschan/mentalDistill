@@ -43,3 +43,26 @@ bash 11_multi_seed_ensemble/scripts/run_ensemble.sh
 - 集成等于最佳单 seed (42)，没有超越
 - Seed 方差 8.44pp (71.08%–79.52%)，证实测试集太小（83题）
 - Val 最佳与 Test 无稳定相关
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+> **注意**：`outputs/` 中的 adapter 权重和集成结果不上传 GitHub，需本地重新训练生成。
+> 运行前需确保 Module 08 的融合标签数据已生成。
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870（加载 Module 00 的测试集）
+```

@@ -55,3 +55,33 @@ bash 08_step3_consistency_filter/scripts/run_pipeline.sh
 ## 预期结果
 
 超越单教师最佳 81.93%（DeepSeek-V3 两阶段），目标 ≥ 83%。
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+还需配置 API key（用于多票采样）：
+```bash
+export DEEPSEEK_API_KEY="your-api-key"
+export DOUBAO_API_KEY="your-api-key"
+```
+
+> **注意**：运行前需确保 Module 02、03 的多票采样数据已生成。训练产物不上传 GitHub。
+
+## 测试集评估
+
+评估集成在 pipeline 脚本中。也可使用通用测试界面：
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

@@ -124,3 +124,43 @@ export BASE_MODEL_QWEN3_8B="/path/to/Qwen3-8B"
 1. Qwen3-8B 的 non-thinking 零样本基线 (71.08%) 低于 Qwen2.5-7B (77.11%)，但这不影响蒸馏效果 — 蒸馏训练会覆盖模型的 zero-shot 行为
 2. 训练脚本使用 ChatML 格式 + 短答案模式（max_new_tokens=4），不触发 Qwen3 的 thinking 模式
 3. 如果 Stage 2 导致性能下降（参考 Module 13 经验），应只使用 Stage 1 结果
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+# 下载 Qwen3-14B 学生模型
+huggingface-cli download Qwen/Qwen3-14B --local-dir models/Qwen3-14B
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_QWEN3_8B="/your/path/to/models/Qwen3-14B"  # 注意：变量名沿用 QWEN3_8B
+```
+
+教师标签复用 Module 02（DeepSeek-V3），如需重新生成还需：
+```bash
+export DEEPSEEK_API_KEY="your-api-key"
+```
+
+> **注意**：训练产物（`runs/`）、评估结果（`outputs/`）不上传 GitHub。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```
+
+## 启动模型推理 Web 界面
+
+```bash
+bash scripts/start_web.sh
+```

@@ -25,7 +25,7 @@ def extract_answer_char(text: str) -> str:
     return ""
 
 
-def build_prompt(item: dict) -> str:
+def build_prompt(item: dict, qwen3_nothink: bool = False) -> str:
     q = item.get("Question", "")
     opts = item.get("Options", "")
     messages = [
@@ -37,6 +37,8 @@ def build_prompt(item: dict) -> str:
     for m in messages:
         prompt += f"<|im_start|>{m['role']}\n{m['content']}<|im_end|>\n"
     prompt += "<|im_start|>assistant\n"
+    if qwen3_nothink:
+        prompt += "<think>\n\n</think>\n\n"
     return prompt
 
 
@@ -51,7 +53,8 @@ def load_jsonl(path: str) -> list:
 
 
 def evaluate(base_model: str, adapter_dir: str, test_data: str,
-             wrong_log: str = None, device: str = "cuda"):
+             wrong_log: str = None, device: str = "cuda",
+             qwen3_nothink: bool = False):
     print(f"加载基础模型: {base_model}")
     model = AutoModelForCausalLM.from_pretrained(
         base_model, torch_dtype=torch.bfloat16, device_map=device,
@@ -74,7 +77,7 @@ def evaluate(base_model: str, adapter_dir: str, test_data: str,
         if not gt:
             continue
         total += 1
-        prompt = build_prompt(item)
+        prompt = build_prompt(item, qwen3_nothink=qwen3_nothink)
         inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
         with torch.no_grad():
@@ -118,8 +121,11 @@ def main():
                         help="LoRA adapter 路径，不指定则评估原始模型")
     parser.add_argument("--test_data", required=True)
     parser.add_argument("--wrong_log", default=None)
+    parser.add_argument("--qwen3_nothink", action="store_true",
+                        help="Add <think>\n\n</think> prefix for Qwen3 non-thinking mode")
     args = parser.parse_args()
-    evaluate(args.base_model, args.adapter_dir, args.test_data, args.wrong_log)
+    evaluate(args.base_model, args.adapter_dir, args.test_data, args.wrong_log,
+             qwen3_nothink=args.qwen3_nothink)
 
 
 if __name__ == "__main__":

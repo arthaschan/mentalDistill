@@ -76,3 +76,33 @@ bash scripts/run_pipeline.sh
 | 02-05 两阶段 | 5-dim 概率 | 5-dim |
 | 07-08 多教师融合 | 加权 5-dim | 5-dim |
 | **12 推理链蒸馏** | **自然语言推理链** | **~100-300 token** |
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+还需配置豆包 API key（用于 CoT 推理链生成）。
+
+> **注意**：生成的 CoT 数据（`data/train_cot.jsonl`）、训练产物（`outputs/`）、日志不上传 GitHub。
+
+## 测试集评估
+
+```bash
+SEED=42 bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

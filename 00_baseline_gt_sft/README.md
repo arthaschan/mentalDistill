@@ -84,3 +84,39 @@ bash scripts/start_best_web.sh
 
 - 这是最先应该复现的目录
 - 如果该基线无法稳定复现，后续蒸馏结果就缺少有效参照
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**（`models/` 已被 `.gitignore` 排除）。
+克隆代码后需自行下载基座模型：
+
+```bash
+# 方式一：使用 huggingface-cli
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+
+# 方式二：使用 modelscope（国内更快）
+pip install modelscope
+modelscope download --model Qwen/Qwen2.5-7B-Instruct --local_dir models/Qwen2.5-7B-Instruct
+```
+
+然后在 `setup.env` 中配置路径：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+> **注意**：`runs/`、`outputs/`、`logs/` 等训练产物同样不会上传，需在本地重新训练生成。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+启动一个网页界面，从测试集加载选择题，你可以自己作答并查看是否正确：
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

@@ -1,0 +1,7 @@
+{
+    "name": "Llama-3.3-70B-Instruct-AWQ",
+    "model": "local",
+    "model_path_env": "BASE_MODEL_LLAMA70B",
+    "type": "local_logprobs",
+    "note": "Meta Llama 3.3 70B, AWQ INT4 quantized, local inference with real logprobs"
+}

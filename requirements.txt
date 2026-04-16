@@ -1,0 +1,27 @@
+# mentalDistill Python 依赖
+# 安装: pip install -r requirements.txt
+
+# ── 核心深度学习 ──────────────────────────────────
+torch>=2.0.0
+transformers>=4.51.0          # >=4.51 支持 Qwen3 model_type
+numpy>=1.24.0
+peft>=0.7.0                   # LoRA adapter 训练与加载
+
+# ── 训练加速 ──────────────────────────────────────
+accelerate>=0.20.0
+
+# ── 数据处理 ──────────────────────────────────────
+datasets>=2.14.0
+tqdm>=4.65.0
+
+# ── API 教师标签生成 ──────────────────────────────
+requests>=2.31.0
+
+# ── 可选：vLLM 推理加速（Llama-70B-AWQ 教师等）──
+# vllm>=0.4.0
+
+# ── 可选：豆包 API（Module 03/12 需要）──
+# volcenginesdkcore>=0.2.0
+
+# ── 可选：PPT 生成（docs/gen_comparison_slide.py）──
+# python-pptx>=0.6.21

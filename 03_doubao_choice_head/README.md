@@ -122,3 +122,33 @@ bash scripts/start_best_web.sh
 - 当前目录已放入历史上验证可用的 soft label 数据
 - 如果你只想复现训练主链，可以直接从已有 `data/teacher_train_soft.jsonl` 开始
 - 如果你要完全从零复现，则应先重跑 `generate_teacher_labels.sh` 与 `generate_teacher_soft_labels.sh`
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+还需配置豆包 API key（`configs/teacher_candidate.json` 中的 endpoint）。
+
+> **注意**：教师标签（`data/teacher_*.jsonl`）和训练产物（`runs/`）不上传到 GitHub。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

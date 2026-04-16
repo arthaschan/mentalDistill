@@ -126,3 +126,36 @@ bash scripts/start_best_web.sh
 
 - DeepSeek 的峰值结果对 seed 较敏感
 - 如果 API 额度紧张，优先使用夜间调度入口
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+还需配置 DeepSeek API key：
+```bash
+export DEEPSEEK_API_KEY="your-api-key"
+```
+
+> **注意**：教师标签（`data/teacher_*.jsonl`）和训练产物（`runs/`）也不会上传到 GitHub。首次使用需重新生成教师标签或联系原作者获取。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

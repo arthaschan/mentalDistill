@@ -121,3 +121,33 @@ bash scripts/start_best_web.sh
 
 - 该目录是重要的负样本对照实验，不应因为结果不好就省略
 - 迁移后建议保留它，用于验证“教师强度确实影响蒸馏收益”这一结论
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+```
+
+还需配置 Kimi API key（`configs/teacher_candidate.json`）。
+
+> **注意**：教师标签、训练产物、日志等不会上传到 GitHub。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

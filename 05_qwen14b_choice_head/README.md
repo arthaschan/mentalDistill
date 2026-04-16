@@ -127,3 +127,35 @@ bash scripts/start_best_web.sh
 
 - 该目录是一个重要反例实验
 - 不要因为结果低于基线就删除；它对分析“什么样的教师会带来负蒸馏”很关键
+
+## 模型准备（GitHub 不含模型文件）
+
+本仓库上传到 GitHub 时 **不包含模型权重**。克隆代码后需自行下载：
+
+```bash
+# 下载 7B 学生模型
+huggingface-cli download Qwen/Qwen2.5-7B-Instruct --local-dir models/Qwen2.5-7B-Instruct
+# 下载 14B 教师模型
+huggingface-cli download Qwen/Qwen2.5-14B-Instruct --local-dir models/Qwen2.5-14B-Instruct
+```
+
+在 `setup.env` 中配置：
+```bash
+export BASE_MODEL_7B="/your/path/to/models/Qwen2.5-7B-Instruct"
+export BASE_MODEL_14B="/your/path/to/models/Qwen2.5-14B-Instruct"
+```
+
+> **注意**：教师标签、训练产物、日志等不会上传到 GitHub。
+
+## 测试集评估
+
+```bash
+bash scripts/run_eval.sh
+```
+
+## 人机交互测试
+
+```bash
+bash scripts/start_quiz.sh
+# 默认地址 http://0.0.0.0:7870
+```

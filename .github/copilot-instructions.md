@@ -1,7 +1,7 @@
 # Copilot Instructions for mentalDistill
 
 This repository is a standalone CMExam medical multiple-choice knowledge distillation experiment platform.
-It contains 19 experiment modules (00–18) covering GT SFT baseline, white-box/black-box/cross-architecture teacher distillation, multi-teacher fusion, rationale distillation, full-data scaling, and information geometry analysis.
+It contains 21 experiment modules (00–20) covering GT SFT baseline, white-box/black-box/cross-architecture teacher distillation, multi-teacher fusion, rationale distillation, full-data scaling, information geometry analysis, and IG-guided optimization experiments.
 
 ## Project layout
 
@@ -24,6 +24,8 @@ It contains 19 experiment modules (00–18) covering GT SFT baseline, white-box/
 - `16_llama70b_choice_head/` – Llama-3.3-70B-AWQ → 14B cross-architecture distillation
 - `17_alpha_divergence/` – α-divergence family replacing KL in Choice-Head distillation
 - `18_fisher_rao_analysis/` – Fisher-Rao distance teacher quality analysis (information geometry)
+- `19_boundary_filter/` – Boundary-distance confidence filtering distillation (IG direction 4)
+- `20_adaptive_alpha/` – Per-sample adaptive α-divergence distillation (IG direction 1)
 - `shared/` – shared scripts for training, evaluation, label generation, web serving, quiz UI
 - `docs/` – thesis report, defense QA, analysis documents
 
@@ -78,6 +80,8 @@ Top-level orchestration:
 - `shared/train_gt_sft.py` – GT SFT training
 - `shared/train_choice_head_distill.py` – Choice-Head two-stage distillation
 - `shared/train_alpha_distill.py` – α-divergence distillation (Module 17)
+- `shared/train_boundary_filter_distill.py` – boundary-distance filtered distillation (Module 19)
+- `shared/train_adaptive_alpha_distill.py` – per-sample adaptive α-divergence distillation (Module 20)
 - `shared/train_whitebox_distill.py` – white-box KL distillation
 - `shared/train_rationale_sft.py` – CoT rationale SFT
 - `shared/evaluate_model.py` – unified evaluation

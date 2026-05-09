@@ -11,6 +11,22 @@ night_logs/
 **/outputs/
 **/runs/
 
+# Thesis export intermediates
+thesis/.docx_check/
+thesis/.format_audit/
+thesis/.format_fix/
+thesis/.front_check/
+thesis/.ppt_preview/
+thesis/.ppt_style/
+thesis/.style_check/
+thesis/.toc_check/
+thesis/.toc_iter*/
+thesis/.verify/
+thesis/.thesis_headings.json
+thesis/.thesis_submission_pass*
+thesis/.thesis_submission_tmp*
+thesis/.thesis_toc_pass*.md
+
 # Generated teacher/distillation artifacts
 **/data/teacher_*.jsonl
 **/data/train_head_distill.jsonl

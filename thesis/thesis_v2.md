@@ -43,7 +43,10 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 | BF16 | Brain Floating Point 16 | 脑浮点 16 位精度 |
 | AWQ | Activation-aware Weight Quantization | 激活感知权重量化 |
 | GPU | Graphics Processing Unit | 图形处理单元 |
+| GQA | Grouped Query Attention | 分组查询注意力 |
 | pp | Percentage Point | 百分点 |
+
+\newpage
 
 ## 第一章 绪论
 
@@ -134,6 +137,21 @@ Meta LLaMA 系列中，Llama-3.3-70B-Instruct 是 Meta 发布的高性能开源�
 豆包（Doubao）是字节跳动推出的推理模型，在 CMExam 牙科测试集上达到 98.80% 的最高准确率，但其参数规模和技术细节未公开。本研究中豆包作为高性能教师模型之一参与蒸馏实验。
 
 Kimi（月之暗面推出，moonshot-v1-32k）在牙科测试集上仅达到 61.45% 的准确率，作为本研究的弱教师负例提供了重要的对比参照。
+
+为了更直观地说明本文实验中教师与学生之间的容量差异，表 2-1 汇总了本研究涉及的主要模型参数规模。可以看到，已公开的模型规模从 7B 学生到 671B 总参数的 DeepSeek-V3 教师不等；对于豆包与 Kimi 等闭源 API 模型，由于官方未披露参数规模，本文仅将其作为黑盒教师使用，而不将其纳入严格的公开参数对比。
+
+表 2-1 本研究涉及的学生模型与教师模型参数规模
+
+| 模型 | 角色 | 参数规模 | 备注 |
+|------|------|---------|------|
+| Qwen2.5-7B-Instruct | 学生模型 | 7B | 7B 主力学生，也用于自蒸馏实验 |
+| Qwen2.5-14B-Instruct | 学生模型 / 对照教师 | 14B | 14B 主力学生，在 Module 05 中也作为同容量教师对照 |
+| Qwen3-14B | 学生模型 | 14B | 用于跨架构/新架构学生对照 |
+| Qwen2.5-32B-Instruct | 教师模型 | 32B | 本地白盒教师，可直接读取 logits |
+| Llama-3.3-70B-Instruct | 教师模型 | 70B | 异构开源教师，用于跨架构蒸馏 |
+| DeepSeek-V3 | 教师模型 | 671B 总参数 / 37B 激活参数 | MoE API 教师，本文主要高性能教师 |
+| Doubao | 教师模型 | 未公开 | 商业 API 教师，仅能按黑盒方式使用 |
+| Kimi (moonshot-v1-32k) | 教师模型 | 未公开 | 商业 API 教师，作为弱教师负例 |
 
 ### 2.4 信息几何理论基础
 

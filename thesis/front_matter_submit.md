@@ -22,6 +22,8 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 日期：MAY 2026
 
+\newpage
+
 ---
 
 ## 学位论文独创性声明
@@ -32,6 +34,8 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 日期：____年____月____日
 
+\newpage
+
 ---
 
 ## 学位论文版权使用授权声明
@@ -41,5 +45,7 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 学位论文作者签名：______________    导师签名：______________
 
 日期：____年____月____日          日期：____年____月____日
+
+\newpage
 
 ---

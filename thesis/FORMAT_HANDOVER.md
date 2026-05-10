@@ -2,8 +2,8 @@
 
 ## Current Status
 
-- Canonical source remains `thesis_v2.md`; export pipeline is `export_thesis_pdf.sh`.
-- Latest export succeeded and regenerated `thesis_submission.pdf`.
+- Canonical source remains `thesis_v2.md`; export pipelines are `export_thesis_pdf.sh` and `export_thesis_docx.sh`.
+- Latest exports succeeded and regenerated `thesis_submission.pdf` and `thesis_submission.docx`.
 - ODT patching now enforces A4 size, table borders, chapter-level static TOC, serif body typography, stronger heading hierarchy, and a `BodyPage` master-page path intended for sample-style headers from the abstract onward.
 - Structural validation against `.thesis_submission_tmp_patched.odt` confirms these header-related XML objects exist:
   - `MP2`
@@ -21,7 +21,9 @@
 ## Verified Facts
 
 - `bash thesis/export_thesis_pdf.sh` completes successfully.
+- `bash thesis/export_thesis_docx.sh` completes successfully.
 - `thesis_submission.pdf` is A4 and currently reports 42 pages.
+- `thesis_submission.docx` is generated via Pandoc and uses `MSAAI Master Thesis example 2024 v1b.docx` as the reference-doc template when that file is present.
 - The patched ODT, not the raw temp ODT, is the right file to inspect for page-style validation:
   - `.thesis_submission_tmp_patched.odt`
 

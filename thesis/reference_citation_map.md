@@ -1,61 +1,41 @@
 # 论文引用位置与参考文献对应说明
 
 说明：
-- 文内引用位置以 [thesis/thesis.md](thesis/thesis.md) 为准。
-- 当前参考文献文件统一以 [thesis/reference2](thesis/reference2) 为准。
-- [thesis/thesis_v2.md](thesis/thesis_v2.md) 的参考文献表已按本次核验结果做过一轮修正。
+- 当前以 thesis_v2.md 为主稿。
+- 当前以 thesis/reference 为唯一参考文献目录。
+- thesis_v2.md 正文大多是叙述式引用，因此本文件采用“章节位置 + 论断用途 + 对应原文部分”的方式映射，而不再依赖 thesis.md 的旧行号。
 
-## 总体状态
+## 核心映射表
 
-| 类型 | 数量 | 说明 |
-|---|---:|---|
-| 已有正确 PDF | 19 | 可直接打开核验正文 |
-| 官方 landing page | 4 | 出版方页面已保存 |
-| 检索证据 | 2 | 原条目仍待人工核准 |
-
-## 编号对应关系
-
-| 编号 | thesis.md 中的主要引用位置 | 引用目的 | reference2 中的对应文件 | 当前状态 |
+| 编号 | thesis_v2.md 中的主要使用位置 | 引用目的 | 对应原文部分 | 当前状态 |
 |---|---|---|---|---|
-| [1] | thesis.md:130, 324 | Transformer 与 self-attention 基础 | reference2/01_Attention_Is_All_You_Need_1706.03762.pdf | PDF |
-| [2] | thesis.md:130, 219 | GPT 系列作为通用 LLM 代表 | reference2/02_GPT4_Technical_Report_2303.08774.pdf | PDF |
-| [3] | thesis.md:130, 219, 245 | LLaMA 系列与跨架构背景 | reference2/03_Llama3_Herd_of_Models_2407.21783.pdf | PDF |
-| [4] | thesis.md:130, 241 | Qwen 系列模型背景 | reference2/04_Qwen2.5_Technical_Report_2412.15115.pdf | PDF |
-| [5] | thesis.md:144, 227, 229, 281 | 软标签蒸馏、温度缩放、暗知识 | reference2/05_Distilling_Knowledge_1503.02531.pdf | PDF |
-| [6] | thesis.md:219 | ChatGLM 家族背景 | reference2/06_ChatGLM_2406.12793.pdf | PDF |
-| [7] | thesis.md:219 | 中文医疗对话模型代表工作 | reference2/07_DISC-MedLLM_search_results.json | 检索证据 |
-| [8] | thesis.md:219 | HuatuoGPT 的医疗推理与训练方法 | reference2/08_HuatuoGPT_2023.findings-emnlp.725.pdf | PDF |
-| [9] | thesis.md:221, 271 | Huatuo 系列医学 QA 数据集背景 | reference2/09_Huatuo-26M_2025.findings-naacl.211.pdf | PDF |
-| [10] | thesis.md:223 | CMExam 评测基准 | reference2/10_CMExam_Benchmark_landing.html | Landing page |
-| [11] | thesis.md:223, 271 | MedQA 基准与数据集来源 | reference2/11_MedQA_10.3390_app11146421_landing.html | Landing page |
-| [12] | thesis.md:223, 271 | PubMedQA 基准 | reference2/12_PubMedQA_1909.06146.pdf | PDF |
-| [13] | thesis.md:229 | FitNets 中间层提示蒸馏 | reference2/13_FitNets_1412.6550.pdf | PDF |
-| [14] | thesis.md:229 | Attention transfer 蒸馏 | reference2/14_Attention_Transfer_1612.03928.pdf | PDF |
-| [15] | thesis.md:233 | 黑盒/输出层蒸馏相关讨论 | reference2/15_Scaling_Laws_for_KD_search_results.json | 检索证据 |
-| [16] | thesis.md:233 | Symbolic KD 思路 | reference2/16_Symbolic_KD_2110.07178.pdf | PDF |
-| [17] | thesis.md:235, 285, 356 | LoRA 低秩适配 | reference2/17_LoRA_2106.09685.pdf | PDF |
-| [18] | thesis.md:243 | DeepSeek-V3 教师模型背景 | reference2/18_DeepSeek_V3_2412.19437.pdf | PDF |
-| [19] | thesis.md:253, 259, 366 | 信息几何与 α-散度理论 | reference2/19_Information_Geometry_and_Its_Applications_landing.html | Landing page |
-| [20] | thesis.md:255 | Fisher-Rao 距离的经典来源 | reference2/20_Rao_Information_and_Accuracy_reprint_landing.html | Landing page |
-| [21] | thesis.md:281 | TextBrewer 工具包 | reference2/21_TextBrewer_2002.12620.pdf | PDF |
-| [22] | thesis.md:281 | DistilBERT 作为 NLP 蒸馏代表例子 | reference2/22_DistilBERT_1910.01108.pdf | PDF |
-| [23] | thesis.md:283 | AWQ 量化 | reference2/23_AWQ_2306.00978.pdf | PDF |
-| [24] | thesis.md:285 | QLoRA 量化微调 | reference2/24_QLoRA_2305.14314.pdf | PDF |
-| [25] | thesis.md:332 | RoPE / RoFormer | reference2/25_RoFormer_2104.09864.pdf | PDF |
+| [1] | 2.3 医疗大语言模型背景 | 说明 Transformer 架构是后续大模型的共同基础 | Abstract；Introduction | PDF |
+| [2] | 2.1 通用大模型背景 | 作为 GPT 系列代表，支撑“通用大模型进入医疗场景” | Abstract；Introduction；Scope and Limitations | PDF |
+| [3] | 2.1、2.3、4.9 | 说明 Llama 系列的基础能力与跨架构蒸馏背景 | Introduction；Benchmark；post-training/data mix 相关章节 | PDF |
+| [4] | 2.2、2.3 | 支撑 Qwen2.5 的规模、训练改进与词表/架构描述 | Abstract；Introduction；Architecture & Tokenizer；training methodology 相关章节 | PDF |
+| [5] | 2.2、3.3 | 支撑软标签蒸馏、温度缩放与暗知识的基本思想 | Abstract；1 Introduction；2 Distillation；3 Preliminary Experiments | PDF |
+| [6] | 2.1 | 说明 ChatGLM/GLM-4 在中文医疗与通用中文场景中的代表性 | Abstract；Introduction | PDF |
+| [7] | 参考文献表保留，正文直接依赖已移除 | 原本拟用作中文医疗对话模型代表条目；现已确认 arXiv 正式来源存在，旧题名误写问题已修复，并已补本地 PDF 与快照，因此当前仅作补充背景，不承载正文核心论证 | arXiv Abstract；数据构建说明；实验结论 | arXiv + local PDF/snapshot |
+| [8] | 2.1 | 支撑 HuatuoGPT 的训练配方与医疗咨询能力 | Abstract；Introduction；Methodology；2 RLMF | PDF |
+| [9] | 2.1、3.2 | 支撑 Huatuo-26M 作为大规模中文医疗 QA 数据集 | Abstract；Introduction；Dataset；Data Sources/Data Processing；Benchmarking | PDF |
+| [10] | 2.1、3.2 | 支撑 CMExam 为中国医学考试标准化评测基准 | 页面标题与出版信息 | Landing page |
+| [11] | 2.1、3.2 | 支撑 MedQA 为医学考试来源的英文基准 | Abstract；1 Introduction；3 Data；5 Experiments；6 Conclusions；Share and Cite 元数据 | PDF + article page |
+| [12] | 2.1、3.2 | 支撑 PubMedQA 为生物医学 QA 基准 | Abstract；Introduction；Data Collection；Evaluation Settings | PDF |
+| [13] | 2.2 | 支撑中间层 hint 蒸馏思路 | student-teacher framework 与 hints 训练流程；MNIST/CIFAR/SVHN/AFLW 基准实验 | PDF |
+| [14] | 2.2 | 支撑注意力迁移蒸馏思路 | 3 Activation-based Attention Transfer；3 Gradient-based Attention Transfer；4 Experimental Results | PDF |
+| [15] | 2.2、3.7、5.2、5.3 | 支撑 LoRA 低秩适配与参数高效训练载体 | LoRA design and practical benefits；rank-deficiency 讨论；GLUE/语言模型适配实验 | PDF |
+| [16] | 2.3、4.4、4.12、5.4 | 支撑 DeepSeek-V3 的 MoE 规模与教师背景 | Abstract；Introduction；2 Architecture；性能图表；Conclusion | PDF |
+| [17] | 2.4、3.6、5.1 | 支撑信息几何框架、散度/对偶结构、统计推断与机器学习应用背景 | Springer 图书简介、Part I/III/IV 概述、关键词 | Landing page + DOI metadata |
+| [18] | 2.4 | 支撑 Fisher 信息与统计参数估计精度的经典历史来源 | 章节题名、DOI、作者、页码与摘要片段 | Chapter metadata |
+| [19] | 2.2 | 用于补充 NLP 蒸馏工具链背景与工程化蒸馏流程 | Abstract；Introduction；工具工作流步骤；Experiments | PDF |
+| [20] | 2.2 | 用于补充 NLP 蒸馏代表案例，说明预训练阶段也可蒸馏 | Abstract；Introduction；Experiments | PDF |
+| [21] | 缩写表、3.1 硬件部署、4.9 | 支撑 AWQ 量化与 Llama-70B-AWQ 的部署背景 | activation-aware scaling/search 方法；TinyChat 推理系统；Experiments | PDF |
+| [22] | 3.7 | 支撑量化微调与低显存训练背景 | Abstract；Introduction；4-bit/quantization 方法相关章节 | PDF |
+| [23] | 2.3 | 支撑 RoPE/RoFormer 的位置编码背景 | Introduction；Preliminary；RoPE 理论与实验讨论部分 | PDF |
 
-## 当前仍需人工确认的条目
+## 当前仍需补强的地方
 
-1. [7] DISC-MedLLM：原 bibliography 中曾带错误 arXiv 编号，当前仅保存检索证据。
-2. [15] Scaling Laws for Knowledge Distillation：当前题名与可检索结果不稳定，尚未确认正式来源。
-
-## 已修正的 bibliography 重点条目
-
-以下条目已在 [thesis/thesis_v2.md](thesis/thesis_v2.md) 中修正为更接近正式来源的写法：
-
-1. [8] HuatuoGPT
-2. [9] Huatuo-26M
-3. [10] CMExam
-4. [11] MedQA
-5. [16] Symbolic Knowledge Distillation
-6. [21] TextBrewer
-7. [25] RoFormer 年份
+1. [7] 已能细化到 arXiv 摘要与实验层级，并已补本地 PDF 与快照证据；当前剩余较弱来源主要是 [10]、[17]、[18] 这类 landing page 条目。
+2. [19]、[20]、[22]、[23] 已分别落到 2.2、2.2、3.7、2.3，但若后续要提交更严格的引用核验表，仍可补成显式编号型引文。
+3. [17] / [18] 当前虽然不是全文 PDF 核验，但已经具备“替代证明链”：前者证明现代信息几何框架与应用范围，后者证明 Fisher 信息/估计精度的经典来源地位。
+4. 如果后续需要提交更严格的引用核验表，建议把 thesis_v2.md 中对应章节再补上更显式的编号型引文。

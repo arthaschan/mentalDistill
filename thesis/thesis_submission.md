@@ -100,16 +100,6 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 ## 目录
 
-第一章 绪论 ............................ 8  
-第二章 研究背景与理论基础 ..................... 12  
-第三章 设计与方法 ......................... 17  
-第四章 实验结果与分析 ....................... 24  
-第五章 讨论与结论 ......................... 30  
-参考文献 .............................. 36  
-附录 ................................ 39  
-致谢 ................................ 42  
-\newpage
-
 ## 第一章 绪论
 
 ### 1.1 研究背景
@@ -168,7 +158,7 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 医疗问答与医疗聊天系统的发展，反映了自然语言处理技术从通用文本处理走向专业健康服务的演进路径。就现有工作而言，相关研究大体可以分为两类：一类面向覆盖范围较广的通用医疗咨询，另一类则围绕特定专科任务进行定向适配。
 
-在通用医疗场景中，研究者多基于大型预训练语言模型（如 GPT 系列、ChatGLM、LLaMA 等），通过医疗领域数据集监督微调（Supervised Fine-Tuning, SFT），实现疾病咨询、用药指导、健康科普等基础功能。DISC-MedLLM 专注于医患对话优化，在回答专业性和人性化方面表现突出；HuatuoGPT 以创新的训练方法论和强大的医学推理能力为亮点，支持多尺度模型选择。
+在通用医疗场景中，研究者多基于大型预训练语言模型（如 GPT 系列、ChatGLM、LLaMA 等），通过医疗领域数据集监督微调（Supervised Fine-Tuning, SFT），实现疾病咨询、用药指导、健康科普等基础功能。现有中文医疗对话模型普遍强调医患交互中的专业性、可理解性与人性化表达；HuatuoGPT 则以创新的训练方法论和强大的医学推理能力为亮点，支持多尺度模型选择。
 
 在垂直专科场景中，研究者针对特定医学领域的需求特点优化模型的专业适配性。在牙科聊天机器人方向，目前的研究相对有限。已有研究基于 ChatGLM3 预训练模型，采用 Huatuo26M-Lite 数据集中的牙科子集进行微调，验证了专科数据对模型性能提升的关键作用，但该研究存在数据规模与多样性不足的问题，未能充分挖掘专科场景的复杂需求。此外，该研究使用开放式问答评估，评估指标的量化程度有限。
 
@@ -180,6 +170,8 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 从方法演化来看，早期蒸馏工作主要强调概率分布匹配。Hinton 的软标签蒸馏通过温度缩放让教师分布更平滑，使学生能够学习类别之间的相似性结构，而不仅仅是硬标签对应的单点监督。随后出现的 FitNets、Attention Transfer 等方法，则分别从中间层表示和注意力模式出发，说明蒸馏可以发生在不同层级的信息表达上。这些工作共同奠定了一个基本判断：学生真正需要继承的并非单一答案，而是教师对候选空间的组织方式。
 
+当蒸馏进入自然语言处理场景后，DistilBERT 进一步证明了蒸馏不仅可以作为任务微调阶段的压缩手段，也可以直接作用于预训练语言模型本身，从而在保持较强通用性的同时显著缩小模型体量。TextBrewer 则把蒸馏过程进一步工程化，展示了任务蒸馏、教师适配和训练流程编排可以被统一到可复用工具链中。这两类工作说明，在大语言模型时代，蒸馏问题不仅是损失函数设计问题，也是训练工作流设计问题。
+
 但当蒸馏对象从图像分类网络转向大语言模型时，经典方案会立刻遇到任务与系统层面的双重约束。第一，词表规模膨胀使全 vocab logits 的存储与计算代价迅速上升，例如 Qwen2.5 的输出空间已达到 151,936 维。第二，许多高性能教师以 API 形式存在，外部研究者无法稳定获得完整内部状态，传统白盒蒸馏因此失去适用前提。第三，大语言模型通常服务于具体任务场景，不同任务对蒸馏信号的需求差异很大，通用式蒸馏目标未必最有效。
 
 在这种背景下，任务结构本身就成为重新定义蒸馏目标的依据。对于五选一医学选择题，教师真正需要传递给学生的信息并不在于完整词表上的概率细节，而在于五个候选项之间的相对支持关系。只要能够恢复这种选项级分布，无论教师来自本地模型还是 API 服务，都有可能形成有效监督。本文提出的 Choice-Head 蒸馏正是沿着这一思路，将蒸馏问题从通用 token 分布匹配改写为任务头层面的决策分布迁移。
@@ -190,7 +182,9 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 医疗大语言模型的发展推动了医疗 AI 的工业化落地，当前已涌现出多个各具特色的开源和商业模型。
 
-通义千问系列（Qwen）是阿里云推出的模型系列，提供了 7B、14B、32B、72B 等多种规模的模型，在中文医疗场景中表现突出。Qwen2.5-7B-Instruct 在 CMExam 牙科测试集上的零样本准确率为 77.11%，14B 版本提升至 83.13%。其稠密 Transformer 架构、152,064 维词表和分组查询注意力（GQA）设计在中文文本处理上具有优势。Qwen3 系列引入了推理链（thinking/non-thinking）双模式设计，专为 Chain-of-Thought 推理优化。
+通义千问系列（Qwen）是阿里云推出的模型系列，提供了 7B、14B、32B、72B 等多种规模的模型，在中文医疗场景中表现突出。Qwen2.5-7B-Instruct 在 CMExam 牙科测试集上的零样本准确率为 77.11%，14B 版本提升至 83.13%。其稠密 Transformer 架构、152,064 维词表和分组查询注意力（GQA）设计在中文文本处理上具有优势。Qwen3 系列引入了推理链（thinking/non-thinking）双模式设计，专为 Chain-of-Thought 推理优化；但本文后续实验表明，在牙科选择题这种要求短输出、直接答题的蒸馏场景下，Qwen3-14B 反而不如 Qwen2.5-14B，更适合作为“架构与任务目标不匹配”的负结果案例，而非主力学生模型。
+
+从更底层的结构组件看，现代 Qwen、LLaMA 等主流模型普遍采用 Rotary Position Embedding（RoPE）这一位置编码路线，其直接理论源头可追溯到 RoFormer 对旋转式相对位置编码的系统化提出。这类设计使长上下文中的相对位置信息能够更平滑地融入自注意力计算，也是本文所使用各类 Transformer 学生/教师模型共享的重要结构背景。
 
 DeepSeek 系列中，DeepSeek-V3 采用稀疏混合专家（Mixture of Experts, MoE）架构，总参数量 671B，每次推理仅激活约 37B 参数，在多个基准测试中达到与 GPT-4 级别的性能。在 CMExam 牙科测试集上准确率为 87.95%，是本研究的主要教师模型。
 
@@ -385,6 +379,8 @@ $$
 
 除特别说明外，所有实验统一使用以下 LoRA 参数：LoRA Rank (r) = 16，LoRA Alpha (α_lora) = 32，目标模块为 q_proj 和 v_proj，Dropout = 0.0，数据类型为 bfloat16。可训练参数方面，7B 模型约 13M（0.17%），14B 模型约 16M（0.11%）。
 
+需要说明的是，QLoRA 证明了 4-bit 量化基座模型与 LoRA 适配器结合后，可以把微调显存进一步压缩到更低水平，是参数高效训练的重要延伸路线。本文最终仍以标准 LoRA 为主，而未在主实验中采用 QLoRA，主要原因在于本研究更关注蒸馏标签质量与教师形态差异，对训练稳定性和跨模块可比性的要求高于极限省显存需求；在 H100 环境下，LoRA 已能满足 7B 与 14B 学生的训练预算。
+
 ### 3.8 系统部署架构
 
 本研究实现了两个面向用户的 Web 应用。
@@ -417,6 +413,8 @@ Qwen2.5-7B-Instruct 经纯 GT SFT 后在 83 题牙科测试集上达到 77.11% �
 | Qwen2.5-14B-Instruct | 本地/API | 77.11%（64/83） | 20.24%（136/672） |
 | Kimi (moonshot-v1-32k) | API | 61.45%（51/83） | 0% |
 
+由于 Llama-3.3-70B 的异构教师实验使用的是 Module 15 的 991 题全量重分割设定，而非这里的 83 题牙科旧设定，因此未直接并入表 4-1。其已核验指标为：991 题教师准确率 72.45%，训练集不一致率 27.21%，对应的蒸馏结果见表 4-4、表 4-5 与 4.9 节。
+
 答辩要点在于教师"越强越好"并不成立，不一致率决定了可迁移暗知识的有效区间。
 
 ### 4.3 白盒蒸馏（Module 01）
@@ -435,6 +433,9 @@ Qwen2.5-7B-Instruct 经纯 GT SFT 后在 83 题牙科测试集上达到 77.11% �
 | 03 | 豆包 | 98.80% | 80.72% | 79.52% | +3.61pp |
 | 04 | Kimi | 61.45% | 77.11% | 约 76% | ±0.00 |
 | 05 | Qwen2.5-14B | 77.11% | 75.90% | 约 75.5% | -1.21pp |
+| 16* | Llama-3.3-70B-AWQ | 72.45%* | 87.59%* | 87.25%* | +3.70pp* |
+
+注：带 * 的 Module 16 结果基于 991 题全量测试集与 14B 学生，不属于上表 83 题牙科 7B 单教师设定，因此作为跨架构参考行展示。
 
 #### 4.4.2 DeepSeek-V3 详细结果（Module 02）
 
@@ -472,7 +473,9 @@ Stage 1（仅蒸馏）：峰值 84.34%，均值 82.33%。Stage 2（追加 GT SFT
 
 #### 4.7.2 Qwen3-14B（Module 14）
 
-最佳结果为 81.93%，均值为 80.72%。在本任务的直答评估模式下，Qwen2.5-14B 仍优于 Qwen3-14B。Qwen3-14B 零样本基线为 79.52%，低于 Qwen2.5-14B 的 83.13%，这表明 Qwen3 的架构为推理链优化，在直答场景下表现相对较弱。
+Qwen3-14B 的研究结论可以概括为“在本文任务设定下并不适合做学生模型”。具体来看，零样本 non-thinking 基线仅为 79.52%，低于 Qwen2.5-14B 的 83.13%；经 Choice-Head 蒸馏后，最佳结果为 81.93%，3-seed 均值为 80.72%，仍未超过 Qwen2.5-14B 的 Stage 1 峰值 84.34% 与均值 82.33%。进一步地，若尝试让 Qwen3 走推理链路线，则会与本文要求的“短输出、选项级分布对齐”相冲突：训练时在线评估一度因 thinking 模式触发而显示 0%，事后重新评估虽可恢复到 79.52%–81.93%，但追加 CoT SFT 后结果反而退化到 69.88%–74.70%。
+
+这一负结果说明，模型“更新一代”并不自动意味着更适合蒸馏。Qwen3 的设计重点在长推理链与 thinking 模式，而本文的 Choice-Head 框架要求学生在极短输出窗口内直接给出 A/B/C/D/E 选项，并与教师的选项级概率分布对齐。在这种前提下，Qwen3 的结构优势无法被发挥，反而因为 non-thinking 直答能力偏弱而拖低整体上限。因此，Qwen3-14B 在本研究中应被视为一个明确的架构失配案例：它并非“略差一些”，而是在当前任务定义、训练数据规模与蒸馏目标下都不适合作为推荐学生。
 
 ### 4.8 全量重分割验证（Module 15）
 
@@ -487,6 +490,9 @@ Stage 1（仅蒸馏）：峰值 84.34%，均值 82.33%。Stage 2（追加 GT SFT
 | Qwen2.5-7B | 76.49% | 68.80% |
 | Qwen2.5-14B | 83.55% | 74.40% |
 | DeepSeek-V3 教师 | 87.18% | 79.20% |
+| Llama-70B-AWQ 教师 | 72.45% | — |
+
+注：Llama-70B 在 125 题牙科子集上的教师单独评测值未在原始实验产物中保存，因此此处仅列出已核验的 991 题全量教师分数。
 
 #### 4.8.2 蒸馏结果
 
@@ -497,10 +503,11 @@ Stage 1（仅蒸馏）：峰值 84.34%，均值 82.33%。Stage 2（追加 GT SFT
 | 7B | Stage 1 | 85.60% | 86.28% | 73.60% |
 | 7B | Stage 2 | 85.20% | 85.77% | 73.33% |
 | 14B | Stage 1 only | 88.67% | 89.10% | 79.20% |
+| 14B | Llama-70B 教师（Module 16） | 87.25% | 87.59% | 80.00% |
 
 #### 4.8.3 核心发现
 
-三项关键发现如下。第一，学生超越教师，14B 均值 88.67% 超过 87.18%（+1.49pp），最佳 89.10% 超过教师 +1.92pp。第二，种子稳定性显著增强，14B 极差仅 0.70pp（对比旧小集的 4.82pp）。第三，7B 在大数据下也观察到 Stage 2 轻微负效应（-0.40pp）。
+三项关键发现如下。第一，学生超越教师，14B 均值 88.67% 超过 87.18%（+1.49pp），最佳 89.10% 超过教师 +1.92pp。第二，种子稳定性显著增强，14B 极差仅 0.70pp（对比旧小集的 4.82pp）。第三，7B 在大数据下也观察到 Stage 2 轻微负效应（-0.40pp）。作为补充对照，Llama-70B 异构教师虽然自身仅有 72.45%，但蒸馏后 14B 学生仍达到 87.25% 均值，并在牙科子集上取得 80.00%，说明真实 logprobs 的结构信息足以支撑竞争性结果。
 
 ### 4.9 跨架构蒸馏（Module 16）
 
@@ -538,9 +545,11 @@ Llama-70B-AWQ（真实 logprobs）→ Qwen2.5-14B 的实验中，教师准确率
 |---|---|---|---|---|---|
 | 1 | 14B Stage1（Module 15, seed=8） | Qwen2.5-14B | DeepSeek-V3 | 89.10% | +5.55pp |
 | 2 | 14B Stage1 均值（Module 15） | Qwen2.5-14B | DeepSeek-V3 | 88.67% | +5.12pp |
-| 3 | 7B Stage1（Module 15, seed=11） | Qwen2.5-7B | DeepSeek-V3 | 86.28% | +9.79pp |
-| 4 | 7B Stage1 均值（Module 15） | Qwen2.5-7B | DeepSeek-V3 | 85.60% | +9.11pp |
+| 3 | 14B Llama-70B 均值（Module 16） | Qwen2.5-14B | Llama-70B-AWQ | 87.25% | +3.70pp |
+| 4 | 7B Stage1（Module 15, seed=11） | Qwen2.5-7B | DeepSeek-V3 | 86.28% | +9.79pp |
+| 5 | 7B Stage1 均值（Module 15） | Qwen2.5-7B | DeepSeek-V3 | 85.60% | +9.11pp |
 | — | DeepSeek-V3 教师 | — | — | 87.18% | — |
+| — | Llama-70B 教师 | — | — | 72.45% | — |
 | — | 14B 零样本 | — | — | 83.55% | — |
 | — | 7B 零样本 | — | — | 76.49% | — |
 
@@ -560,13 +569,15 @@ Llama-70B-AWQ（真实 logprobs）→ Qwen2.5-14B 的实验中，教师准确率
 
 第四，本文验证了任务头蒸馏对跨架构教师具有一定适应性。即使教师与学生不属于同一模型家族，选项级概率分布仍然可以作为稳定知识载体。Llama-3.3-70B 到 Qwen-14B 的结果说明，模型结构差异并不会天然阻断有效蒸馏。这使本文的方法不局限于单一模型生态，而具备更现实的可迁移性。
 
-第五，本文将信息几何视角引入教师标签分析，为实验观察提供了额外解释框架。通过 Fisher-Rao 距离与 α-散度分析，本文进一步说明了为什么某些教师虽然分数更高，却未必产生更好的蒸馏结果，以及为什么人工平滑标签难以替代真实 logprobs。这个部分的价值在于，它使全文不只停留在经验对比层面，而开始具备对蒸馏现象进行结构化解释的理论基础。
+第五，本文还给出了一个清晰的“新模型并不一定更适合任务”的反例。Qwen3-14B 虽然是更新一代的模型，并原生支持 thinking/non-thinking 双模式，但在本文要求短输出直答的牙科选择题场景中，其零样本基线、蒸馏峰值和稳定性都落后于 Qwen2.5-14B。该结果说明，学生模型的选择不能只看发布时间、预训练 token 数或通用推理能力，还必须看其后训练目标是否与当前任务一致。
+
+第六，本文将信息几何视角引入教师标签分析，为实验观察提供了额外解释框架。通过 Fisher-Rao 距离与 α-散度分析，本文进一步说明了为什么某些教师虽然分数更高，却未必产生更好的蒸馏结果，以及为什么人工平滑标签难以替代真实 logprobs。这个部分的价值在于，它使全文不只停留在经验对比层面，而开始具备对蒸馏现象进行结构化解释的理论基础。
 
 ### 5.2 研究局限性
 
 在确认本文贡献的同时，也必须明确其成立条件和外推边界。以下局限性并不否定本文结论，而是用于说明这些结论目前在哪些范围内是可信的、在哪些范围内仍需要更强证据支持。首先，数据规模与数据覆盖面仍是影响结论稳定性的主要因素。早期实验依赖 83 题牙科测试集，容易受到单题波动和随机种子差异的影响；虽然 Module 15 已将测试规模扩展到 991 题并显著改善统计可靠性，但该评测仍主要建立在考试题分布上，牙科子集也只有 125 题，尚不足以完全代表真实临床咨询中的问题复杂度、表述多样性和知识更新频率。因此，本文结论更适用于“标准化牙科考试型知识问答”场景，而不宜直接外推到开放环境下的通用医疗问答。
 
-其次，教师模型谱系仍然偏窄，这限制了对“教师质量与蒸馏收益关系”这一结论的进一步细化。本文虽然覆盖了强教师、弱教师、API 教师与异构教师等多种情形，但总量仍只有 5 个主要教师，且在 85%–95% 准确率区间缺少更密集的中间样本。换言之，本文已经验证了倒 U 型关系的存在，却尚未给出该曲线在不同任务规模、不同学生容量和不同标签质量条件下的精确形状。类似豆包这类极高准确率教师的表现，也可能受到具体任务分布和接口返回形式的共同影响，因此当前结果更适合被理解为“强证据的经验发现”，而非已完成普适证明的理论定律。
+其次，学生模型的探索仍然没有完全展开，这限制了对“何种学生更适合 Choice-Head 蒸馏”这一问题的进一步一般化。本文已经验证 Qwen2.5-14B 是强学生，而 Qwen3-14B 在当前任务中则是一个明确的负例；但除这两类代表外，仍缺少更多不同后训练目标、不同输出风格学生的系统比较。因此，当前只能说“直答型指令模型明显优于推理链型学生”，尚不能把这一结论直接推广到所有新架构模型。
 
 第三，本文方法本身仍依赖任务结构假设。Choice-Head 蒸馏的优势来自于对五选一决策空间的压缩建模，但这也意味着方法天然更适合标准化多选任务。对于开放式问答、病例推理、长文本解释生成等任务，教师需要传递的信息不再局限于少量候选项之间的相对权重，当前框架无法直接复用。此外，本文在训练配置上仍保持了较强的工程简化，例如固定 LoRA rank=16、未系统搜索 rank∈{4,8,16,32,64} 的影响、未采用课程学习或难度感知采样，这些选择有助于控制变量，却也限制了方法上界的进一步探索。
 
@@ -606,7 +617,7 @@ Llama-70B-AWQ（真实 logprobs）→ Qwen2.5-14B 的实验中，教师准确率
 
 [6] GLM Team. (2024). ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools. arXiv:2406.12793.
 
-[7] DISC-MedLLM Team. (2024). DISC-MedLLM: A Large Language Model for Chinese Medical Dialogue.
+[7] Bao, Z., et al. (2023). DISC-MedLLM: Bridging General Large Language Models and Real-World Medical Consultation. arXiv:2308.14346.
 
 [8] Zhang, H., et al. (2023). HuatuoGPT, Towards Taming Language Model to Be a Doctor. Findings of the Association for Computational Linguistics: EMNLP 2023.
 
@@ -622,27 +633,23 @@ Llama-70B-AWQ（真实 logprobs）→ Qwen2.5-14B 的实验中，教师准确率
 
 [14] Zagoruyko, S., & Komodakis, N. (2017). Paying More Attention to Attention: ICLR 2017.
 
-[15] Snell, C., et al. (2022). Scaling Laws for Knowledge Distillation. ICML 2022.
+[15] Hu, E. J., et al. (2022). LoRA: Low-Rank Adaptation of Large Language Models. ICLR 2022.
 
-[16] West, P., et al. (2022). Symbolic Knowledge Distillation: from General Language Models to Commonsense Models. NAACL 2022.
+[16] DeepSeek AI. (2024). DeepSeek-V3 Technical Report. arXiv:2412.19437.
 
-[17] Hu, E. J., et al. (2022). LoRA: Low-Rank Adaptation of Large Language Models. ICLR 2022.
+[17] Amari, S. (2016). Information Geometry and Its Applications. Springer.
 
-[18] DeepSeek AI. (2024). DeepSeek-V3 Technical Report. arXiv:2412.19437.
+[18] Rao, C. R. (1945). Information and the Accuracy Attainable in the Estimation of Statistical Parameters. Bulletin of the Calcutta Mathematical Society, 37, 81-91.
 
-[19] Amari, S. (2016). Information Geometry and Its Applications. Springer.
+[19] Yang, Z., et al. (2020). TextBrewer: An Open-Source Knowledge Distillation Toolkit for Natural Language Processing. ACL 2020 System Demonstrations.
 
-[20] Rao, C. R. (1945). Information and the Accuracy Attainable in the Estimation of Statistical Parameters. Bulletin of the Calcutta Mathematical Society, 37, 81-91.
+[20] Sanh, V., et al. (2019). DistilBERT, a Distilled Version of BERT. NeurIPS 2019 Workshop.
 
-[21] Yang, Z., et al. (2020). TextBrewer: An Open-Source Knowledge Distillation Toolkit for Natural Language Processing. ACL 2020 System Demonstrations.
+[21] Lin, J., et al. (2024). AWQ: Activation-Aware Weight Quantization for LLM Compression. MLSys 2024.
 
-[22] Sanh, V., et al. (2019). DistilBERT, a Distilled Version of BERT. NeurIPS 2019 Workshop.
+[22] Dettmers, T., et al. (2023). QLoRA: Efficient Finetuning of Quantized LLMs. NeurIPS 2023.
 
-[23] Lin, J., et al. (2024). AWQ: Activation-Aware Weight Quantization for LLM Compression. MLSys 2024.
-
-[24] Dettmers, T., et al. (2023). QLoRA: Efficient Finetuning of Quantized LLMs. NeurIPS 2023.
-
-[25] Su, J., et al. (2021). RoFormer: Enhanced Transformer with Rotary Position Embedding. arXiv:2104.09864.
+[23] Su, J., et al. (2021). RoFormer: Enhanced Transformer with Rotary Position Embedding. arXiv:2104.09864.
 
 ## 附录
 

@@ -26,6 +26,8 @@ thesis/.thesis_headings.json
 thesis/.thesis_submission_pass*
 thesis/.thesis_submission_tmp*
 thesis/.thesis_toc_pass*.md
+thesis/MSAAI Master Thesis example 2024 v1b.docx
+thesis/RAI+601+毕业设计汇报 #10 陈天元256360231.pptx
 
 # Generated teacher/distillation artifacts
 **/data/teacher_*.jsonl

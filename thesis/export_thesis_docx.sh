@@ -7,7 +7,12 @@ FRONT_MD="$ROOT_DIR/front_matter_submit.md"
 COMBINED_MD="$ROOT_DIR/thesis_submission.md"
 OUT_DOCX="$ROOT_DIR/thesis_submission.docx"
 REFERENCE_DOC="${REFERENCE_DOC:-$ROOT_DIR/MSAAI Master Thesis example 2024 v1b.docx}"
+FORMAT_TEMPLATE_DOC="${FORMAT_TEMPLATE_DOC:-$ROOT_DIR/陈天元 256360231-3.docx}"
 PANDOC_BIN="${PANDOC_BIN:-/home/student/anaconda3/bin/pandoc}"
+
+if [[ ! -f "$FORMAT_TEMPLATE_DOC" ]]; then
+  FORMAT_TEMPLATE_DOC="$REFERENCE_DOC"
+fi
 
 if [[ ! -f "$MAIN_MD" ]]; then
   echo "Missing main markdown: $MAIN_MD" >&2
@@ -333,9 +338,125 @@ tmp_path.replace(docx_path)
 PY
 }
 
+normalize_docx_format() {
+  local docx_path="$1"
+  local template_doc="$2"
+
+  if [[ ! -f "$template_doc" ]]; then
+  echo "Warning: format template not found, skip DOCX format normalization: $template_doc" >&2
+  return 0
+  fi
+
+  DOCX_PATH="$docx_path" TEMPLATE_DOC="$template_doc" python3 - <<'PY'
+import os
+import shutil
+import tempfile
+import zipfile
+from pathlib import Path
+
+from docx import Document
+
+docx_path = Path(os.environ['DOCX_PATH'])
+template_doc = Path(os.environ['TEMPLATE_DOC'])
+
+format_parts = [
+  'word/styles.xml',
+  'word/fontTable.xml',
+  'word/webSettings.xml',
+  'word/theme/theme1.xml',
+]
+
+
+def transplant_format_parts(template_path: Path, target_path: Path) -> None:
+  with tempfile.TemporaryDirectory() as target_dir, tempfile.TemporaryDirectory() as template_dir:
+    target_root = Path(target_dir)
+    template_root = Path(template_dir)
+
+    with zipfile.ZipFile(target_path) as archive:
+      archive.extractall(target_root)
+    with zipfile.ZipFile(template_path) as archive:
+      archive.extractall(template_root)
+
+    for part in format_parts:
+      source = template_root / part
+      if not source.exists():
+        continue
+      destination = target_root / part
+      destination.parent.mkdir(parents=True, exist_ok=True)
+      shutil.copy2(source, destination)
+
+    tmp_docx = target_path.with_suffix('.tmp.docx')
+    with zipfile.ZipFile(tmp_docx, 'w', zipfile.ZIP_DEFLATED) as archive:
+      for path in target_root.rglob('*'):
+        if path.is_file():
+          archive.write(path, path.relative_to(target_root).as_posix())
+    tmp_docx.replace(target_path)
+
+
+def pick_body_style(paragraph, document, current_index):
+  text = paragraph.text.strip()
+  style_names = {style.name for style in document.styles}
+  body_text_style = document.styles['Body Text'] if 'Body Text' in style_names else document.styles['Normal']
+  first_paragraph_style = document.styles['First Paragraph'] if 'First Paragraph' in style_names else body_text_style
+  caption_style = None
+  if 'Captioned Figure' in style_names:
+    caption_style = document.styles['Captioned Figure']
+  elif 'Image Caption' in style_names:
+    caption_style = document.styles['Image Caption']
+
+  if text.startswith('图 ') and caption_style is not None:
+    return caption_style
+
+  prev_nonempty = None
+  paragraphs = document.paragraphs
+  for prev_index in range(current_index - 1, -1, -1):
+    if paragraphs[prev_index].text.strip():
+      prev_nonempty = paragraphs[prev_index]
+      break
+
+  prev_style_name = prev_nonempty.style.name if prev_nonempty is not None and prev_nonempty.style else ''
+  if prev_style_name.startswith('Heading'):
+    return first_paragraph_style
+  return body_text_style
+
+
+def normalize_paragraph_styles(target_path: Path) -> None:
+  document = Document(target_path)
+  protected_prefixes = ('Heading',)
+  protected_names = {
+    'Title',
+    'Subtitle',
+    'First Paragraph',
+    'Body Text',
+    'Image Caption',
+    'Captioned Figure',
+    'TOC Heading',
+    'Contents 1',
+    'Contents 2',
+    'Contents 3',
+    'Contents 4',
+  }
+
+  for current_index, paragraph in enumerate(document.paragraphs):
+    if not paragraph.text.strip():
+      continue
+    style_name = paragraph.style.name if paragraph.style else ''
+    if style_name in protected_names or style_name.startswith(protected_prefixes):
+      continue
+    paragraph.style = pick_body_style(paragraph, document, current_index)
+
+  document.save(target_path)
+
+
+transplant_format_parts(template_doc, docx_path)
+normalize_paragraph_styles(docx_path)
+PY
+}
+
 build_markdown "$COMBINED_MD"
 render_docx "$COMBINED_MD" "$OUT_DOCX"
 patch_docx_toc "$OUT_DOCX"
+normalize_docx_format "$OUT_DOCX" "$FORMAT_TEMPLATE_DOC"
 
 echo "Generated: $COMBINED_MD"
 echo "Generated: $OUT_DOCX"

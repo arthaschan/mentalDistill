@@ -218,14 +218,14 @@ def build_outline(prs, total):
     line.fill.fore_color.rgb = RED
     line.line.fill.background()
     items = [
-        "1. 研究背景与问题定义",
-        "2. 研究目标、数据与实验范围",
-        "3. 核心方法：Choice-Head 两阶段蒸馏",
+        "1. 研究背景与核心问题",
+        "2. 数据、目标与实验范围",
+        "3. Choice-Head 蒸馏方法",
         "4. 实验体系与设置",
         "5. 核心结果：学生超过教师",
-        "6. 关键发现与理论解释",
+        "6. 关键发现与解释",
         "7. 应用价值、局限与未来工作",
-        "8. 结论与答辩总结",
+        "8. 结论",
     ]
     add_bullets(slide, Inches(1.0), Inches(1.7), Inches(7.3), Inches(4.9), items, font_size=22, color=TEXT, level0_indent=0.18)
     add_footer(slide, 2, total, "基于知识蒸馏的牙科选择题自动答题系统")
@@ -237,15 +237,15 @@ def build_background(slide, total):
     tf = box.text_frame
     tf.clear()
     p = tf.paragraphs[0]
-    p.text = "核心问题：能否通过知识蒸馏，将大型教师模型的答题能力迁移到轻量级学生模型（7B~14B），在保持可部署性的同时最大化准确率？"
+    p.text = "核心问题：能否把大模型的牙科答题能力迁移到 7B/14B 学生模型，同时兼顾准确率和部署成本？"
     set_text_style(p, 21, color=BLUE, bold=True)
 
     add_textbox(slide, Inches(0.9), Inches(3.2), Inches(2.0), Inches(0.5), "研究动机", font_size=24, color=TEXT, bold=True)
     bullets = [
-        "牙科知识服务需要即时、低门槛、可解释的辅助能力",
-        "商业级教师模型准确率高，但显存、算力和调用成本高",
-        "传统全词表蒸馏对五选一任务存在明显冗余",
-        "研究目标不是做更大模型，而是把高性能能力做成可部署系统",
+        "需要的是低成本、可部署的牙科答题能力",
+        "大模型效果好，但推理和部署代价高",
+        "传统全词表蒸馏对五选一任务有明显冗余",
+        "因此本文重写蒸馏目标，而不是继续堆大模型",
     ]
     add_bullets(slide, Inches(0.95), Inches(3.75), Inches(10.5), Inches(2.6), bullets, font_size=21)
     add_footer(slide, 3, total, "基于知识蒸馏的牙科选择题自动答题系统")
@@ -265,9 +265,9 @@ def build_setup(slide, total):
     p.text = "评测设置"
     set_text_style(p, 20, color=TEAL, bold=True)
     for line in [
-        "小规模实验：672/74/83（train/val/test）牙科固定划分",
-        "大规模验证：4608/991/991 全量重分割 + 125 题牙科子集",
-        "教师：DeepSeek-V3、Doubao、Llama-3.3-70B、Qwen2.5-32B",
+        "小规模：672/74/83 牙科固定划分",
+        "大规模：4608/991/991 全量重分割 + 125 题牙科子集",
+        "教师覆盖 DeepSeek-V3、Doubao、Llama-70B、Qwen2.5-32B",
         "硬件：NVIDIA H100 NVL 95GB，BF16 混合精度训练",
     ]:
         para = tf_left.add_paragraph()
@@ -283,8 +283,8 @@ def build_setup(slide, total):
     p.text = "模型参数规模"
     set_text_style(p, 20, color=ORANGE, bold=True)
     for line in [
-        "学生：Qwen2.5-7B / 14B，覆盖 7B 到 14B 容量段",
-        "本地教师：Qwen2.5-32B（32B）、Llama-3.3-70B（70B）",
+        "学生：Qwen2.5-7B / 14B",
+        "本地教师：Qwen2.5-32B、Llama-3.3-70B",
         "主要 API 教师：DeepSeek-V3（671B 总参数 / 37B 激活）",
         "Doubao、Kimi 为闭源模型，参数规模未公开",
     ]:
@@ -298,12 +298,12 @@ def build_setup(slide, total):
 
 def build_method(slide, total):
     add_title(slide, "03", "核心方法：Choice-Head 两阶段蒸馏")
-    add_card(slide, Inches(0.8), Inches(1.55), Inches(2.25), Inches(1.65), "传统全词表蒸馏", ["151,936 维 logits", "显存与计算代价高", "API 教师难以支持"], line_color=RGBColor(120, 120, 120), title_color=TEXT)
-    add_card(slide, Inches(3.25), Inches(1.55), Inches(2.35), Inches(1.65), "Choice-Head 蒸馏", ["只蒸馏 A/B/C/D/E", "监督维度压缩到 5 维", "天然兼容黑盒教师"], line_color=TEAL)
-    add_card(slide, Inches(5.8), Inches(1.55), Inches(2.35), Inches(1.65), "Stage 1", ["Choice-Head KL + CE", "1 epoch，α=0.35", "先学教师偏好结构"], line_color=ORANGE)
-    add_card(slide, Inches(8.35), Inches(1.55), Inches(3.0), Inches(1.65), "Stage 2", ["GT SFT 精校", "2–5 epochs", "用标准答案纠正教师误差"], line_color=BLUE)
+    add_card(slide, Inches(0.8), Inches(1.55), Inches(2.25), Inches(1.65), "传统全词表蒸馏", ["151,936 维 logits", "代价高", "黑盒教师难支持"], line_color=RGBColor(120, 120, 120), title_color=TEXT)
+    add_card(slide, Inches(3.25), Inches(1.55), Inches(2.35), Inches(1.65), "Choice-Head 蒸馏", ["只看 A/B/C/D/E", "监督降到 5 维", "兼容 API 教师"], line_color=TEAL)
+    add_card(slide, Inches(5.8), Inches(1.55), Inches(2.35), Inches(1.65), "Stage 1", ["Choice-Head KL + CE", "先学教师偏好", "1 epoch"], line_color=ORANGE)
+    add_card(slide, Inches(8.35), Inches(1.55), Inches(3.0), Inches(1.65), "Stage 2", ["GT SFT 精校", "再用标准答案校准", "2–5 epochs"], line_color=BLUE)
 
-    add_textbox(slide, Inches(0.95), Inches(3.55), Inches(4.8), Inches(0.5), "关键设计思想", font_size=24, color=RED, bold=True)
+    add_textbox(slide, Inches(0.95), Inches(3.55), Inches(4.8), Inches(0.5), "方法直觉", font_size=24, color=RED, bold=True)
     left = add_round_box(slide, Inches(0.8), Inches(4.05), Inches(5.5), Inches(2.2), fill=LIGHT_GRAY, line=TEAL)
     tf_left = left.text_frame
     tf_left.clear()
@@ -311,9 +311,9 @@ def build_method(slide, total):
     p.text = "Stage 1：Choice-Head KL 蒸馏"
     set_text_style(p, 20, color=TEAL, bold=True)
     for line in [
-        "仅提取 A/B/C/D/E 五个选项上的概率分布",
+        "只蒸馏五个选项间的相对偏好",
         "损失：α·KL(pT∥pS) + (1-α)·CE",
-        "典型显存约 22GB，可使用 API-only 教师",
+        "显存更低，也能用 API-only 教师",
     ]:
         para = tf_left.add_paragraph()
         para.text = line
@@ -329,8 +329,8 @@ def build_method(slide, total):
     set_text_style(p, 20, color=BLUE, bold=True)
     for line in [
         "继承 Stage 1 的 LoRA 权重",
-        "用标准答案对教师错误进行校准",
-        "对弱学生更稳定，对 14B 强学生不一定持续增益",
+        "用 GT 校正教师误差",
+        "对 7B 更稳，对 14B 不一定继续增益",
     ]:
         para = tf_right.add_paragraph()
         para.text = line
@@ -342,11 +342,11 @@ def build_method(slide, total):
 
 def build_experiment_matrix(slide, total):
     add_title(slide, "04", "实验体系与设置")
-    add_card(slide, Inches(0.8), Inches(1.55), Inches(2.15), Inches(1.55), "A. 基线建立", ["GT SFT 基线", "7B：77.11%", "明确学生起点"], line_color=RGBColor(90, 90, 90), title_color=TEXT)
-    add_card(slide, Inches(3.05), Inches(1.55), Inches(2.35), Inches(1.55), "B. 单教师蒸馏", ["白盒 Logit-KL", "黑盒 Choice-Head", "比较教师形态与参数规模"], line_color=TEAL)
+    add_card(slide, Inches(0.8), Inches(1.55), Inches(2.15), Inches(1.55), "A. 基线建立", ["GT SFT", "7B：77.11%", "先定起点"], line_color=RGBColor(90, 90, 90), title_color=TEXT)
+    add_card(slide, Inches(3.05), Inches(1.55), Inches(2.35), Inches(1.55), "B. 单教师蒸馏", ["白盒 Logit-KL", "黑盒 Choice-Head", "比较监督形式"], line_color=TEAL)
     add_card(slide, Inches(5.55), Inches(1.55), Inches(2.35), Inches(1.55), "C. 多教师优化", ["静态融合", "一致性过滤", "多数票集成"], line_color=ORANGE)
-    add_card(slide, Inches(8.05), Inches(1.55), Inches(1.55), Inches(1.55), "D. 范式拓展", ["CoT 蒸馏", "α-散度", "边界过滤"], line_color=RED)
-    add_card(slide, Inches(9.8), Inches(1.55), Inches(1.55), Inches(1.55), "E. 容量升级", ["14B 学生", "跨架构蒸馏", "全量重分割"], line_color=GREEN)
+    add_card(slide, Inches(8.05), Inches(1.55), Inches(1.55), Inches(1.55), "D. 范式拓展", ["CoT", "α-散度", "边界过滤"], line_color=RED)
+    add_card(slide, Inches(9.8), Inches(1.55), Inches(1.55), Inches(1.55), "E. 容量升级", ["14B 学生", "跨架构", "全量重分割"], line_color=GREEN)
 
     left = add_round_box(slide, Inches(0.8), Inches(3.55), Inches(5.25), Inches(2.35), fill=WHITE, line=TEAL)
     tf_left = left.text_frame
@@ -355,9 +355,9 @@ def build_experiment_matrix(slide, total):
     p.text = "实验设计特点"
     set_text_style(p, 20, color=TEAL, bold=True)
     for line in [
-        "从单教师到多教师、从 7B 到 14B、从 83 题到 991 题逐层推进",
-        "包含正例、负例与失败实验，不只保留最优结果",
-        "所有模块保留统一运行脚本，强调可复现性",
+        "从单教师到多教师、从 7B 到 14B 逐层推进",
+        "同时保留正例、负例和失败实验",
+        "所有模块都保留统一脚本，保证可复现",
     ]:
         para = tf_left.add_paragraph()
         para.text = line
@@ -372,9 +372,9 @@ def build_experiment_matrix(slide, total):
     p.text = "关键可比性控制"
     set_text_style(p, 20, color=ORANGE, bold=True)
     for line in [
-        "模块之间尽量复用同一学生架构与训练超参",
-        "通过多 seed 与大测试集缓解 83 题小样本波动",
-        "把理论分析放在经验结论之后，避免先验解释替代实证比较",
+        "模块之间尽量复用同一学生架构与超参",
+        "用多 seed 和大测试集缓解 83 题波动",
+        "先给经验结果，再做理论解释",
     ]:
         para = tf_right.add_paragraph()
         para.text = line
@@ -398,9 +398,9 @@ def build_main_results(slide, total):
     p.text = "最重要的结论"
     set_text_style(p, 22, color=GREEN, bold=True)
     for line in [
-        "学生模型不只是接近教师，而是在任务结构更对齐的训练目标下可以超过教师",
-        "对 14B 强学生而言，最有效的并不一定是更复杂流程，而是更精准的蒸馏目标",
-        "大测试集验证后，结论在统计上更稳健，不依赖少量题目的偶然波动",
+        "学生不只是接近教师，而是可以超过教师",
+        "关键不在流程更复杂，而在蒸馏目标更贴近任务结构",
+        "991 题验证后，这个结论更稳健",
     ]:
         para = tf_left.add_paragraph()
         para.text = line
@@ -430,19 +430,19 @@ def build_main_results(slide, total):
 
 def build_result_details(slide, total):
     add_title(slide, "06", "结果细化：什么条件下蒸馏有效？")
-    add_card(slide, Inches(0.8), Inches(1.55), Inches(3.35), Inches(1.9), "白盒 vs 黑盒", ["白盒 Logit-KL：80.72%", "黑盒 Choice-Head：81.93%", "任务对齐优于全词表监督"], line_color=TEAL)
-    add_card(slide, Inches(4.35), Inches(1.55), Inches(3.35), Inches(1.9), "Stage 2 的边界", ["7B 学生通常受益", "14B 学生均值反而下降约 1.6pp", "说明强学生会被过校准"], line_color=ORANGE)
-    add_card(slide, Inches(7.9), Inches(1.55), Inches(3.35), Inches(1.9), "跨架构可行性", ["72.8% 的 Llama-70B 教师", "仍能蒸馏出 87.25% 的 14B 学生", "监督价值不只由教师准确率决定"], line_color=GREEN)
+    add_card(slide, Inches(0.8), Inches(1.55), Inches(3.35), Inches(1.9), "白盒 vs 黑盒", ["白盒 Logit-KL：80.72%", "黑盒 Choice-Head：81.93%", "任务对齐比全词表更重要"], line_color=TEAL)
+    add_card(slide, Inches(4.35), Inches(1.55), Inches(3.35), Inches(1.9), "Stage 2 的边界", ["7B 通常受益", "14B 均值下降约 1.6pp", "强学生可能被过校准"], line_color=ORANGE)
+    add_card(slide, Inches(7.9), Inches(1.55), Inches(3.35), Inches(1.9), "跨架构可行性", ["Llama-70B 教师：72.45%", "14B 学生仍达 87.25%", "教师价值不只看准确率"], line_color=GREEN)
 
     bottom = add_round_box(slide, Inches(0.85), Inches(3.95), Inches(10.5), Inches(1.8), fill=LIGHT_BLUE, line=BLUE)
     tf = bottom.text_frame
     tf.clear()
     p = tf.paragraphs[0]
-    p.text = "结论不是“蒸馏越复杂越好”，而是“监督信号是否与任务决策结构匹配”。"
+    p.text = "结论不是“越复杂越好”，而是“监督信号要和任务决策结构匹配”。"
     p.alignment = PP_ALIGN.CENTER
     set_text_style(p, 23, color=BLUE, bold=True)
     p2 = tf.add_paragraph()
-    p2.text = "因此，本文的主要价值不只是一组更高分数，而是给出了一套可解释的设计原则：聚焦选项空间、保留教师偏好、避免无效监督维度。"
+    p2.text = "本文的价值不只是一组更高分数，更在于给出了可解释的设计原则。"
     p2.alignment = PP_ALIGN.CENTER
     set_text_style(p2, 16, color=TEXT_LIGHT)
     add_footer(slide, 8, total, "基于知识蒸馏的牙科选择题自动答题系统")
@@ -450,15 +450,15 @@ def build_result_details(slide, total):
 
 def build_inverted_u(slide, total):
     add_title(slide, "07", "关键发现一：教师不是越强越好")
-    add_card(slide, Inches(0.9), Inches(1.7), Inches(3.1), Inches(2.7), "弱教师", ["代表：Kimi，61.45%", "错误过多，噪声大", "学生学习到的偏好不稳定"], line_color=RED)
-    add_card(slide, Inches(4.15), Inches(1.7), Inches(4.0), Inches(2.7), "最佳区间", ["教师与 GT 不一致率约 5%–15%", "既保留结构信息，又不过度偏离真值", "是最适合迁移的蒸馏信号"], line_color=GREEN)
-    add_card(slide, Inches(8.35), Inches(1.7), Inches(3.0), Inches(2.7), "过强教师", ["接近 one-hot", "暗知识不足", "难以提供有梯度价值的混淆结构"], line_color=ORANGE)
+    add_card(slide, Inches(0.9), Inches(1.7), Inches(3.1), Inches(2.7), "弱教师", ["Kimi：62.65%", "分歧高但信号质量不足", "学生最终与基线持平"], line_color=RED)
+    add_card(slide, Inches(4.15), Inches(1.7), Inches(4.0), Inches(2.7), "较优情形", ["较高准确率 + 适度 teacher-GT 分歧", "保留结构信息，又不过分偏离真值", "更容易带来蒸馏增益"], line_color=GREEN)
+    add_card(slide, Inches(8.35), Inches(1.7), Inches(3.0), Inches(2.7), "过强教师", ["接近 one-hot", "暗知识不足", "给不出有效混淆结构"], line_color=ORANGE)
 
     box = add_round_box(slide, Inches(0.95), Inches(4.75), Inches(10.35), Inches(1.2), fill=WHITE, line=TEAL)
     tf = box.text_frame
     tf.clear()
     p = tf.paragraphs[0]
-    p.text = "教师质量与蒸馏收益呈倒 U 型关系。真正关键的不是教师“绝对有多强”，而是它是否保留了可迁移的结构性不确定性。"
+    p.text = "教师质量与蒸馏收益呈倒 U 型，关键在于是否保留了可迁移的不确定性结构。"
     p.alignment = PP_ALIGN.CENTER
     set_text_style(p, 20, color=TEAL, bold=True)
     add_footer(slide, 9, total, "基于知识蒸馏的牙科选择题自动答题系统")
@@ -473,9 +473,9 @@ def build_information_geometry(slide, total):
     p.text = "为什么人工平滑标签不够？"
     set_text_style(p, 20, color=BLUE, bold=True)
     for line in [
-        "人工平滑只在正确答案周围分配固定噪声，信息结构单一",
-        "无法反映“最容易混淆的错误项”与“边界距离”",
-        "因此在任务层面只提供了有限的软监督增益",
+        "人工平滑只是加固定噪声",
+        "看不到最容易混淆的错误项和边界距离",
+        "因此只能提供有限的软监督增益",
     ]:
         para = tf_left.add_paragraph()
         para.text = line
@@ -490,9 +490,9 @@ def build_information_geometry(slide, total):
     p.text = "信息几何分析给出的证据"
     set_text_style(p, 20, color=GREEN, bold=True)
     for line in [
-        "Fisher-Rao 与 α-散度分析显示：真实 logprobs 更接近连续概率流形",
-        "真实标签的体积密度约为人工平滑标签的 2500 倍",
-        "这解释了为何真实 logprobs 教师往往蒸馏效果更稳定",
+        "Fisher-Rao 与 α-散度都指向同一结论",
+        "真实 logprobs 更接近连续概率流形",
+        "体积密度约为人工平滑标签的 2500 倍",
     ]:
         para = tf_right.add_paragraph()
         para.text = line
@@ -504,7 +504,7 @@ def build_information_geometry(slide, total):
     tf = highlight.text_frame
     tf.clear()
     p = tf.paragraphs[0]
-    p.text = "结论：决定蒸馏效果的不只是“答对没有”，而是教师分布中是否保留了高价值的连续结构信息。"
+    p.text = "决定蒸馏效果的，不只是教师有没有答对，更在于它有没有保留高价值的连续结构信息。"
     p.alignment = PP_ALIGN.CENTER
     set_text_style(p, 18, color=TEAL, bold=True)
     add_footer(slide, 10, total, "基于知识蒸馏的牙科选择题自动答题系统")
@@ -519,10 +519,10 @@ def build_application(slide, total):
     p.text = "从论文到系统"
     set_text_style(p, 20, color=TEAL, bold=True)
     for line in [
-        "仓库中已实现统一训练、评估、Web 推理与 Quiz 交互入口",
-        "7B/14B 学生模型可以在普通 GPU 条件下完成部署演示",
-        "适合患者教育、教学演示、标准化考试训练等轻量场景",
-        "方法本身也可迁移到其他标准化多选知识评测任务",
+        "仓库已提供统一训练、评估和 Web/Quiz 入口",
+        "7B/14B 学生模型可完成部署演示",
+        "更适合教学演示、考试训练等轻量场景",
+        "方法也能迁移到其他标准化多选任务",
     ]:
         para = tf_left.add_paragraph()
         para.text = line
@@ -537,9 +537,9 @@ def build_application(slide, total):
     p.text = "应用意义"
     set_text_style(p, 20, color=ORANGE, bold=True)
     for line in [
-        "不是把大模型原样搬到端侧，而是围绕任务结构重构蒸馏目标",
-        "把“能答题”转化为“能低成本稳定交付”",
-        "为医疗大模型轻量化提供了可复现、可解释的实验范式",
+        "重点不是把大模型原样搬到端侧",
+        "而是把“能答题”做成“能低成本交付”",
+        "为医疗大模型轻量化提供可复现范式",
     ]:
         para = tf_right.add_paragraph()
         para.text = line
@@ -560,8 +560,8 @@ def build_future(slide, total):
     set_text_style(p, 21, color=RED, bold=True)
     for line in [
         "任务仍以标准化选择题为主，尚未覆盖开放问答与长文本推理",
-        "教师谱系还不够密集，倒 U 型规律仍需更细粒度验证",
-        "评估指标以准确率为主，缺少人工质量评审与临床专家反馈",
+        "教师谱系还不够密集，倒 U 型仍需更细验证",
+        "评估以准确率为主，缺少人工和专家反馈",
         "系统目前更多面向研究验证，而非直接临床部署",
     ]:
         para = tf_left.add_paragraph()
@@ -577,10 +577,10 @@ def build_future(slide, total):
     p.text = "未来工作"
     set_text_style(p, 21, color=GREEN, bold=True)
     for line in [
-        "扩大数据与多种子验证，进一步提高结论的统计置信度",
-        "研究教师路由、自适应 α-散度与动态样本选择策略",
-        "从选择题扩展到开放医疗问答、多模态与真实交互任务",
-        "继续推进端侧部署与真实用户反馈闭环",
+        "扩大数据与多种子验证，提高统计可信度",
+        "研究教师路由、自适应 α-散度和动态样本选择",
+        "从选择题扩展到开放问答、多模态和真实交互",
+        "继续推进端侧部署与真实反馈闭环",
     ]:
         para = tf_right.add_paragraph()
         para.text = line
@@ -600,7 +600,7 @@ def build_ending(slide, total):
     tf = box.text_frame
     tf.clear()
     p = tf.paragraphs[0]
-    p.text = "本文证明：当蒸馏目标与任务决策结构对齐时，小模型不仅能以更低成本部署，还有机会获得超过教师的任务表现。"
+    p.text = "本文说明：当蒸馏目标和任务决策结构对齐时，小模型不仅更容易部署，也有机会超过教师。"
     p.alignment = PP_ALIGN.CENTER
     set_text_style(p, 22, color=BLUE, bold=True)
     p2 = tf.add_paragraph()

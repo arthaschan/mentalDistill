@@ -43,7 +43,7 @@ echo "========================================"
 echo "[FUSION] 5老师对照组 (含 Kimi)"
 echo "========================================"
 
-# 5老师权重: 按 accuracy 归一化 (98.80+87.95+83.13+77.11+61.45 = 408.44)
+# 5老师权重: 按 accuracy 归一化 (97.59+87.95+83.13+77.11+62.65 = 408.43)
 $PYTHON "$PROJ_DIR/shared/merge_teacher_soft_labels.py" \
     --base "$PROJ_DIR/00_baseline_gt_sft/data/train.jsonl" \
     --teachers \

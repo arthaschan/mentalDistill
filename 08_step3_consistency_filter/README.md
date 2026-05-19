@@ -14,8 +14,8 @@ Stage 2 发现：所有 "软标签" 均为 smooth_eps 生成的假分布（0.80/
 
 | 教师 | 准确率 | 权重 | 多票文件 |
 |------|--------|------|----------|
-| Doubao (ep-20260330210911-6pc2r) | 98.80% | 0.528 | `03_doubao_choice_head/data/teacher_train_multivote.jsonl` |
-| DeepSeek-V3 | 87.95% | 0.472 | `02_deepseek_v3_choice_head/data/teacher_train_multivote.jsonl` |
+| Doubao (ep-20260330210911-6pc2r) | 97.59% | 0.526 | `03_doubao_choice_head/data/teacher_train_multivote.jsonl` |
+| DeepSeek-V3 | 87.95% | 0.474 | `02_deepseek_v3_choice_head/data/teacher_train_multivote.jsonl` |
 
 多票采样: N=9 (1 base vote + 8 extra API calls), temperature=0.9
 

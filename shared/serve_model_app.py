@@ -25,72 +25,174 @@ HTML_PAGE = """<!doctype html>
   <title>{title}</title>
   <style>
     :root {{
-      --bg: #f3efe4;
-      --panel: rgba(255,255,255,0.82);
-      --ink: #1f2a1f;
-      --accent: #0f766e;
-      --accent-2: #b45309;
-      --line: rgba(31,42,31,0.12);
+      --bg: #f4efe6;
+      --paper: rgba(255, 251, 245, 0.84);
+      --panel: rgba(255, 255, 255, 0.76);
+      --ink: #1f2430;
+      --muted: #5d6271;
+      --accent: #8c1d18;
+      --accent-soft: #c56a52;
+      --deep: #12343b;
+      --gold: #b48a3a;
+      --line: rgba(18, 52, 59, 0.12);
+      --shadow: 0 24px 60px rgba(31, 36, 48, 0.12);
     }}
     * {{ box-sizing: border-box; }}
     body {{
       margin: 0;
-      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(180,83,9,0.18), transparent 28%),
-        radial-gradient(circle at right 20%, rgba(15,118,110,0.18), transparent 24%),
-        linear-gradient(135deg, #f8f5ea, var(--bg));
+        radial-gradient(circle at top left, rgba(180, 138, 58, 0.20), transparent 24%),
+        radial-gradient(circle at 85% 12%, rgba(140, 29, 24, 0.18), transparent 22%),
+        linear-gradient(145deg, #fcf7ef, var(--bg));
       min-height: 100vh;
     }}
-    .shell {{ max-width: 1080px; margin: 0 auto; padding: 32px 20px 48px; }}
-    .hero {{ margin-bottom: 20px; }}
-    .eyebrow {{ letter-spacing: 0.16em; text-transform: uppercase; font-size: 12px; opacity: 0.68; }}
-    h1 {{ font-size: clamp(28px, 4vw, 52px); margin: 10px 0 8px; line-height: 1.04; }}
-    .hero p {{ max-width: 760px; font-size: 16px; line-height: 1.7; margin: 0; }}
-    .grid {{ display: grid; gap: 18px; grid-template-columns: 1.08fr 0.92fr; }}
+    .shell {{ max-width: 1260px; margin: 0 auto; padding: 28px 20px 44px; }}
+    .hero {{
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 22px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(140deg, rgba(18, 52, 59, 0.94), rgba(26, 34, 42, 0.9) 52%, rgba(140, 29, 24, 0.92));
+      color: #f9f3ea;
+      box-shadow: var(--shadow);
+    }}
+    .hero::after {{
+      content: "";
+      position: absolute;
+      inset: auto -120px -140px auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0));
+    }}
+    .hero-grid {{
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+      align-items: start;
+    }}
+    .eyebrow {{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }}
+    .hero h1 {{ font-size: clamp(30px, 4.3vw, 56px); margin: 16px 0 10px; line-height: 1.06; }}
+    .hero .subtitle {{ max-width: 820px; font-size: 17px; line-height: 1.75; color: rgba(249,243,234,0.84); margin: 0; }}
+    .thesis-en {{ margin-top: 12px; font-size: 14px; letter-spacing: 0.04em; color: rgba(249,243,234,0.72); }}
+    .identity-card {{
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }}
+    .logo-wrap {{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }}
+    .logo-wrap img {{
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.92);
+      padding: 10px;
+    }}
+    .logo-wrap strong {{ display: block; font-size: 18px; line-height: 1.35; }}
+    .logo-wrap span {{ color: rgba(249,243,234,0.72); font-size: 13px; }}
+    .info-grid {{ display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+    .info-item {{
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+    }}
+    .info-item .k {{ font-size: 12px; color: rgba(249,243,234,0.66); margin-bottom: 4px; }}
+    .info-item .v {{ font-size: 15px; font-weight: 700; }}
+    .deployment {{
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.1);
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(249,243,234,0.78);
+    }}
+    .grid {{ display: grid; gap: 20px; grid-template-columns: 1.04fr 0.96fr; }}
     .card {{
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 20px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 50px rgba(31,42,31,0.08);
+      border-radius: 28px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
     }}
-    .tabs {{ display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }}
+    .section-title {{ display: flex; justify-content: space-between; gap: 12px; align-items: start; margin-bottom: 16px; }}
+    .section-title h2 {{ margin: 0; font-size: 24px; line-height: 1.15; }}
+    .section-title p {{ margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }}
+    .tabs {{ display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }}
     .tab {{
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.56);
+      background: rgba(255,255,255,0.66);
       border-radius: 999px;
-      padding: 10px 14px;
+      padding: 11px 16px;
       cursor: pointer;
       transition: 160ms ease;
     }}
-    .tab.active {{ background: var(--accent); color: #fff; border-color: var(--accent); }}
-    label {{ display: block; font-size: 13px; margin: 14px 0 8px; opacity: 0.78; }}
+    .tab.active {{ background: linear-gradient(135deg, var(--accent), var(--accent-soft)); color: #fff; border-color: transparent; }}
+    label {{ display: block; font-size: 13px; margin: 14px 0 8px; color: var(--muted); }}
     textarea, input, select {{
       width: 100%;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 14px 15px;
       font: inherit;
       color: inherit;
-      background: rgba(255,255,255,0.84);
+      background: rgba(255,255,255,0.9);
     }}
-    textarea {{ min-height: 160px; resize: vertical; }}
-    .options {{ min-height: 148px; }}
+    textarea {{ min-height: 170px; resize: vertical; }}
+    .options {{ min-height: 168px; }}
+    .helper-grid {{ display: grid; gap: 10px; margin-top: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+    .helper-chip {{
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.62);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }}
     .actions {{ display: flex; gap: 12px; align-items: center; margin-top: 18px; flex-wrap: wrap; }}
     button {{
       border: 0;
       border-radius: 999px;
-      padding: 12px 18px;
+      padding: 12px 20px;
       font: inherit;
-      background: linear-gradient(135deg, var(--accent), #155e75);
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
       color: #fff;
       cursor: pointer;
+      box-shadow: 0 12px 30px rgba(140, 29, 24, 0.18);
     }}
-    .ghost {{ background: rgba(255,255,255,0.7); color: var(--ink); border: 1px solid var(--line); }}
-    .status {{ font-size: 13px; opacity: 0.74; }}
+    .ghost {{ background: rgba(255,255,255,0.82); color: var(--ink); border: 1px solid var(--line); box-shadow: none; }}
+    .status {{ font-size: 13px; color: var(--muted); }}
     pre {{
       white-space: pre-wrap;
       word-break: break-word;
@@ -99,26 +201,78 @@ HTML_PAGE = """<!doctype html>
       font-size: 14px;
       line-height: 1.7;
     }}
+    .output-shell {{
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(18,52,59,0.98), rgba(35,43,51,0.96));
+      color: #f6efe4;
+    }}
+    .answer-letter {{ font-size: 52px; line-height: 1; font-weight: 800; color: #f3c66d; margin-bottom: 14px; }}
+    .answer-panel {{ min-height: 220px; }}
     .meta {{ display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 16px; }}
-    .pill {{ border: 1px solid var(--line); border-radius: 18px; padding: 12px 14px; background: rgba(255,255,255,0.54); }}
+    .pill {{ border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 12px 14px; background: rgba(255,255,255,0.06); }}
+    .pill strong {{ display: block; color: rgba(246,239,228,0.7); font-size: 12px; margin-bottom: 6px; }}
     .wide {{ grid-column: 1 / -1; }}
     .toolbar {{ display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }}
     .toolbar .grow {{ flex: 1 1 320px; }}
     .toolbar button {{ white-space: nowrap; }}
-    .answer-letter {{ font-size: 40px; line-height: 1; font-weight: 800; color: var(--accent-2); margin-bottom: 12px; }}
-    .mini {{ font-size: 12px; opacity: 0.72; margin-top: 8px; }}
-    @media (max-width: 900px) {{ .grid {{ grid-template-columns: 1fr; }} }}
+    .mini {{ font-size: 12px; color: rgba(246,239,228,0.64); margin-top: 10px; line-height: 1.6; }}
+    .footer-note {{ margin-top: 14px; color: var(--muted); font-size: 13px; line-height: 1.7; }}
+    @media (max-width: 980px) {{
+      .hero-grid, .grid, .info-grid, .helper-grid {{ grid-template-columns: 1fr; }}
+      .shell {{ padding-inline: 16px; }}
+      .hero, .card {{ padding: 20px; }}
+    }}
   </style>
 </head>
 <body>
   <div class="shell">
     <section class="hero">
-      <div class="eyebrow">Dental Distillation Workspace</div>
-      <h1>{title}</h1>
-      <p>这个页面用于快速验证当前实验目录产出的学生模型。支持牙科问答与口腔选择题推理，默认走本地模型，不依赖额外前端工程。</p>
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Master Thesis Demo System</div>
+          <h1>基于知识蒸馏的牙科选择题自动答题系统</h1>
+          <p class="subtitle">该演示页面用于现场展示毕业论文对应的牙科智能答题系统，支持牙科问答题与五选一选择题两种交互模式，并直接连接当前最佳蒸馏模型。</p>
+          <div class="thesis-en">A Knowledge Distillation-Based Automatic Dental Multiple-Choice Question Answering System</div>
+        </div>
+        <aside class="identity-card">
+          <div class="logo-wrap">
+            <img src="https://www.chuhai.edu.hk/_nuxt/logo_v_c.eba84de3.png" alt="香港珠海学院校徽">
+            <div>
+              <strong>香港珠海学院</strong>
+              <span>Hong Kong Chu Hai College</span>
+            </div>
+          </div>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="k">姓名</div>
+              <div class="v">陈天元</div>
+            </div>
+            <div class="info-item">
+              <div class="k">学号</div>
+              <div class="v">256360231</div>
+            </div>
+            <div class="info-item">
+              <div class="k">导师</div>
+              <div class="v">熊体操</div>
+            </div>
+            <div class="info-item">
+              <div class="k">系统模式</div>
+              <div class="v">问答题 / 选择题</div>
+            </div>
+          </div>
+          <div class="deployment">当前部署：{title}<br>本页适合课堂、答辩和论文演示场景，支持直接展示模型输出与候选选项结果。</div>
+        </aside>
+      </div>
     </section>
     <section class="grid">
       <div class="card">
+        <div class="section-title">
+          <div>
+            <h2>交互输入区</h2>
+            <p>在选择题模式下输入题干与 A-E 五个选项；在问答模式下输入牙科临床或科普问题。</p>
+          </div>
+        </div>
         <div class="tabs">
           <button class="tab active" data-mode="choice" type="button">选择题</button>
           <button class="tab" data-mode="qa" type="button">问答</button>
@@ -136,24 +290,39 @@ HTML_PAGE = """<!doctype html>
           <label for="options">选项</label>
           <textarea id="options" class="options" placeholder="A. ...\nB. ...\nC. ...\nD. ...\nE. ..."></textarea>
         </div>
+        <div class="helper-grid">
+          <div class="helper-chip">选择题建议：直接粘贴标准五选一题目，选项按 A、B、C、D、E 分行输入。</div>
+          <div class="helper-chip">问答题建议：可要求模型按“诊断、依据、处理原则”结构作答，便于现场展示。</div>
+        </div>
         <div class="actions">
           <button id="submit" type="button">生成结果</button>
           <button id="reset" type="button" class="ghost">清空</button>
           <span id="status" class="status">模型已加载后可直接提问</span>
         </div>
+        <div class="footer-note">如果演示现场网络不稳定，页面会直接展示明确错误信息，避免出现难以解释的前端异常。</div>
       </div>
       <div class="card">
-        <div class="answer-letter" id="answer-letter">-</div>
-        <label>模型输出</label>
-        <pre id="answer">等待输入...</pre>
-        <div class="meta">
-          <div class="pill"><strong>模式</strong><div id="mode-view">choice</div></div>
-          <div class="pill"><strong>推理后端</strong><div id="backend-view">-</div></div>
-          <div class="pill wide"><strong>当前 Adapter</strong><div id="adapter-view">-</div></div>
-          <div class="pill wide"><strong>基础模型</strong><div id="base-view">-</div></div>
-          <div class="pill wide"><strong>候选数量</strong><div id="adapter-count">-</div></div>
+        <div class="section-title">
+          <div>
+            <h2>模型输出区</h2>
+            <p>右侧展示选择题答案字母或问答题完整回复，适合投屏展示模型响应效果。</p>
+          </div>
         </div>
-        <div class="mini">选择题模式下会额外抽取首个 A-E 字母，便于快速核对预测。</div>
+        <div class="output-shell">
+          <div class="answer-letter" id="answer-letter">-</div>
+          <div class="answer-panel">
+            <label>模型输出</label>
+            <pre id="answer">等待输入...</pre>
+          </div>
+          <div class="meta">
+            <div class="pill"><strong>模式</strong><div id="mode-view">choice</div></div>
+            <div class="pill"><strong>推理后端</strong><div id="backend-view">-</div></div>
+            <div class="pill wide"><strong>当前 Adapter</strong><div id="adapter-view">-</div></div>
+            <div class="pill wide"><strong>基础模型</strong><div id="base-view">-</div></div>
+            <div class="pill wide"><strong>候选数量</strong><div id="adapter-count">-</div></div>
+          </div>
+          <div class="mini">选择题模式下会自动抽取首个 A-E 字母作为结果高亮，便于答辩现场快速核对。</div>
+        </div>
       </div>
     </section>
   </div>
@@ -183,9 +352,21 @@ HTML_PAGE = """<!doctype html>
 
     tabs.forEach(tab => tab.addEventListener('click', () => syncMode(tab.dataset.mode)));
 
+    async function readResponsePayload(response) {{
+      const contentType = (response.headers.get('content-type') || '').toLowerCase();
+      if (contentType.includes('application/json')) {{
+        return response.json();
+      }}
+      const text = await response.text();
+      const compact = String(text || '').replace(/\\s+/g, ' ').trim();
+      return {{
+        error: compact || `HTTP ${{response.status}} ${{response.statusText}}`
+      }};
+    }}
+
     async function fetchState() {{
       const response = await fetch('/api/state');
-      const payload = await response.json();
+      const payload = await readResponsePayload(response);
       if (!response.ok) throw new Error(payload.error || 'state error');
       backendView.textContent = payload.backend || '-';
       adapterView.textContent = payload.current_adapter_display || '(base only)';
@@ -210,7 +391,7 @@ HTML_PAGE = """<!doctype html>
         headers: {{ 'Content-Type': 'application/json' }},
         body: JSON.stringify({{ adapter: adapterSelect.value }})
       }});
-      const payload = await response.json();
+      const payload = await readResponsePayload(response);
       if (!response.ok) throw new Error(payload.error || '切换失败');
       await fetchState();
       answerBox.textContent = 'adapter 切换完成。';
@@ -251,7 +432,7 @@ HTML_PAGE = """<!doctype html>
             options: optionsBox.value
           }})
         }});
-        const payload = await response.json();
+        const payload = await readResponsePayload(response);
         if (!response.ok) throw new Error(payload.error || '请求失败');
         answerBox.textContent = payload.answer || '(空响应)';
         answerLetterBox.textContent = payload.answer_letter || '-';

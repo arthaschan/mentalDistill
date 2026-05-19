@@ -68,12 +68,28 @@ patch_docx_toc() {
   local docx_path="$1"
   DOCX_PATH="$docx_path" python3 - <<'PY'
 import os
+import re
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 import xml.etree.ElementTree as ET
 
 W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
 XML_NS = 'http://www.w3.org/XML/1998/namespace'
+MC_NS = 'http://schemas.openxmlformats.org/markup-compatibility/2006'
+PRESERVED_ROOT_NAMESPACES = {
+  'mc': MC_NS,
+  'w14': 'http://schemas.microsoft.com/office/word/2010/wordml',
+  'w15': 'http://schemas.microsoft.com/office/word/2012/wordml',
+  'w16se': 'http://schemas.microsoft.com/office/word/2015/wordml/symex',
+  'w16cid': 'http://schemas.microsoft.com/office/word/2016/wordml/cid',
+  'w16': 'http://schemas.microsoft.com/office/word/2018/wordml',
+  'w16cex': 'http://schemas.microsoft.com/office/word/2018/wordml/cex',
+  'w16sdtdh': 'http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash',
+  'w16sdtfl': 'http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock',
+  'w16du': 'http://schemas.microsoft.com/office/word/2023/wordml/word16du',
+}
+
+ET.register_namespace('mc', MC_NS)
 ET.register_namespace('w', W_NS)
 
 docx_path = Path(os.environ['DOCX_PATH'])
@@ -81,9 +97,101 @@ tmp_path = docx_path.with_suffix('.tmp.docx')
 
 ns = {'w': W_NS}
 
+
+def qn(tag: str) -> str:
+  return f'{{{W_NS}}}{tag}'
+
+
+def ensure_child(parent, tag, attrs=None):
+  child = parent.find(f'w:{tag}', ns)
+  if child is None:
+    child = ET.SubElement(parent, qn(tag), attrs or {})
+  elif attrs:
+    child.attrib.update(attrs)
+  return child
+
+
+def strip_attrs(elem, names):
+  for name in names:
+    elem.attrib.pop(qn(name), None)
+
+
+def set_run_properties(rpr, *, size=None, east_asia='SimSun', latin='Times New Roman'):
+  rfonts = ensure_child(rpr, 'rFonts')
+  strip_attrs(rfonts, ['asciiTheme', 'hAnsiTheme', 'eastAsiaTheme', 'cstheme'])
+  rfonts.set(qn('ascii'), latin)
+  rfonts.set(qn('hAnsi'), latin)
+  rfonts.set(qn('cs'), latin)
+  rfonts.set(qn('eastAsia'), east_asia)
+
+  lang = ensure_child(rpr, 'lang')
+  strip_attrs(lang, ['eastAsia', 'bidi', 'val'])
+  lang.set(qn('val'), 'en-US')
+  lang.set(qn('eastAsia'), 'zh-CN')
+  lang.set(qn('bidi'), 'ar-SA')
+
+  kern = rpr.find('w:kern', ns)
+  if kern is not None:
+    rpr.remove(kern)
+
+  spacing = rpr.find('w:spacing', ns)
+  if spacing is not None:
+    rpr.remove(spacing)
+
+  if size is not None:
+    ensure_child(rpr, 'sz', {qn('val'): str(size)})
+    ensure_child(rpr, 'szCs', {qn('val'): str(size)})
+
+
+def set_paragraph_spacing(ppr, *, after=None, line=None, before=None):
+  spacing = ensure_child(ppr, 'spacing')
+  if before is not None:
+    spacing.set(qn('before'), str(before))
+  if after is not None:
+    spacing.set(qn('after'), str(after))
+  if line is not None:
+    spacing.set(qn('line'), str(line))
+    spacing.set(qn('lineRule'), 'auto')
+
+
+def set_table_borders(tbl_pr):
+  tbl_borders = ensure_child(tbl_pr, 'tblBorders')
+  for edge in ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']:
+    border = ensure_child(tbl_borders, edge)
+    border.set(qn('val'), 'single')
+    border.set(qn('sz'), '8')
+    border.set(qn('space'), '0')
+    border.set(qn('color'), '000000')
+
+
+def serialize_xml(root, *, preserve_root_namespaces=False):
+  xml_text = ET.tostring(root, encoding='utf-8', xml_declaration=True).decode('utf-8')
+  if not preserve_root_namespaces:
+    return xml_text.encode('utf-8')
+
+  xml_text = xml_text.replace('xmlns:ns2="http://schemas.microsoft.com/office/word/2010/wordml"', 'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"')
+  xml_text = xml_text.replace('ns2:', 'w14:')
+
+  match = re.search(r'<w:styles\b[^>]*>', xml_text)
+  if match is None:
+    raise RuntimeError('Could not locate XML root tag during serialization')
+
+  root_tag = match.group(0)
+  root_tag = root_tag.replace('xmlns:ns1="%s"' % MC_NS, 'xmlns:mc="%s"' % MC_NS)
+  root_tag = root_tag.replace('ns1:Ignorable=', 'mc:Ignorable=')
+
+  for prefix, uri in PRESERVED_ROOT_NAMESPACES.items():
+    decl = f'xmlns:{prefix}="{uri}"'
+    if decl not in root_tag:
+      root_tag = root_tag[:-1] + f' {decl}>'
+
+  xml_text = xml_text[:match.start()] + root_tag + xml_text[match.end():]
+  return xml_text.encode('utf-8')
+
 with ZipFile(docx_path, 'r') as zin, ZipFile(tmp_path, 'w', compression=ZIP_DEFLATED) as zout:
     document_xml = zin.read('word/document.xml')
     settings_xml = zin.read('word/settings.xml')
+    styles_xml = zin.read('word/styles.xml')
 
     doc_root = ET.fromstring(document_xml)
     body = doc_root.find('w:body', ns)
@@ -135,18 +243,91 @@ with ZipFile(docx_path, 'r') as zin, ZipFile(tmp_path, 'w', compression=ZIP_DEFL
     body.insert(toc_idx + 1, p)
 
     settings_root = ET.fromstring(settings_xml)
+    styles_root = ET.fromstring(styles_xml)
+
+    # Remove East Asian character grid controls that compress Chinese text in Word.
+    for elem_name in ['characterSpacingControl']:
+        elem = settings_root.find(f'w:{elem_name}', ns)
+        if elem is not None:
+            settings_root.remove(elem)
+
+    for sect_pr in doc_root.findall('.//w:sectPr', ns):
+        doc_grid = sect_pr.find('w:docGrid', ns)
+        if doc_grid is not None:
+            sect_pr.remove(doc_grid)
+
+    # Normalize default run properties so body text does not depend on template-only settings.
+    doc_defaults = styles_root.find('w:docDefaults', ns)
+    if doc_defaults is not None:
+        rpr_default = doc_defaults.find('w:rPrDefault/w:rPr', ns)
+        if rpr_default is None:
+            rpr_default_parent = ensure_child(doc_defaults, 'rPrDefault')
+            rpr_default = ensure_child(rpr_default_parent, 'rPr')
+        set_run_properties(rpr_default, size=24)
+
+        ppr_default = doc_defaults.find('w:pPrDefault/w:pPr', ns)
+        if ppr_default is None:
+            ppr_default_parent = ensure_child(doc_defaults, 'pPrDefault')
+            ppr_default = ensure_child(ppr_default_parent, 'pPr')
+        set_paragraph_spacing(ppr_default, after=0, line=360)
+
+    style_sizes = {
+        'BodyText': 24,
+        'FirstParagraph': 24,
+        'Compact': 21,
+        'ImageCaption': 21,
+        'CaptionedFigure': 21,
+        'Heading2': 32,
+        'Heading3': 28,
+        'Heading4': 24,
+    }
+
+    for style in styles_root.findall('w:style', ns):
+        style_id = style.get(qn('styleId'))
+        style_type = style.get(qn('type'))
+        if style_type == 'character':
+            rpr = ensure_child(style, 'rPr')
+            set_run_properties(rpr)
+        if style_id in style_sizes:
+            rpr = ensure_child(style, 'rPr')
+            set_run_properties(rpr, size=style_sizes[style_id])
+
+            ppr = ensure_child(style, 'pPr')
+            if style_id in {'BodyText', 'FirstParagraph'}:
+                set_paragraph_spacing(ppr, after=0, line=360)
+            elif style_id == 'Compact':
+                set_paragraph_spacing(ppr, after=0, line=300)
+
+        if style_id == 'Table':
+            tbl_pr = ensure_child(style, 'tblPr')
+            set_table_borders(tbl_pr)
+
+    for tbl in doc_root.findall('.//w:tbl', ns):
+        tbl_pr = tbl.find('w:tblPr', ns)
+        if tbl_pr is None:
+            tbl_pr = ET.Element(qn('tblPr'))
+            tbl.insert(0, tbl_pr)
+        set_table_borders(tbl_pr)
+
+        tbl_w = tbl_pr.find('w:tblW', ns)
+        if tbl_w is not None:
+            tbl_w.set(qn('type'), 'auto')
+            tbl_w.set(qn('w'), '0')
+
     update_fields = settings_root.find('w:updateFields', ns)
     if update_fields is None:
         update_fields = ET.SubElement(settings_root, f'{{{W_NS}}}updateFields')
     update_fields.set(f'{{{W_NS}}}val', 'true')
 
     for item in zin.infolist():
-        data = zin.read(item.filename)
-        if item.filename == 'word/document.xml':
-            data = ET.tostring(doc_root, encoding='utf-8', xml_declaration=True)
-        elif item.filename == 'word/settings.xml':
-            data = ET.tostring(settings_root, encoding='utf-8', xml_declaration=True)
-        zout.writestr(item, data)
+      data = zin.read(item.filename)
+      if item.filename == 'word/document.xml':
+        data = serialize_xml(doc_root)
+      elif item.filename == 'word/settings.xml':
+        data = serialize_xml(settings_root)
+      elif item.filename == 'word/styles.xml':
+        data = serialize_xml(styles_root, preserve_root_namespaces=True)
+      zout.writestr(item, data)
 
 tmp_path.replace(docx_path)
 PY

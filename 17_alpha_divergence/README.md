@@ -17,7 +17,7 @@ $$D_\alpha(p \| q) = \frac{4}{1-\alpha^2}\left(1 - \sum_i p_i^{(1+\alpha)/2} \cd
 | α = 0 | Hellinger 距离 | 对称，对教师错误更鲁棒 |
 | α → -1 | KL(q‖p) 反向 KL | mode-covering |
 
-**核心假设**：弱教师（如 Module 04 Kimi, 61.45%）的蒸馏失败可能与 KL(p‖q) 的 mode-seeking 特性有关——它强迫学生在教师的错误选项上也分配概率。使用 α=0（Hellinger）可能对教师噪声更鲁棒。
+**核心假设**：弱教师（如 Module 04 Kimi, 62.65%）的蒸馏失败可能与 KL(p‖q) 的 mode-seeking 特性有关——它强迫学生在教师的错误选项上也分配概率。使用 α=0（Hellinger）可能对教师噪声更鲁棒。
 
 ## 实验设计
 

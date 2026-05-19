@@ -43,7 +43,7 @@ def save(fig, name: str):
 
 def plot_teacher_quality_vs_gain():
     labels = ["Kimi", "Doubao", "DeepSeek", "Qwen-14B"]
-    disagreement = np.array([0.0, 0.33, 14.14, 20.24])
+    disagreement = np.array([27.83, 0.33, 14.14, 20.24])
     gain = np.array([0.0, 3.61, 4.82, -1.21])
 
     fig, ax = plt.subplots(figsize=(7.0, 4.2))
@@ -62,9 +62,9 @@ def plot_teacher_quality_vs_gain():
 
 def plot_single_teacher_results():
     teachers = ["DeepSeek", "Doubao", "Kimi", "Qwen-14B", "Llama-70B*"]
-    teacher_acc = np.array([87.95, 98.80, 61.45, 77.11, 72.45])
+    teacher_acc = np.array([87.95, 97.59, 62.65, 77.11, 72.45])
     student_best = np.array([81.93, 80.72, 77.11, 75.90, 87.59])
-    student_mean = np.array([79.52, 79.52, 76.00, 75.50, 87.25])
+    student_mean = np.array([79.52, 79.52, 77.11, 75.50, 87.25])
 
     x = np.arange(len(teachers))
     width = 0.24
@@ -72,7 +72,7 @@ def plot_single_teacher_results():
     fig, ax = plt.subplots(figsize=(8.2, 4.6))
     ax.bar(x - width, teacher_acc, width, label="Teacher acc", color=FG_LIGHT, edgecolor=FG_DARK, hatch="//")
     ax.bar(x, student_best, width, label="Student best", color=FG_MID, edgecolor=FG_DARK)
-    ax.bar(x + width, student_mean, width, label="Student mean/stable", color="white", edgecolor=FG_DARK, hatch="..")
+    ax.bar(x + width, student_mean, width, label="Student stable", color="white", edgecolor=FG_DARK, hatch="..")
 
     ax.set_xticks(x)
     ax.set_xticklabels(teachers)

@@ -32,10 +32,20 @@ thesis/RAI+601+毕业设计汇报 #10 陈天元256360231.pptx
 # Generated teacher/distillation artifacts
 **/data/teacher_*.jsonl
 **/data/train_head_distill.jsonl
+**/data/train_head_distill*.jsonl
 **/data/train_head_distill_clean.jsonl
 **/data/train_cot_sft.jsonl
 **/data/distill_dataset_report.txt
+**/data/distill_dataset_report*.txt
 **/data/*generated*.jsonl
+
+# Local thesis backups
+thesis/*backup-before-fixes.docx
+
+# Local one-off inspection scripts
+check*.py
+extract_docx.py
+search_docx.py
 
 # Model weights / checkpoints (never commit)
 *.safetensors

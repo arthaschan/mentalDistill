@@ -52,9 +52,9 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 ## 摘要
 
-牙科智能问答若要服务于患者教育与分诊辅助，其核心问题不在于模型规模本身，而在于高性能能力能否以可承受的成本完成部署。针对这一问题，本文以牙科医学选择题自动答题为研究对象，采用知识蒸馏（Knowledge Distillation, KD）方法，将大型教师模型的判别能力迁移到较小的学生模型，以同时兼顾准确率、部署成本与可复现性。
+牙科智能问答若要在教学演示、标准化考试训练等轻量场景中落地，其核心问题不在于模型规模本身，而在于高性能能力能否以可承受的成本完成部署。针对这一问题，本文以牙科医学选择题自动答题为研究对象，采用知识蒸馏（Knowledge Distillation, KD）方法，将大型教师模型的判别能力迁移到较小的学生模型，以同时兼顾准确率、部署成本与可复现性。
 
-基于中国医师资格考试数据集 CMExam，本文构建了牙科选择题评测基准，并提出面向五选一任务的 Choice-Head 两阶段蒸馏框架。该方法不再对全词表 logits 进行蒸馏，而是直接学习 A/B/C/D/E 五个候选选项上的概率分布，因此既能兼容黑盒 API 教师，也能显著降低显存与计算开销。围绕该框架，本文完成了 21 组系统性实验，并得到四项核心结论：第一，Qwen2.5-14B 学生模型在 991 题全量测试集上达到 89.10% 最佳准确率，3-seed 均值为 88.67%，超过 DeepSeek-V3 教师的 87.18%，说明在 45 倍参数压缩条件下仍可实现性能反超；第二，教师质量与蒸馏收益呈倒 U 型关系，教师与标准答案不一致率位于 5%–15% 区间时效果最佳；第三，基于 Fisher-Rao 距离与 α-散度的分析表明，真实 logprobs 标签较人工平滑标签保留了更丰富的连续结构信息，其体积密度高约 2500 倍；第四，异构教师同样可以提供有效蒸馏信号，72.45% 准确率的 Llama-3.3-70B 教师仍能蒸馏出达到 87.25% 的 14B 学生模型。
+基于中国医师资格考试数据集 CMExam，本文构建了牙科选择题评测基准，并提出面向五选一任务的 Choice-Head 两阶段蒸馏框架。该方法不再对全词表 logits 进行蒸馏，而是直接学习 A/B/C/D/E 五个候选选项上的概率分布，因此既能兼容黑盒 API 教师，也能显著降低显存与计算开销。围绕该框架，本文完成了 21 组系统性实验，并得到四项核心结论：第一，Qwen2.5-14B 学生模型在 991 题全量测试集上达到 89.10% 最佳准确率，3-seed 均值为 88.67%，超过 DeepSeek-V3 教师的 87.18%，说明在 45 倍参数压缩条件下仍可实现性能反超；第二，教师质量与蒸馏收益呈倒 U 型关系，较高准确率且保留适度 teacher-GT 分歧的教师更容易提供有效蒸馏信号；第三，基于 Fisher-Rao 距离与 α-散度的分析表明，真实 logprobs 标签较人工平滑标签保留了更丰富的连续结构信息，其体积密度高约 2500 倍；第四，异构教师同样可以提供有效蒸馏信号，72.45% 准确率的 Llama-3.3-70B 教师仍能蒸馏出达到 87.25% 的 14B 学生模型。
 
 本文结果表明，围绕任务决策结构设计蒸馏目标，是推动医疗大模型轻量化部署的一种有效方案。Choice-Head 框架不仅适用于本研究的牙科场景，也为其他标准化多选知识评测任务提供了可迁移的方法参考。
 
@@ -64,9 +64,9 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 ## Abstract
 
-For dental question answering to be practically useful in patient education and triage support, the key issue is not simply model size, but whether high performance can be deployed at an acceptable cost. To address this problem, this study treats dental multiple-choice medical answering as a measurable proxy task and uses knowledge distillation (KD) to transfer decision ability from large teacher models to smaller student models while balancing accuracy, efficiency, and reproducibility.
+For dental question answering to be practically useful in lightweight settings such as teaching demonstrations and standardized exam training, the key issue is not simply model size, but whether high performance can be deployed at an acceptable cost. To address this problem, this study treats dental multiple-choice medical answering as a measurable proxy task and uses knowledge distillation (KD) to transfer decision ability from large teacher models to smaller student models while balancing accuracy, efficiency, and reproducibility.
 
-Based on the Chinese Medical Examination dataset CMExam, this study builds a dental multiple-choice benchmark and proposes a Choice-Head two-stage distillation framework tailored to five-option questions. Instead of distilling full-vocabulary logits, the framework directly learns the probability distribution over options A/B/C/D/E, which both preserves task-relevant supervisory signals and remains compatible with black-box API teachers while substantially reducing memory overhead. Across 21 systematic experiments, four main findings are obtained. First, a Qwen2.5-14B student reaches 89.10% best accuracy on the 991-question full test set, with an 88.67% three-seed mean, exceeding the DeepSeek-V3 teacher's 87.18% under 45× parameter compression. Second, teacher quality shows an inverted-U relationship with distillation gain, with the best signal appearing when the teacher-GT disagreement rate falls between 5% and 15%. Third, analyses based on Fisher-Rao distance and the α-divergence family show that real logprobs retain much richer continuous structure than manually smoothed labels, with approximately 2,500 times higher volume density. Fourth, useful distillation remains possible across architectures: a Llama-3.3-70B teacher with 72.45% accuracy can still produce a 14B student reaching 87.25%.
+Based on the Chinese Medical Examination dataset CMExam, this study builds a dental multiple-choice benchmark and proposes a Choice-Head two-stage distillation framework tailored to five-option questions. Instead of distilling full-vocabulary logits, the framework directly learns the probability distribution over options A/B/C/D/E, which both preserves task-relevant supervisory signals and remains compatible with black-box API teachers while substantially reducing memory overhead. Across 21 systematic experiments, four main findings are obtained. First, a Qwen2.5-14B student reaches 89.10% best accuracy on the 991-question full test set, with an 88.67% three-seed mean, exceeding the DeepSeek-V3 teacher's 87.18% under 45× parameter compression. Second, teacher quality shows an inverted-U relationship with distillation gain, and teachers with relatively high accuracy while preserving moderate teacher-GT disagreement are more likely to provide effective distillation signals. Third, analyses based on Fisher-Rao distance and the α-divergence family show that real logprobs retain much richer continuous structure than manually smoothed labels, with approximately 2,500 times higher volume density. Fourth, useful distillation remains possible across architectures: a Llama-3.3-70B teacher with 72.45% accuracy can still produce a 14B student reaching 87.25%.
 
 **Keywords**: Knowledge Distillation; Large Language Model; Dental Artificial Intelligence; Multiple-Choice Question Answering; Choice-Head Distillation; Information Geometry; Fisher-Rao Distance; LoRA Fine-tuning
 
@@ -106,7 +106,7 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 在医疗健康领域数字化转型的浪潮中，牙科作为与民众日常生活密切相关的细分领域，其信息服务的便捷性与专业性需求日益凸显。传统牙科咨询模式高度依赖线下门诊与专业医师的人工响应，受诊疗时间、地域分布、医师资源等因素限制，难以满足患者对牙科健康知识的即时性、常态化查询需求。近年来，以 GPT 系列、LLaMA、Qwen 为代表的预训练大语言模型相继涌现，在文本理解、生成和推理等任务上取得了突破性进展。在医疗领域，这些模型通过在大规模医学语料上进行预训练和微调，展现出对医疗专业文本的深度理解能力和高质量生成能力。
 
-然而，当前商业级大语言模型的部署面临显著的资源瓶颈。以 DeepSeek-V3 为例，该模型拥有 671B 参数（稀疏混合专家架构，每次推理激活约 37B 参数），虽然在中国医师资格考试（CMExam）牙科科目上达到了 87.95% 的准确率，但其推理需要大量 GPU 算力支持，单卡显存需求 40–90GB，API 调用也产生持续费用。对于基层医疗机构和个人开发者而言，直接部署这些大模型既不经济也不现实。知识蒸馏（Knowledge Distillation, KD）技术为解决这一矛盾提供了一种可行方案：通过将大型教师模型的知识迁移至参数量远小的学生模型，在保持可接受性能水平的同时，大幅降低推理成本和硬件需求。
+然而，当前商业级大语言模型的部署面临显著的资源瓶颈。以 DeepSeek-V3 为例，该模型拥有 671B 参数（稀疏混合专家架构，每次推理激活约 37B 参数），虽然在 83 题牙科测试集上达到了 87.95% 的准确率，但其推理需要大量 GPU 算力支持，单卡显存需求 40–90GB，API 调用也产生持续费用。对于基层医疗机构和个人开发者而言，直接部署这些大模型既不经济也不现实。知识蒸馏（Knowledge Distillation, KD）技术为解决这一矛盾提供了一种可行方案：通过将大型教师模型的知识迁移至参数量远小的学生模型，在保持可接受性能水平的同时，大幅降低推理成本和硬件需求。
 
 ### 1.2 研究动机
 
@@ -120,9 +120,9 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 ### 1.3 研究目标
 
-本研究的总体目标，是构建一套面向牙科患者教育与分诊辅助场景的轻量化智能问答方案。具体而言，本文希望通过知识蒸馏把大型教师模型的医学判别能力迁移到较小的学生模型，使其在 45 倍以上参数压缩条件下仍保持接近甚至超越教师的答题性能，并具备在普通 GPU 设备上部署的可行性。
+本研究的总体目标，是构建一套面向教学演示、标准化考试训练等轻量场景的轻量化牙科智能问答方案。具体而言，本文希望通过知识蒸馏把大型教师模型的医学判别能力迁移到较小的学生模型，使其在 45 倍以上参数压缩条件下仍保持接近甚至超越教师的答题性能，并具备在普通 GPU 设备上部署的可行性。
 
-围绕这一总体目标，本文设置了四项具体任务：（1）基于 CMExam 数据集建立标准化牙科选择题评测基准；（2）设计并验证 Choice-Head 蒸馏框架，使其同时兼容黑盒 API 教师与白盒本地教师；（3）分析学生模型在不同教师、不同训练阶段和不同数据规模下的性能变化，并验证学生超越教师的条件；（4）实现可交互的牙科问答原型系统，为后续教学演示与实际部署提供接口基础。
+围绕这一总体目标，本文设置了四项具体任务：（1）基于 CMExam 数据集建立标准化牙科选择题评测基准；（2）设计并验证 Choice-Head 蒸馏框架，使其同时兼容黑盒 API 教师与白盒本地教师；（3）分析学生模型在不同教师、不同训练阶段和不同数据规模下的性能变化，并验证学生超越教师的条件；（4）实现可交互的牙科问答原型系统，为后续教学演示、考试训练与方法验证提供接口基础。
 
 ### 1.4 研究贡献
 
@@ -194,7 +194,7 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 从更底层的结构组件看，现代 Qwen、LLaMA 等主流模型普遍采用 Rotary Position Embedding（RoPE）这一位置编码路线，其直接理论源头可追溯到 RoFormer 对旋转式相对位置编码的系统化提出[23]。这类设计使长上下文中的相对位置信息能够更平滑地融入自注意力计算，也是本文所使用各类 Transformer 学生/教师模型共享的重要结构背景。
 
-DeepSeek 系列中，DeepSeek-V3 采用稀疏混合专家（Mixture of Experts, MoE）架构，总参数量 671B，每次推理仅激活约 37B 参数，在多个基准测试中达到与 GPT-4 级别的性能[16]。在 CMExam 牙科测试集上准确率为 87.95%，是本研究的主要教师模型。
+DeepSeek 系列中，DeepSeek-V3 采用稀疏混合专家（Mixture of Experts, MoE）架构，总参数量 671B，每次推理仅激活约 37B 参数，在多个基准测试中达到与 GPT-4 级别的性能[16]。在本文使用的 83 题牙科测试集上准确率为 87.95%，在 991 题全量测试集上为 87.18%，是本研究的主要教师模型。
 
 Meta LLaMA 系列中，Llama-3.3-70B-Instruct 是 Meta 发布的高性能开源模型，采用稠密 Transformer 架构[3]。虽然在中文医学任务上的表现弱于 Qwen 和 DeepSeek（CMExam 准确率约 72.45%），但其完全异构的架构为跨架构蒸馏验证提供了理想的实验对象。
 

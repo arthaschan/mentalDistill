@@ -52,11 +52,11 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 ## 摘要
 
-牙科智能问答若要在教学演示、标准化考试训练等轻量场景中落地，其核心问题不在于模型规模本身，而在于高性能能力能否以可承受的成本完成部署。针对这一问题，本文以牙科医学选择题自动答题为研究对象，采用知识蒸馏（Knowledge Distillation, KD）方法，将大型教师模型的判别能力迁移到较小的学生模型，以同时兼顾准确率、部署成本与可复现性。
+牙科智能问答若要服务于患者教育与分诊辅助，其核心问题不在于模型规模本身，而在于高性能能力能否以可承受的成本完成部署。针对这一问题，本文以牙科医学选择题自动答题为研究对象，采用知识蒸馏（Knowledge Distillation, KD）方法，将大型教师模型的判别能力迁移到较小的学生模型，以同时兼顾准确率、部署成本与可复现性，并通过系统性对比实验分析教师类型、学生容量与标签形态对蒸馏效果的影响。
 
-基于中国医师资格考试数据集 CMExam，本文面向牙科五选一选择题任务构建了可复现的评测设置，并在此基础上提出了 Choice-Head 两阶段蒸馏框架。该方法不再对全词表 logits 进行蒸馏，而是直接学习 A/B/C/D/E 五个候选选项上的概率分布，因此既能兼容黑盒 API 教师，也能显著降低显存与计算开销。围绕该框架，本文完成了 21 组系统性实验，并得到四项核心结论：第一，Qwen2.5-14B 学生模型在 991 题全量测试集上达到 89.10% 最佳准确率，3-seed 均值为 88.67%，超过 DeepSeek-V3 教师的 87.18%，说明在 45 倍参数压缩条件下仍可实现性能反超；第二，教师质量与蒸馏收益呈倒 U 型关系，较高准确率且保留适度 teacher-GT 分歧的教师更容易提供有效蒸馏信号；第三，基于 Fisher-Rao 距离与 α-散度的分析表明，真实 logprobs 标签较人工平滑标签保留了更丰富的连续结构信息，其体积密度高约 2500 倍；第四，异构教师同样可以提供有效蒸馏信号，72.45% 准确率的 Llama-3.3-70B 教师仍能蒸馏出达到 87.25% 的 14B 学生模型。
+基于中国医师资格考试数据集 CMExam，本文面向牙科五选一选择题任务构建了可复现的评测设置，并在此基础上提出了 Choice-Head 两阶段蒸馏框架。该方法不再对全词表 logits 进行蒸馏，而是直接学习 A/B/C/D/E 五个候选选项上的概率分布，因此既能兼容黑盒 API 教师，也能显著降低显存与计算开销。
 
-本文结果表明，围绕任务决策结构设计蒸馏目标，是推动医疗大模型轻量化部署的一种有效方案。Choice-Head 框架不仅适用于本研究的牙科场景，也为其他标准化多选知识评测任务提供了可迁移的方法参考。
+本文通过系统性的实验开展研究，包括蒸馏等方法研究中观察到一些值得注意的发现。第一，当前的大语言模型在进行压缩的同时，仍能达到并优于现有教师模型的性能。第二，目前的最先进模型（如 Qwen、DeepSeek 等）的蒸馏结果显示，教师模型质量与蒸馏之间存在“倒 U 型”关系。第三，基于 Fisher-Rao 距离与 α-散度的分析表明，真实 logprobs 标签较人工平滑标签保留了更丰富的连续结构信息，其体积密度高约 2500 倍。第四，异构教师同样可以提供有效蒸馏信号，72.45% 准确率的 Llama-3.3-70B 教师仍能蒸馏出达到 87.25% 的 14B 学生模型。
 
 **关键词**：知识蒸馏；大语言模型；牙科人工智能；选择题自动答题；Choice-Head 蒸馏；信息几何；Fisher-Rao 距离；LoRA 微调
 
@@ -64,9 +64,11 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 ## Abstract
 
-For dental question answering to be practically useful in lightweight settings such as teaching demonstrations and standardized exam training, the key issue is not simply model size, but whether high performance can be deployed at an acceptable cost. To address this problem, this study treats dental multiple-choice medical answering as a measurable proxy task and uses knowledge distillation (KD) to transfer decision ability from large teacher models to smaller student models while balancing accuracy, efficiency, and reproducibility.
+For dental intelligent question answering to be useful in patient education and triage support, the central challenge lies not in model scale per se, but in whether strong performance can be deployed at an acceptable cost. To address this issue, this thesis studies the automatic answering of dental multiple-choice medical questions and adopts knowledge distillation (KD) to transfer the discriminative capabilities of large teacher models to smaller student models, thereby balancing accuracy, deployment cost, and reproducibility. Systematic comparative experiments are further conducted to examine how teacher type, student capacity, and label form influence distillation effectiveness.
 
-Based on the Chinese Medical Examination dataset CMExam, this study establishes a reproducible evaluation setup for dental five-option multiple-choice questions and, on this basis, proposes a Choice-Head two-stage distillation framework. Instead of distilling full-vocabulary logits, the framework directly learns the probability distribution over options A/B/C/D/E, which both preserves task-relevant supervisory signals and remains compatible with black-box API teachers while substantially reducing memory overhead. Across 21 systematic experiments, four main findings are obtained. First, a Qwen2.5-14B student reaches 89.10% best accuracy on the 991-question full test set, with an 88.67% three-seed mean, exceeding the DeepSeek-V3 teacher’s 87.18% under 45× parameter compression. Second, teacher quality shows an inverted-U relationship with distillation gain, and teachers with relatively high accuracy while preserving moderate teacher-GT disagreement are more likely to provide effective distillation signals. Third, analyses based on Fisher-Rao distance and the α-divergence family show that real logprobs retain much richer continuous structure than manually smoothed labels, with approximately 2,500 times higher volume density. Fourth, useful distillation remains possible across architectures: a Llama-3.3-70B teacher with 72.45% accuracy can still produce a 14B student reaching 87.25%.
+Using the Chinese Medical Examination dataset CMExam, this thesis constructs a reproducible evaluation setup for dental five-option multiple-choice questions and, on this basis, proposes a two-stage Choice-Head distillation framework. Instead of distilling full-vocabulary logits, the proposed method directly learns the probability distribution over the five candidate options A/B/C/D/E. This design is compatible with black-box API teachers and substantially reduces memory and computational overhead.
+
+The experiments yield several notable findings. First, current large language models can still match and even surpass existing teacher models after compression. Second, distillation results with state-of-the-art models such as Qwen and DeepSeek indicate an inverted-U relationship between teacher quality and distillation effectiveness. Third, analyses based on Fisher-Rao distance and α-divergence show that real log-probability labels preserve much richer continuous structural information than manually smoothed labels, with approximately 2,500 times higher volume density. Fourth, heterogeneous teachers can also provide effective distillation signals: a Llama-3.3-70B teacher with 72.45% accuracy can still distill a 14B student model that reaches 87.25%.
 
 **Keywords**: Knowledge Distillation; Large Language Model; Dental Artificial Intelligence; Multiple-Choice Question Answering; Choice-Head Distillation; Information Geometry; Fisher-Rao Distance; LoRA Fine-tuning
 
@@ -99,6 +101,16 @@ Based on the Chinese Medical Examination dataset CMExam, this study establishes 
 \newpage
 
 ## 目录
+
+第一章 绪论 ............................ 8  
+第二章 研究背景与理论基础 ..................... 12  
+第三章 设计与方法 ......................... 20  
+第四章 实验结果与分析 ....................... 31  
+第五章 讨论与结论 ......................... 45  
+参考文献 .............................. 52  
+附录 ................................ 54  
+致谢 ................................ 57  
+\newpage
 
 ## 第一章 绪论
 

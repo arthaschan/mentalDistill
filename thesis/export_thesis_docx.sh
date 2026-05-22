@@ -58,6 +58,7 @@ render_docx() {
   pandoc_args=(
     "$PANDOC_BIN"
     "$input_md"
+    --resource-path="$ROOT_DIR"
     -o
     "$output_docx"
   )

@@ -206,6 +206,7 @@ render_pdf() {
   local output_pdf="$4"
 
   "$PANDOC_BIN" "$input_md" \
+    --resource-path="$ROOT_DIR" \
     --metadata title="基于知识蒸馏的牙科选择题自动答题系统" \
     -o "$output_odt"
 

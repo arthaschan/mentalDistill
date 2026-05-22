@@ -13,6 +13,9 @@
 
 ## What Was Just Changed
 
+- `陈天元 256360231.docx` was treated as the current authority for the abstract, and its updated Chinese/English abstract wording was synced back into `thesis_v2.md`.
+- `thesis_submission.md`, `thesis_submission.docx`, and `thesis_submission.pdf` were regenerated after the abstract sync.
+- Both export scripts now pass Pandoc `--resource-path="$ROOT_DIR"`, so running them from the repository root no longer drops `thesis/figures/*` assets.
 - Body text uses `Liberation Serif` + `Noto Serif CJK SC` in the ODT patch stage.
 - `First_20_paragraph` now has thesis-like line spacing and first-line indentation.
 - `Heading_20_2`, `Heading_20_2_PageBreak`, and `Heading_20_3` were restyled to remove the old italic/sans look and make chapter/section hierarchy closer to the school sample.

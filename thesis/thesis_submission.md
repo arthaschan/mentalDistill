@@ -54,7 +54,7 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 牙科智能问答若要在教学演示、标准化考试训练等轻量场景中落地，其核心问题不在于模型规模本身，而在于高性能能力能否以可承受的成本完成部署。针对这一问题，本文以牙科医学选择题自动答题为研究对象，采用知识蒸馏（Knowledge Distillation, KD）方法，将大型教师模型的判别能力迁移到较小的学生模型，以同时兼顾准确率、部署成本与可复现性。
 
-基于中国医师资格考试数据集 CMExam，本文构建了牙科选择题评测基准，并提出面向五选一任务的 Choice-Head 两阶段蒸馏框架。该方法不再对全词表 logits 进行蒸馏，而是直接学习 A/B/C/D/E 五个候选选项上的概率分布，因此既能兼容黑盒 API 教师，也能显著降低显存与计算开销。围绕该框架，本文完成了 21 组系统性实验，并得到四项核心结论：第一，Qwen2.5-14B 学生模型在 991 题全量测试集上达到 89.10% 最佳准确率，3-seed 均值为 88.67%，超过 DeepSeek-V3 教师的 87.18%，说明在 45 倍参数压缩条件下仍可实现性能反超；第二，教师质量与蒸馏收益呈倒 U 型关系，较高准确率且保留适度 teacher-GT 分歧的教师更容易提供有效蒸馏信号；第三，基于 Fisher-Rao 距离与 α-散度的分析表明，真实 logprobs 标签较人工平滑标签保留了更丰富的连续结构信息，其体积密度高约 2500 倍；第四，异构教师同样可以提供有效蒸馏信号，72.45% 准确率的 Llama-3.3-70B 教师仍能蒸馏出达到 87.25% 的 14B 学生模型。
+基于中国医师资格考试数据集 CMExam，本文面向牙科五选一选择题任务构建了可复现的评测设置，并在此基础上提出了 Choice-Head 两阶段蒸馏框架。该方法不再对全词表 logits 进行蒸馏，而是直接学习 A/B/C/D/E 五个候选选项上的概率分布，因此既能兼容黑盒 API 教师，也能显著降低显存与计算开销。围绕该框架，本文完成了 21 组系统性实验，并得到四项核心结论：第一，Qwen2.5-14B 学生模型在 991 题全量测试集上达到 89.10% 最佳准确率，3-seed 均值为 88.67%，超过 DeepSeek-V3 教师的 87.18%，说明在 45 倍参数压缩条件下仍可实现性能反超；第二，教师质量与蒸馏收益呈倒 U 型关系，较高准确率且保留适度 teacher-GT 分歧的教师更容易提供有效蒸馏信号；第三，基于 Fisher-Rao 距离与 α-散度的分析表明，真实 logprobs 标签较人工平滑标签保留了更丰富的连续结构信息，其体积密度高约 2500 倍；第四，异构教师同样可以提供有效蒸馏信号，72.45% 准确率的 Llama-3.3-70B 教师仍能蒸馏出达到 87.25% 的 14B 学生模型。
 
 本文结果表明，围绕任务决策结构设计蒸馏目标，是推动医疗大模型轻量化部署的一种有效方案。Choice-Head 框架不仅适用于本研究的牙科场景，也为其他标准化多选知识评测任务提供了可迁移的方法参考。
 
@@ -66,7 +66,7 @@ Supervisor: Dr. Richard Tai-Chiu Hsung (Associate Professor)
 
 For dental question answering to be practically useful in lightweight settings such as teaching demonstrations and standardized exam training, the key issue is not simply model size, but whether high performance can be deployed at an acceptable cost. To address this problem, this study treats dental multiple-choice medical answering as a measurable proxy task and uses knowledge distillation (KD) to transfer decision ability from large teacher models to smaller student models while balancing accuracy, efficiency, and reproducibility.
 
-Based on the Chinese Medical Examination dataset CMExam, this study builds a dental multiple-choice benchmark and proposes a Choice-Head two-stage distillation framework tailored to five-option questions. Instead of distilling full-vocabulary logits, the framework directly learns the probability distribution over options A/B/C/D/E, which both preserves task-relevant supervisory signals and remains compatible with black-box API teachers while substantially reducing memory overhead. Across 21 systematic experiments, four main findings are obtained. First, a Qwen2.5-14B student reaches 89.10% best accuracy on the 991-question full test set, with an 88.67% three-seed mean, exceeding the DeepSeek-V3 teacher's 87.18% under 45× parameter compression. Second, teacher quality shows an inverted-U relationship with distillation gain, and teachers with relatively high accuracy while preserving moderate teacher-GT disagreement are more likely to provide effective distillation signals. Third, analyses based on Fisher-Rao distance and the α-divergence family show that real logprobs retain much richer continuous structure than manually smoothed labels, with approximately 2,500 times higher volume density. Fourth, useful distillation remains possible across architectures: a Llama-3.3-70B teacher with 72.45% accuracy can still produce a 14B student reaching 87.25%.
+Based on the Chinese Medical Examination dataset CMExam, this study establishes a reproducible evaluation setup for dental five-option multiple-choice questions and, on this basis, proposes a Choice-Head two-stage distillation framework. Instead of distilling full-vocabulary logits, the framework directly learns the probability distribution over options A/B/C/D/E, which both preserves task-relevant supervisory signals and remains compatible with black-box API teachers while substantially reducing memory overhead. Across 21 systematic experiments, four main findings are obtained. First, a Qwen2.5-14B student reaches 89.10% best accuracy on the 991-question full test set, with an 88.67% three-seed mean, exceeding the DeepSeek-V3 teacher’s 87.18% under 45× parameter compression. Second, teacher quality shows an inverted-U relationship with distillation gain, and teachers with relatively high accuracy while preserving moderate teacher-GT disagreement are more likely to provide effective distillation signals. Third, analyses based on Fisher-Rao distance and the α-divergence family show that real logprobs retain much richer continuous structure than manually smoothed labels, with approximately 2,500 times higher volume density. Fourth, useful distillation remains possible across architectures: a Llama-3.3-70B teacher with 72.45% accuracy can still produce a 14B student reaching 87.25%.
 
 **Keywords**: Knowledge Distillation; Large Language Model; Dental Artificial Intelligence; Multiple-Choice Question Answering; Choice-Head Distillation; Information Geometry; Fisher-Rao Distance; LoRA Fine-tuning
 
@@ -122,7 +122,7 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 本研究的总体目标，是构建一套面向教学演示、标准化考试训练等轻量场景的轻量化牙科智能问答方案。具体而言，本文希望通过知识蒸馏把大型教师模型的医学判别能力迁移到较小的学生模型，使其在 45 倍以上参数压缩条件下仍保持接近甚至超越教师的答题性能，并具备在普通 GPU 设备上部署的可行性。
 
-围绕这一总体目标，本文设置了四项具体任务：（1）基于 CMExam 数据集建立标准化牙科选择题评测基准；（2）设计并验证 Choice-Head 蒸馏框架，使其同时兼容黑盒 API 教师与白盒本地教师；（3）分析学生模型在不同教师、不同训练阶段和不同数据规模下的性能变化，并验证学生超越教师的条件；（4）实现可交互的牙科问答原型系统，为后续教学演示、考试训练与方法验证提供接口基础。
+围绕这一总体目标，本文设置了四项具体任务：（1）基于 CMExam 数据集建立面向牙科选择题任务的数据划分与评测设置；（2）设计并验证 Choice-Head 蒸馏框架，使其同时兼容黑盒 API 教师与白盒本地教师；（3）分析学生模型在不同教师、不同训练阶段和不同数据规模下的性能变化，并验证学生超越教师的条件；（4）实现可交互的牙科问答原型系统，为后续教学演示、考试训练与方法验证提供接口基础。
 
 ### 1.4 研究贡献
 
@@ -162,7 +162,7 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 在垂直专科场景中，研究者针对特定医学领域的需求特点优化模型的专业适配性。在牙科聊天机器人方向，目前的研究相对有限。已有工作基于 ChatGLM 等中文大模型，并结合 Huatuo-26M 等中文医疗问答数据开展领域适配，说明医疗领域数据对模型专科能力提升具有重要作用。不过，这类路线仍普遍面临数据规模、任务覆盖范围与评测量化程度受限的问题。[6,9]
 
-近年来，医学大语言模型的评测基准也取得了重要进展。CMExam 收录了中国执业医师资格考试真题，涵盖多个临床学科，以标准化选择题形式提供客观、可量化的评估方案[10]。MedQA 和 PubMedQA 等英文数据集也为医疗 AI 的性能评估提供了标准化基准[11,12]。本研究选用 CMExam 的牙科子集作为评测基准，既保证了题目的专业性和权威性，又支持精确匹配准确率的客观评估[10]。
+近年来，医学大语言模型的评测基准也取得了重要进展。CMExam 收录了中国执业医师资格考试真题，涵盖多个临床学科，以标准化选择题形式提供客观、可量化的评估方案[10]。MedQA 和 PubMedQA 等英文数据集也为医疗 AI 的性能评估提供了标准化基准[11,12]。本研究选用 CMExam 的牙科子集作为主要评测对象，既保证了题目的专业性和权威性，又支持基于准确率的客观评估[10]。
 
 医疗聊天机器人与标准化医学考试系统虽然都以“回答医学问题”为表面形式，但其评价标准并不相同。前者通常强调多轮对话中的安全性、可解释性与风险提示能力，后者则强调在封闭候选空间中快速定位正确答案的能力。因此，面向真实咨询场景优化得到的医疗模型，并不必然在考试型任务中占优；相反，一些输出更短、更稳定、对选项间细粒度差异更敏感的模型，反而可能在标准化测试中表现更好[10-12]。本文聚焦牙科选择题，而不是开放式问答，正是希望在评价目标明确、误差可量化、教师-学生差异可直接比较的设置下讨论知识蒸馏的有效性。
 
@@ -178,11 +178,11 @@ Based on the Chinese Medical Examination dataset CMExam, this study builds a den
 
 但当蒸馏对象从图像分类网络转向大语言模型时，经典方案会立刻遇到任务与系统层面的双重约束。第一，词表规模膨胀使全 vocab logits 的存储与计算代价迅速上升，例如 Qwen2.5 的输出空间已达到 151,936 维[4]。第二，许多高性能教师以 API 形式存在，外部研究者无法稳定获得完整内部状态，传统白盒蒸馏因此失去适用前提。第三，大语言模型通常服务于具体任务场景，不同任务对蒸馏信号的需求差异很大，通用式蒸馏目标未必最有效[5,19,20]。
 
-在这种背景下，任务结构本身就成为重新定义蒸馏目标的依据。对于五选一医学选择题，教师需要传递给学生的信息并不在于完整词表上的概率细节，而在于五个候选项之间的相对支持关系。只要能够恢复这种选项级分布，无论教师来自本地模型还是 API 服务，都有可能形成有效监督。本文提出的 Choice-Head 蒸馏正是沿着这一思路，将蒸馏问题从通用 token 分布匹配改写为任务头层面的决策分布迁移。
+在这种背景下，任务结构本身就成为重新定义蒸馏目标的依据。对于五选一医学选择题，教师需要传递给学生的信息并不在于完整词表上的概率细节，而在于五个候选项之间的相对支持关系。只要能够恢复这种选项级分布，无论教师来自本地模型还是 API 服务，都有可能形成有效监督。基于这一思路，本文将蒸馏问题从通用 token 分布匹配改写为任务头层面的决策分布迁移，并提出了 Choice-Head 蒸馏方法。
 
 与此同时，参数高效微调也为蒸馏提供了现实可行的训练载体。LoRA（Low-Rank Adaptation）通过低秩增量参数完成大模型适配，使训练成本维持在可控范围内[15]。将 LoRA 与蒸馏结合，意味着学生既能够接收教师提供的软标签结构信息，又不需要承担全量参数更新带来的硬件负担，这也是本文实验体系能够快速迭代的重要前提。
 
-当前蒸馏研究还面临一个经常被忽视的问题，即“教师信息到底以什么形式最值得被学生继承”。在传统分类任务中，类别数固定且较少，软标签天然能够表达类别相似性；但在大语言模型任务中，完整词表分布既极高维，又包含大量与当前任务无关的 token。若不先识别出真正承载决策信息的结构，蒸馏就容易退化为高成本的噪声传递。Choice-Head 的出发点正在于此：对于五选一医学选择题，真正需要迁移的不是整个语言生成空间，而是教师如何在有限候选项之间分配支持度。这一判断既是本文方法设计的起点，也是后续实验解释的主线。
+当前蒸馏研究还面临一个经常被忽视的问题，即教师信息应以何种形式被学生继承，才能最大程度保留对任务决策有用的结构信息。在传统分类任务中，类别数固定且较少，软标签天然能够表达类别相似性；但在大语言模型任务中，完整词表分布既极高维，又包含大量与当前任务无关的 token。若不先识别出真正承载决策信息的结构，蒸馏就容易退化为高成本的噪声传递。Choice-Head 的出发点正在于此：对于五选一医学选择题，真正需要迁移的不是整个语言生成空间，而是教师如何在有限候选项之间分配支持度。这一判断既是本文方法设计的起点，也是后续实验解释的主线。
 
 因此，本文并不打算简单比较“哪一种蒸馏损失函数最好”，而是把蒸馏拆解为三个层面：监督对象、教师可见性与任务约束。前者回答学生究竟应拟合全词表、隐层特征还是任务头分布；中者区分教师是白盒、本地黑盒还是远程 API；后者则限定蒸馏发生在开放生成、封闭分类还是结构化决策场景。只有同时考虑这三层，才能解释为什么某些在通用 NLP 中有效的方法，在本文设置下会失去优势，也才能把本文的方法创新放回更清晰的研究脉络中。
 

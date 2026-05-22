@@ -17,6 +17,21 @@
 - `First_20_paragraph` now has thesis-like line spacing and first-line indentation.
 - `Heading_20_2`, `Heading_20_2_PageBreak`, and `Heading_20_3` were restyled to remove the old italic/sans look and make chapter/section hierarchy closer to the school sample.
 - A new body-page master-page path was added so the sample-like page header can start from abstract/body pages without contaminating the cover logic.
+- Thesis wording was synchronized across `thesis_v2.md`, `thesis_submission.md`, `答辩/答辩摘要.md`, `cty.docx`, and `thesis_submission.docx`.
+- The paper now consistently distinguishes these two layers:
+  - `CMExam` itself can still be described as an existing medical evaluation benchmark.
+  - This thesis should describe the author contribution as building a reproducible dental-task evaluation setup / data split and evaluation setting, not as creating a new benchmark from scratch.
+- Related phrasing was updated in the thesis main text:
+  - `牙科选择题评测基准` -> `面向牙科五选一选择题任务的可复现评测设置`
+  - `建立标准化牙科选择题评测基准` -> `建立面向牙科选择题任务的数据划分与评测设置`
+  - `作为评测基准` -> `作为主要评测对象`
+  - the two teacher-information wording issues flagged by the advisor were also rewritten into more formal academic prose.
+
+## Terminology Sync Scope
+
+- Checked thesis-related markdown files after the wording update.
+- No further sync is currently needed for reference-reading notes, citation maps, or literature-analysis files that describe `CMExam` itself as a benchmark; those are literature notes, not claims about the thesis contribution.
+- If later edits touch abstract, introduction, defense scripts, or oral-summary materials again, keep using `评测设置 / 主要评测对象 / 数据划分与评测设置` for the thesis contribution layer.
 
 ## Verified Facts
 

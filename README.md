@@ -199,6 +199,7 @@ bash run_night_api_tasks.sh
 
 ## 文档
 
+- [docs/用户手册.md](docs/%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.md) — 项目用户手册（环境、部署、启动、调用与 Python 文件功能说明）
 - [`docs/thesis_experiment_report.md`](docs/thesis_experiment_report.md) — 完整实验报告（含所有模块结果与分析）
 - [`docs/defense_qa_preparation.md`](docs/defense_qa_preparation.md) — 答辩 Q&A 准备
 - [`docs/analysis_distill_bottleneck.md`](docs/analysis_distill_bottleneck.md) — 蒸馏瓶颈分析

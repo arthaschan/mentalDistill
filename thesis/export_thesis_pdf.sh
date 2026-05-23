@@ -57,6 +57,9 @@ from pathlib import Path
 
 body = Path(os.environ['SOURCE_MD']).read_text(encoding='utf-8')
 
+# Normalize in-repo media paths for export from the thesis directory.
+body = body.replace('(thesis/docx_media/', '(docx_media/')
+
 toc_path = os.environ['TOC_MD']
 if toc_path:
     toc_text = Path(toc_path).read_text(encoding='utf-8').rstrip()

@@ -2,9 +2,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
-MAIN_MD="$ROOT_DIR/thesis_v2.md"
-FRONT_MD="$ROOT_DIR/front_matter_submit.md"
-COMBINED_MD="$ROOT_DIR/thesis_submission.md"
+SOURCE_MD="$ROOT_DIR/thesis_submission.md"
+BUILD_MD="$ROOT_DIR/.thesis_submission_docx_input.md"
 OUT_DOCX="$ROOT_DIR/thesis_submission.docx"
 REFERENCE_DOC="${REFERENCE_DOC:-$ROOT_DIR/MSAAI Master Thesis example 2024 v1b.docx}"
 FORMAT_TEMPLATE_DOC="${FORMAT_TEMPLATE_DOC:-$ROOT_DIR/陈天元 256360231-3.docx}"
@@ -14,13 +13,8 @@ if [[ ! -f "$FORMAT_TEMPLATE_DOC" ]]; then
   FORMAT_TEMPLATE_DOC="$REFERENCE_DOC"
 fi
 
-if [[ ! -f "$MAIN_MD" ]]; then
-  echo "Missing main markdown: $MAIN_MD" >&2
-  exit 1
-fi
-
-if [[ ! -f "$FRONT_MD" ]]; then
-  echo "Missing front matter markdown: $FRONT_MD" >&2
+if [[ ! -f "$SOURCE_MD" ]]; then
+  echo "Missing source markdown: $SOURCE_MD" >&2
   exit 1
 fi
 
@@ -34,19 +28,16 @@ fi
 
 build_markdown() {
   local output_md="$1"
-  FRONT_MD="$FRONT_MD" MAIN_MD="$MAIN_MD" OUTPUT_MD="$output_md" python3 - <<'PY'
+  SOURCE_MD="$SOURCE_MD" OUTPUT_MD="$output_md" python3 - <<'PY'
 import os
 from pathlib import Path
 
-front = Path(os.environ['FRONT_MD']).read_text(encoding='utf-8')
-main_lines = Path(os.environ['MAIN_MD']).read_text(encoding='utf-8').splitlines()
-body = '\n'.join(main_lines[2:]).lstrip()
+body = Path(os.environ['SOURCE_MD']).read_text(encoding='utf-8')
 
 toc_block = '## 目录\n\n'
 body = body.replace('## 第一章 绪论', toc_block + '## 第一章 绪论', 1)
 
-combined = front.rstrip() + '\n\n' + body + '\n'
-Path(os.environ['OUTPUT_MD']).write_text(combined, encoding='utf-8')
+Path(os.environ['OUTPUT_MD']).write_text(body.rstrip() + '\n', encoding='utf-8')
 PY
 }
 
@@ -454,8 +445,8 @@ normalize_paragraph_styles(docx_path)
 PY
 }
 
-build_markdown "$COMBINED_MD"
-render_docx "$COMBINED_MD" "$OUT_DOCX"
+build_markdown "$BUILD_MD"
+render_docx "$BUILD_MD" "$OUT_DOCX"
 patch_docx_toc "$OUT_DOCX"
 normalize_docx_format "$OUT_DOCX" "$FORMAT_TEMPLATE_DOC"
 

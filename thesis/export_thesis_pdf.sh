@@ -2,9 +2,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
-MAIN_MD="$ROOT_DIR/thesis_v2.md"
-FRONT_MD="$ROOT_DIR/front_matter_submit.md"
-COMBINED_MD="$ROOT_DIR/thesis_submission.md"
+SOURCE_MD="$ROOT_DIR/thesis_submission.md"
+COMBINED_MD="$ROOT_DIR/.thesis_submission_final.md"
 OUT_PDF="$ROOT_DIR/thesis_submission.pdf"
 
 PASS1_MD="$ROOT_DIR/.thesis_submission_pass1.md"
@@ -27,13 +26,8 @@ HEADINGS_JSON="$ROOT_DIR/.thesis_headings.json"
 PANDOC_BIN="${PANDOC_BIN:-/home/student/anaconda3/bin/pandoc}"
 LIBREOFFICE_BIN="${LIBREOFFICE_BIN:-/usr/bin/libreoffice}"
 
-if [[ ! -f "$MAIN_MD" ]]; then
-  echo "Missing main markdown: $MAIN_MD" >&2
-  exit 1
-fi
-
-if [[ ! -f "$FRONT_MD" ]]; then
-  echo "Missing front matter markdown: $FRONT_MD" >&2
+if [[ ! -f "$SOURCE_MD" ]]; then
+  echo "Missing source markdown: $SOURCE_MD" >&2
   exit 1
 fi
 
@@ -56,22 +50,19 @@ fi
 build_markdown() {
   local output_md="$1"
   local toc_md="${2:-}"
-  ROOT_DIR="$ROOT_DIR" FRONT_MD="$FRONT_MD" MAIN_MD="$MAIN_MD" OUTPUT_MD="$output_md" TOC_MD="$toc_md" HEADINGS_JSON="$HEADINGS_JSON" python3 - <<'PY'
+  SOURCE_MD="$SOURCE_MD" OUTPUT_MD="$output_md" TOC_MD="$toc_md" HEADINGS_JSON="$HEADINGS_JSON" python3 - <<'PY'
 import json
 import os
 from pathlib import Path
 
-front = Path(os.environ['FRONT_MD']).read_text(encoding='utf-8')
-main_lines = Path(os.environ['MAIN_MD']).read_text(encoding='utf-8').splitlines()
-body = '\n'.join(main_lines[2:]).lstrip()
+body = Path(os.environ['SOURCE_MD']).read_text(encoding='utf-8')
 
 toc_path = os.environ['TOC_MD']
 if toc_path:
     toc_text = Path(toc_path).read_text(encoding='utf-8').rstrip()
     body = body.replace('## 第一章 绪论', toc_text + '\n\n## 第一章 绪论', 1)
 
-combined = front.rstrip() + '\n\n' + body + '\n'
-Path(os.environ['OUTPUT_MD']).write_text(combined, encoding='utf-8')
+Path(os.environ['OUTPUT_MD']).write_text(body.rstrip() + '\n', encoding='utf-8')
 
 headings = []
 skip_level2 = {

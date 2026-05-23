@@ -2,7 +2,7 @@
 
 ## Current Status
 
-- Canonical source remains `thesis_v2.md`; export pipelines are `export_thesis_pdf.sh` and `export_thesis_docx.sh`.
+- Canonical source is `thesis_submission.md`; export pipelines are `export_thesis_pdf.sh` and `export_thesis_docx.sh`.
 - Latest exports succeeded and regenerated `thesis_submission.pdf` and `thesis_submission.docx`.
 - ODT patching now enforces A4 size, table borders, chapter-level static TOC, serif body typography, stronger heading hierarchy, and a `BodyPage` master-page path intended for sample-style headers from the abstract onward.
 - Structural validation against `.thesis_submission_tmp_patched.odt` confirms these header-related XML objects exist:
@@ -13,14 +13,14 @@
 
 ## What Was Just Changed
 
-- `陈天元 256360231.docx` was treated as the current authority for the abstract, and its updated Chinese/English abstract wording was synced back into `thesis_v2.md`.
+- `陈天元 256360231.docx` was treated as the current authority for the thesis content and synced into `thesis_submission.md`.
 - `thesis_submission.md`, `thesis_submission.docx`, and `thesis_submission.pdf` were regenerated after the abstract sync.
 - Both export scripts now pass Pandoc `--resource-path="$ROOT_DIR"`, so running them from the repository root no longer drops `thesis/figures/*` assets.
 - Body text uses `Liberation Serif` + `Noto Serif CJK SC` in the ODT patch stage.
 - `First_20_paragraph` now has thesis-like line spacing and first-line indentation.
 - `Heading_20_2`, `Heading_20_2_PageBreak`, and `Heading_20_3` were restyled to remove the old italic/sans look and make chapter/section hierarchy closer to the school sample.
 - A new body-page master-page path was added so the sample-like page header can start from abstract/body pages without contaminating the cover logic.
-- Thesis wording was synchronized across `thesis_v2.md`, `thesis_submission.md`, `答辩/答辩摘要.md`, `cty.docx`, and `thesis_submission.docx`.
+- Thesis wording was synchronized across `thesis_submission.md`, `答辩/答辩摘要.md`, `cty.docx`, and the exported thesis artifacts.
 - The paper now consistently distinguishes these two layers:
   - `CMExam` itself can still be described as an existing medical evaluation benchmark.
   - This thesis should describe the author contribution as building a reproducible dental-task evaluation setup / data split and evaluation setting, not as creating a new benchmark from scratch.

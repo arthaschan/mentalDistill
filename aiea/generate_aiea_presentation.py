@@ -35,12 +35,12 @@ LIGHT_BLUE = RGBColor(231, 239, 248)
 LIGHT_GRAY = RGBColor(247, 247, 247)
 MID_GRAY = RGBColor(128, 128, 128)
 
-PRESENTATION_NAME = "Choice-Head Distillation for Efficient Dental MCQ Answering"
+PRESENTATION_NAME = "Choice-Head Distillation for Dental Multiple-Choice Question Answering"
 FOOTER_NAME = "AIEA 2026 Conference Presentation"
 
 SPEAKER_NOTES = [
     [
-        "各位老师、各位专家好。我今天汇报的题目是用于高效牙科选择题自动答题的 Choice-Head 蒸馏方法。",
+        "各位老师、各位专家好。我今天汇报的题目是用于牙科选择题自动答题的 Choice-Head 蒸馏方法。",
         "这个工作的核心目标，是把大型医疗语言模型的答题能力迁移到更小、更容易部署的学生模型上。",
     ],
     [
@@ -463,10 +463,12 @@ def build_cover(prs):
     info.fill.solid()
     info.fill.fore_color.rgb = RED
     info.line.fill.background()
-    add_textbox(slide, Inches(1.9), Inches(5.72), Inches(3.0), Inches(0.35), "Presenter: Tianyuan Chen", font_size=21, color=WHITE, bold=True)
-    add_textbox(slide, Inches(7.15), Inches(5.72), Inches(3.4), Inches(0.35), "Supervisor: Tichao Xiong", font_size=21, color=WHITE, bold=True)
-    add_textbox(slide, Inches(1.9), Inches(6.36), Inches(3.3), Inches(0.35), "Program: Applied Artificial Intelligence", font_size=19, color=WHITE, bold=True)
-    add_textbox(slide, Inches(7.15), Inches(6.36), Inches(2.9), Inches(0.35), "AIEA 2026, Shenzhen", font_size=19, color=WHITE, bold=True)
+    add_textbox(slide, Inches(1.25), Inches(5.58), Inches(3.8), Inches(0.32), "Presenter: Tianyuan Chen", font_size=18, color=WHITE, bold=True)
+    add_textbox(slide, Inches(6.15), Inches(5.58), Inches(5.0), Inches(0.32), "Supervisor: Dr. Richard Tai-Chiu Hsung", font_size=15, color=WHITE, bold=True)
+    add_textbox(slide, Inches(1.25), Inches(6.02), Inches(4.5), Inches(0.32), "Program: Applied Artificial Intelligence", font_size=16, color=WHITE, bold=True)
+    add_textbox(slide, Inches(6.15), Inches(6.02), Inches(5.0), Inches(0.32), "Department: Computer Science", font_size=16, color=WHITE, bold=True)
+    add_textbox(slide, Inches(1.25), Inches(6.46), Inches(5.4), Inches(0.32), "College: Hong Kong Chu Hai College", font_size=16, color=WHITE, bold=True)
+    add_textbox(slide, Inches(7.4), Inches(6.46), Inches(2.8), Inches(0.32), "AIEA 2026, Shenzhen", font_size=16, color=WHITE, bold=True)
 
     bottom = slide.shapes.add_shape(MSO_AUTO_SHAPE_TYPE.RECTANGLE, 0, SLIDE_HEIGHT - Inches(0.48), SLIDE_WIDTH, Inches(0.43))
     bottom.fill.solid()

@@ -16,13 +16,14 @@
 
 Title:
 
-Choice-Head Distillation for Efficient Dental Multiple-Choice Question Answering
+Choice-Head Distillation for Dental Multiple-Choice Question Answering
 
 Subtitle:
 
 - Tianyuan Chen
-- Department / Affiliation
-- Supervisor
+- Supervisor: Dr. Richard Tai-Chiu Hsung, Associate Professor, Department of Computer Science
+- Master of Science in Applied Artificial Intelligence
+- Hong Kong Chu Hai College
 - AIEA 2026, Shenzhen
 
 ### Visual Suggestion
@@ -33,7 +34,7 @@ Subtitle:
 
 ### English Speaker Script
 
-Good morning everyone. My presentation is titled Choice-Head Distillation for Efficient Dental Multiple-Choice Question Answering. This work studies how to transfer the capability of large medical language models into smaller and more deployable student models for standardized dental multiple-choice question answering.
+Good morning everyone. My presentation is titled Choice-Head Distillation for Dental Multiple-Choice Question Answering. This work studies how to transfer the capability of large medical language models into smaller and more deployable student models for standardized dental multiple-choice question answering.
 
 ### 中文讲稿
 

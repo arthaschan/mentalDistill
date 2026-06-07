@@ -1,14 +1,30 @@
-# Choice-Head Distillation for Dental Multiple-Choice Question Answering
+---
+title: Choice-Head Distillation for Dental Multiple-Choice Question Answering
+author:
+  - Tianyuan Chen
+date: June 2026
+keywords:
+  - knowledge distillation
+  - medical question answering
+  - large language models
+  - multiple-choice reasoning
+  - decision-space supervision
+---
 
-## Abstract
+Tianyuan Chen  
+Master of Science in Applied Artificial Intelligence  
+Hong Kong Chu Hai College, Hong Kong SAR, China
+Supervisor: Dr. Richard Tai-Chiu Hsung, Associate Professor, Department of Computer Science, Hong Kong Chu Hai College
+
+# Abstract
 
 Medical large language models achieve strong scores on exam benchmarks, but they remain expensive to deploy. This problem is pronounced in dental multiple-choice question answering, where the output space is limited to five options but many distillation methods still supervise the full vocabulary. This paper proposes Choice-Head distillation, which transfers only the teacher distribution over the answer options. The method is task-aligned, computationally lighter than vocabulary-level distillation, and compatible with black-box API teachers. Experiments use DeepSeek-V3 as the teacher and Qwen2.5-7B and Qwen2.5-14B as students on a CMExam-based resplit. On the 991-question full test set, the best 14B student reaches 89.10% accuracy, exceeding the 87.18% teacher. These results show that for structured medical multiple-choice tasks, decision-space distillation is a practical route to smaller and more deployable models.
 
-## Index Terms
+# Keywords
 
-knowledge distillation, medical question answering, large language models, multiple-choice reasoning, decision-space supervision.
+knowledge distillation; medical question answering; large language models; multiple-choice reasoning; decision-space supervision
 
-## 1. Introduction
+# 1. Introduction
 
 Knowledge distillation compresses large models by transferring soft targets to smaller students [1]-[4]. Recent medical and general-purpose language models also motivate this direction because strong benchmark results often come with high inference cost and limited deployability [5]-[7]. In exam-style medical QA, this trade-off is especially important because the deployment target is often a smaller assistant model rather than the largest available teacher.
 
@@ -18,21 +34,21 @@ We address this mismatch with Choice-Head distillation. The method transfers onl
 
 Figure 1 shows the difference between full-vocabulary distillation and the proposed decision-space distillation.
 
-## 2. Related Work
+# 2. Related Work
 
 Classic distillation transfers softened target distributions from a teacher to a student [1]. Later work extends this idea to compact transformer models, parameter-efficient adaptation, and toolkits for large-scale compression [2]-[4]. In language models, the usual target remains the token vocabulary distribution.
 
 For medical QA, stronger teachers and larger evaluation sets have improved reported performance [6], [7]. However, less attention has been given to the question of whether the supervision target itself should change when the downstream task is a fixed-choice exam. Our method differs from generic LLM distillation because it treats the answer-option distribution, not the full vocabulary, as the transfer object.
 
-## 3. Method
+# 3. Method
 
-### 3.1 Problem Setting
+## 3.1 Problem Setting
 
 Given a multiple-choice question $x$ with five candidate answers, the goal is to predict the correct option $y \in \{A, B, C, D, E\}$. Let $p_T$ be the teacher distribution over the five options and $p_S$ be the student distribution over the same options.
 
 Traditional distillation minimizes divergence over the full token vocabulary. In contrast, we distill only the distribution over the decision-relevant option set.
 
-### 3.2 Choice-Head Distillation
+## 3.2 Choice-Head Distillation
 
 Stage 1 training combines distillation and ground-truth supervision:
 
@@ -46,17 +62,17 @@ In the main setting, $\alpha = 0.35$. This objective has three direct advantages
 
 Figure 2 shows the Choice-Head training pipeline.
 
-### 3.3 Training Strategy
+## 3.3 Training Strategy
 
 The broader project also tested a second stage that applies ground-truth supervised fine-tuning after Stage 1. For the strongest 14B student, however, Stage 2 does not help and can be mildly harmful. The best-performing 14B configuration in this paper therefore uses Stage 1 only.
 
-## 4. Experimental Setup
+# 4. Experimental Setup
 
 The evaluation uses a CMExam-based resplit with 6,591 single-choice medical questions across seven subjects [7]. The train, validation, and test splits contain 4,608, 991, and 991 questions. A 125-question dental subset is retained for specialty-focused analysis.
 
 The teacher is DeepSeek-V3 [6]. The students are Qwen2.5-7B-Instruct and Qwen2.5-14B-Instruct [5]. Training uses LoRA with rank 16 and LoRA alpha 32 [3]. For the main 14B setting, Stage 1 is run for one epoch with learning rate $1 \times 10^{-4}$.
 
-## 5. Results and Discussion
+# 5. Results and Discussion
 
 Table 1. Main results on the CMExam full-data and dental test sets.
 
@@ -79,11 +95,11 @@ The student-over-teacher result does not mean the teacher is weak. It shows that
 
 Overall, the method works because it keeps only the uncertainty structure that matters for the final option choice and discards irrelevant supervision dimensions.
 
-## 6. Conclusion
+# 6. Conclusion
 
 This paper presented Choice-Head distillation for dental multiple-choice question answering. The method distills only the five-option answer distribution, not the full vocabulary. This makes the supervision target closer to the task and keeps the framework compatible with black-box teachers. On the 991-question CMExam-based test set, the best 14B student reaches 89.10% accuracy and exceeds the 87.18% DeepSeek-V3 teacher. For structured medical multiple-choice tasks, decision-space distillation is therefore a practical path to smaller and more deployable QA systems.
 
-## References
+# References
 
 [1] G. Hinton, O. Vinyals, and J. Dean, "Distilling the Knowledge in a Neural Network," in NIPS Deep Learning and Representation Learning Workshop, Montreal, Canada, 2015. Available: https://arxiv.org/abs/1503.02531
 

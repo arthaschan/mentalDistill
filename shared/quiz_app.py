@@ -74,7 +74,11 @@ HTML_PAGE = """<!doctype html>
       border: 2px solid var(--line); border-radius: 14px;
       padding: 14px 18px; margin-bottom: 10px;
       font: inherit; font-size: 15px; line-height: 1.6;
+      color: var(--ink);
       background: rgba(255,255,255,0.7); cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      opacity: 1;
       transition: 180ms ease;
     }}
     .option-btn:hover:not(.locked) {{ border-color: var(--accent); background: rgba(15,118,110,0.06); }}

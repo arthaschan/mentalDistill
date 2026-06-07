@@ -18,23 +18,25 @@ knowledge distillation; medical question answering; large language models; multi
 
 # Introduction
 
-Knowledge distillation compresses large models by transferring soft targets to smaller students [1]-[4]. Recent medical and general-purpose language models also motivate this direction because strong benchmark results often come with high inference cost and limited deployability [5]-[7]. In exam-style medical QA, this trade-off is especially important because the deployment target is often a smaller assistant model rather than the largest available teacher.
+Knowledge distillation compresses large models by transferring soft targets to smaller students [1]-[4]. Recent medical and general-purpose language models also motivate this direction because strong benchmark results often come with high inference cost and limited deployability [5], [6]. In exam-style medical QA, this trade-off is especially important because the deployment target is often a smaller assistant model rather than the largest available teacher.
 
 This paper studies dental multiple-choice question answering, a five-option decision task. The task structure is simple, but many distillation pipelines still use full-vocabulary logits or free-form targets. That design is inefficient for a fixed-choice problem and is hard to use with API teachers that do not expose internal logits.
 
-Another practical issue is evaluation reliability. Earlier small-test-set medical QA settings can make model ranking unstable because a difference of one or two questions already changes the reported accuracy by several points. This paper therefore emphasizes a larger CMExam-based resplit with a 991-question main test set. The larger benchmark is not a cosmetic change. It is necessary to judge whether a student-over-teacher result reflects a real transfer effect rather than seed noise or a favorable sample slice.
+Another practical issue is evaluation reliability. Small medical QA test sets can make model ranking unstable because one or two questions may shift the reported accuracy by several points. This paper therefore emphasizes a CMExam-based resplit with a 991-question main test set, which provides a stronger basis for judging whether a student-over-teacher result is real.
 
-We address this mismatch with Choice-Head distillation. The method transfers only the teacher distribution over the five answer options. This paper makes two contributions. First, it presents a task-aligned distillation objective for five-option medical multiple-choice tasks. Second, it shows that this formulation can produce a student that outperforms its teacher: a Qwen2.5-14B student distilled from DeepSeek-V3 reaches 89.10% accuracy on a 991-question CMExam test set, above the teacher accuracy of 87.18%.
+We address this mismatch with Choice-Head distillation, which transfers only the teacher distribution over the five answer options. The method is task-aligned for five-option medical MCQs, and it can produce a student that outperforms its teacher: a Qwen2.5-14B student distilled from DeepSeek-V3 reaches 89.10% accuracy on a 991-question CMExam test set, above the teacher accuracy of 87.18%.
 
-Figure 1 shows the difference between full-vocabulary distillation and the proposed decision-space distillation.
+![Choice-Head distillation pipeline](choice_head_pipeline.png)
+
+Figure 1. Choice-Head distillation keeps only the option-level teacher signal and combines KL supervision with the gold-label cross-entropy loss.
 
 # Related Work
 
 Classic distillation transfers softened target distributions from a teacher to a student [1]. Later work extends this idea to compact transformer models, parameter-efficient adaptation, and toolkits for large-scale compression [2]-[4]. In language models, the usual target remains the token vocabulary distribution.
 
-For medical QA, stronger teachers and larger evaluation sets have improved reported performance [6], [7]. However, less attention has been given to the question of whether the supervision target itself should change when the downstream task is a fixed-choice exam. Our method differs from generic LLM distillation because it treats the answer-option distribution, not the full vocabulary, as the transfer object.
+For medical QA, stronger teachers and larger evaluation sets have improved reported performance [6], [7]. In fixed-choice exams, however, vocabulary-level targets are not always well aligned with the downstream decision. Our method instead treats the answer-option distribution, not the full vocabulary, as the transfer object.
 
-This distinction matters because the downstream task is classification-like even though the underlying models are generative. In open-ended generation, a vocabulary-level target may be justified because many output tokens are semantically relevant. In a five-option exam, most of the vocabulary is unrelated to the final decision. A task-aligned target can therefore simplify training while preserving the uncertainty structure that still influences the answer choice.
+The downstream task is classification-like even though the underlying models are generative. In a five-option exam, most of the vocabulary is unrelated to the final decision. A task-aligned target therefore simplifies training while preserving the uncertainty structure that affects the answer choice.
 
 # Method
 
@@ -54,71 +56,78 @@ $$
 
 (1)
 
-In the main setting, $\alpha = 0.35$. This objective has three direct advantages over vocabulary-level distillation. It matches the task output space, removes irrelevant supervision dimensions, and works with black-box teachers.
+In the main setting, $\alpha = 0.35$. Compared with vocabulary-level distillation, this objective matches the task output space, removes irrelevant supervision dimensions, and works with black-box teachers.
 
-The method is also lightweight in a practical sense. It does not require hidden-state matching, rationale generation, or full-logit access. The teacher only needs to provide a calibrated relative preference over the five answer options. This makes the pipeline easier to deploy when the strongest available teacher is an API model rather than a locally hosted white-box model.
+The method is lightweight in practice. It does not require hidden-state matching, rationale generation, or full-logit access. The teacher only needs to provide a calibrated relative preference over the five answer options, which makes the pipeline practical for API teachers.
 
-Figure 2 shows the Choice-Head training pipeline.
+This design is also simpler to debug than full-vocabulary distillation. When the downstream task is fixed-choice, the transferred signal can be checked directly at the option level instead of being buried in a large token distribution. That property is useful in a medical setting, where training failures need to be traced to concrete answer behavior rather than to opaque language-model internals.
 
 ## Training Strategy
 
-The broader project also tested a second stage that applies ground-truth supervised fine-tuning after Stage 1. For the strongest 14B student, however, Stage 2 does not help and can be mildly harmful. The best-performing 14B configuration in this paper therefore uses Stage 1 only.
+The broader project also tested a second stage that applies ground-truth supervised fine-tuning after Stage 1. For the strongest 14B student, however, Stage 2 does not help and can be mildly harmful. The best-performing 14B configuration therefore uses Stage 1 only.
 
-This observation is important because it clarifies the role of the two stages. Stage 1 injects teacher structure by teaching the student how the options relate to each other. Stage 2, in contrast, sharpens the model toward the hard gold label. For weaker students, that extra correction can be useful. For stronger students, it can become over-calibration: the hard-label update may flatten the soft option geometry that made the distilled model effective in the first place. The best 14B configuration in this work therefore stops after Stage 1 instead of assuming that a longer pipeline must be better.
+Stage 1 transfers option-level structure, while Stage 2 pushes the model toward the hard gold label. For stronger students, that second update can over-calibrate the model and weaken the soft-label geometry learned in Stage 1. The best 14B configuration therefore stops after Stage 1.
 
 # Experimental Setup
 
 The evaluation uses a CMExam-based resplit with 6,591 single-choice medical questions across seven subjects [7]. The train, validation, and test splits contain 4,608, 991, and 991 questions. A 125-question dental subset is retained for specialty-focused analysis.
 
-The resplit follows a 70/15/15 partition and is stratified by difficulty, which keeps the large test set more representative than the small specialty-only setting used in earlier experiments. This matters for interpretation. A 991-question test does not eliminate uncertainty, but it substantially reduces the chance that a strong result is caused by a lucky sample rather than by a stable improvement in decision quality.
+The resplit follows a 70/15/15 partition and is stratified by difficulty, which makes the large test set more representative than the small specialty-only setting used in earlier experiments. A 991-question test does not eliminate uncertainty, but it reduces the chance that a strong result is caused by a favorable sample rather than by a stable improvement in decision quality.
 
 The teacher is DeepSeek-V3 [6]. The students are Qwen2.5-7B-Instruct and Qwen2.5-14B-Instruct [5]. Training uses LoRA with rank 16 and LoRA alpha 32 [3]. For the main 14B setting, Stage 1 is run for one epoch with learning rate $1 \times 10^{-4}$.
 
-Teacher labels cover the full training split. In the full-data setting, the teacher and ground truth disagree on about 12.2% of the training questions. This disagreement is useful rather than purely harmful: it indicates that the teacher provides nontrivial relative preferences instead of merely repeating the gold label. At the same time, the disagreement rate is not so high that the teacher becomes unreliable as a transfer source.
+Teacher labels cover the full training split. In the full-data setting, the teacher and ground truth disagree on about 12.2% of the training questions. This shows that the teacher provides nontrivial relative preferences instead of merely repeating the gold label, while remaining stable enough to serve as a useful transfer source.
 
 Evaluation reports both the 991-question full test set and the 125-question dental subset. The former is the main benchmark used for claims about overall effectiveness. The latter is retained for domain-specific inspection, but its smaller size makes it more sensitive to variance and therefore less suitable as the sole basis for a central conclusion.
+
+To reduce run-to-run noise, the main comparisons use repeated runs under the same data split and prompt format. This matters because a student-over-teacher claim is only meaningful if the margin is reproducible across seeds rather than produced by a single favorable trial. The reported mean and best results are therefore both useful: the mean reflects stability, while the best run shows the upper bound of the same training recipe.
 
 # Results and Discussion
 
 Table 1. Main results on the CMExam full-data and dental test sets.
 
-```text
-Model         Config      Full    Dental
-7B            Zero-shot   76.49%  68.80%
-14B           Zero-shot   83.55%  74.40%
-DeepSeek-V3   Teacher     87.18%  79.20%
-7B            S1 mean     85.60%  73.60%
-14B           S1 mean     88.67%  79.20%
-14B           S1 best     89.10%  78.40%
-```
+| Model | Setting | Full Test Accuracy | Dental Test Accuracy |
+| --- | --- | ---: | ---: |
+| Qwen2.5-7B | Zero-shot baseline | 76.49% | 68.80% |
+| Qwen2.5-14B | Zero-shot baseline | 83.55% | 74.40% |
+| DeepSeek-V3 | Teacher | 87.18% | 79.20% |
+| Qwen2.5-7B | Stage 1 mean | 85.60% | 73.60% |
+| Qwen2.5-14B | Stage 1 mean | 88.67% | 79.20% |
+| Qwen2.5-14B | Stage 1 best | 89.10% | 78.40% |
 
-Full = 991-question full test set. Dental = 125-question dental subset. S1 = Stage 1 only.
+Full Test = 991-question full test set. Dental Test = 125-question dental subset.
 
 The method improves both student sizes. On the full test set, the 7B student rises from 76.49% to 85.60%, a gain of 9.11 percentage points. The 14B student rises from 83.55% to 88.67% on average, a gain of 5.12 percentage points. The best 14B run reaches 89.10%, which exceeds the 87.18% teacher.
 
-The stronger result is not only the peak score but also the stability around it. Across three seeds, the 14B distilled model ranges from 88.40% to 89.10%, a spread of only 0.70 percentage points. This is a much stronger basis for interpretation than a single standout run. The mean and the best run tell the same story: the task-aligned student is consistently competitive with, and in the best case superior to, the teacher.
+![Main comparison on the 991-question full test set](results_comparison.png)
 
-Figure 3 compares the 14B zero-shot baseline, the teacher, and the distilled 14B student.
+Figure 2. Main comparison on the 991-question full test set. The distilled 14B student exceeds both its zero-shot baseline and the teacher.
 
-The main conclusion should be read from the full 991-question test set rather than from the smaller dental subset. The dental subset remains useful, but its smaller size makes it more sensitive to variance. On the main benchmark, the distilled 14B student is stronger than both its zero-shot baseline and the teacher.
+The result is strong not only in peak accuracy but also in stability. Across three seeds, the 14B distilled model ranges from 88.40% to 89.10%, a spread of only 0.70 percentage points. The mean and the best run tell the same story: the task-aligned student is consistently competitive with, and in the best case superior to, the teacher.
 
-The 7B results reinforce that the method is not restricted to a single model size. The 7B student improves by more than nine points on the full test set and remains substantially above its own zero-shot baseline on the dental subset. This matters because the practical motivation of distillation is often to improve the smaller and cheaper model first. In that sense, the 14B student-over-teacher result is the strongest headline, but the 7B gains are equally important for deployment relevance.
+The main conclusion should be read from the full 991-question test set rather than from the smaller dental subset. On the main benchmark, the distilled 14B student is stronger than both its zero-shot baseline and the teacher.
 
-The student-over-teacher result does not mean the teacher is weak. It shows that a task-aligned student can combine teacher uncertainty with direct task optimization to learn a stronger decision boundary. Another practical finding is that Stage 2 is not always beneficial. For a strong 14B student, extra ground-truth fine-tuning can erase useful soft-label structure instead of improving it.
+The dental subset still has diagnostic value. It shows that the distilled students do not gain only by fitting broad exam style; they also remain competitive on the target specialty slice. At the same time, the smaller subset is more volatile, so it should be used as supporting evidence rather than as the primary basis for ranking models.
 
-Additional large-scale runs also suggest that this is not a one-off effect limited to the 14B student. In the same 991-question setting, the 7B Stage 1 mean reaches 85.60%, while the corresponding Stage 2 mean is 85.20%. The drop is small, but it points in the same direction: once the decision-space structure has already been transferred effectively, extra hard-label correction does not necessarily improve the final model. This supports the broader claim that distillation pipelines should be selected conditionally rather than mechanically extended.
+The 7B results show that the method is not restricted to a single model size. The 7B student improves by more than nine points on the full test set and remains above its own zero-shot baseline on the dental subset. This matters because distillation is often motivated by the need to improve smaller and cheaper models first.
 
-Another important interpretation concerns why a student can exceed its teacher at all. The student is not learning every aspect of the teacher. It is learning a compressed and task-focused view of the teacher signal while also being optimized directly for the benchmark objective. That combination can act like regularized transfer: the student inherits useful uncertainty patterns but is not forced to imitate every irrelevant or noisy part of the teacher distribution.
+The student-over-teacher result does not mean the teacher is weak. It suggests that a task-aligned student can combine teacher uncertainty with direct task optimization to learn a stronger decision boundary. Another practical finding is that Stage 2 is not always beneficial. For a strong 14B student, extra ground-truth fine-tuning can erase useful soft-label structure instead of improving it.
+
+Additional runs suggest that this is not a one-off effect limited to the 14B student. In the same 991-question setting, the 7B Stage 1 mean reaches 85.60%, while the corresponding Stage 2 mean is 85.20%. Once the decision-space structure has been transferred effectively, extra hard-label correction does not necessarily improve the final model.
+
+This pattern is consistent with the task itself. In a five-option exam, the most useful teacher signal is the relative relation among the answer choices. Stage 1 preserves that structure, whereas Stage 2 pushes the model toward a single hard label. When the student is already strong, the second step can remove useful uncertainty information rather than refine it.
+
+The student does not learn every aspect of the teacher. It learns a compressed, task-focused view of the teacher signal while also being optimized for the benchmark objective. That combination can act as regularized transfer: the student inherits useful uncertainty patterns without imitating irrelevant parts of the teacher distribution.
 
 Overall, the method works because it keeps only the uncertainty structure that matters for the final option choice and discards irrelevant supervision dimensions.
 
-The current paper still has clear boundaries. The result is strongest for structured five-option medical exams and should not be over-generalized to open-ended clinical dialogue or rationale generation. Nevertheless, within its intended setting, the evidence is strong enough to support a practical conclusion: for standardized medical MCQ tasks, decision-space supervision is not merely a cheaper approximation to full-vocabulary distillation; it can be the better training target.
+The result is strongest for structured five-option medical exams and should not be over-generalized to open-ended clinical dialogue or rationale generation. Within this setting, decision-space supervision is not merely a cheaper approximation to full-vocabulary distillation; it can be the better training target.
 
 # Conclusion
 
 This paper presented Choice-Head distillation for dental multiple-choice question answering. The method distills only the five-option answer distribution, not the full vocabulary. This makes the supervision target closer to the task and keeps the framework compatible with black-box teachers. On the 991-question CMExam-based test set, the best 14B student reaches 89.10% accuracy and exceeds the 87.18% DeepSeek-V3 teacher. For structured medical multiple-choice tasks, decision-space distillation is therefore a practical path to smaller and more deployable QA systems.
 
-More broadly, the study suggests a simple design principle: when the downstream task has a small and explicit decision space, distillation should be defined in that same space unless there is strong evidence that broader supervision is needed. In this setting, the smaller target is not a compromise. It is the reason the transfer becomes both efficient and effective.
+More broadly, the study suggests a simple design principle: when the downstream task has a small and explicit decision space, distillation should be defined in that same space unless broader supervision is clearly necessary. In this setting, the smaller target is not a compromise; it is the reason the transfer is both efficient and effective.
 
 References
 

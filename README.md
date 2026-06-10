@@ -232,7 +232,7 @@ bash run_night_api_tasks.sh
 - [docs/analysis_distill_bottleneck.md](docs/analysis_distill_bottleneck.md) — 蒸馏瓶颈分析
 - [docs/multi_teacher_ensemble_plan.md](docs/multi_teacher_ensemble_plan.md) — 多教师集成方案记录
 - [docs/report_module13_14b_distill.md](docs/report_module13_14b_distill.md) — Module 13 实验报告
-- [thesis/thesis_submission.md](thesis/thesis_submission.md) — 当前论文提交稿正文
+- [thesis/thesis_submission.md](thesis/thesis_submission.md) — 当前论文提交稿源文件
 - 各模块 README.md — 模块级复现指南
 
 ---

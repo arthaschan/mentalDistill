@@ -1,6 +1,6 @@
 # mentalDistill — CMExam 医学选择题知识蒸馏实验平台
 
-基于 CMExam（中国医学考试真题）的多教师 → 小模型知识蒸馏实验。覆盖 17 个实验模块（Module 00–16），包含 GT SFT 基线、白盒/黑盒/异构教师蒸馏、多教师融合、推理链蒸馏、全量数据扩展等方案。
+基于 CMExam（中国医学考试真题）的多教师 → 小模型知识蒸馏实验。当前工作区保留 21 个实验模块（Module 00–20），包含 GT SFT 基线、白盒/黑盒/异构教师蒸馏、多教师融合、推理链蒸馏、全量数据扩展与信息几何相关方案。
 
 ---
 
@@ -93,6 +93,10 @@ bash check_env.sh
 | 14 | DeepSeek-V3 | **Qwen3-14B** | Choice-Head 两阶段 | — |
 | 15 | DeepSeek-V3 | 7B/14B | **全量 6591 题重分割** | 14B: **89.10%** |
 | 16 | Llama-70B-AWQ | **14B** | 异构教师蒸馏 | 14B: **87.59%** |
+| 17 | 多教师分布 | 7B | alpha-散度蒸馏 | — |
+| 18 | 教师分布分析 | — | Fisher-Rao 分析 | — |
+| 19 | DeepSeek-V3 | 7B/14B | 边界过滤蒸馏 | — |
+| 20 | 多教师分布 | 7B/14B | 自适应 alpha 蒸馏 | — |
 
 > Module 15/16 使用 991 题测试集；Module 00–14 使用 83 题测试集。两组绝对值不可直接比较。
 
@@ -100,7 +104,7 @@ bash check_env.sh
 
 ## 运行单个模块
 
-每个模块目录结构统一，入口脚本一致：
+不同模块保留的入口脚本并不完全一致，建议以各模块 `scripts/` 目录中的现有文件为准。标准训练模块常见入口如下：
 
 ```bash
 source setup.env
@@ -119,6 +123,22 @@ bash <module>/scripts/start_web.sh
 
 # 启动人机答题界面（浏览器选择题测试，http://0.0.0.0:7870）
 bash <module>/scripts/start_quiz.sh
+```
+
+特殊模块示例：
+
+```bash
+# Module 15
+bash 15_fulldata_resplit/scripts/run_train_7b.sh
+bash 15_fulldata_resplit/scripts/run_train_14b.sh
+python 15_fulldata_resplit/scripts/run_eval_dual.py
+
+# Module 16
+bash 16_llama70b_choice_head/scripts/run_train_14b.sh
+python 16_llama70b_choice_head/scripts/run_eval_dual.py
+
+# Module 18
+bash 18_fisher_rao_analysis/scripts/run_analysis.sh
 ```
 
 ## 批量执行
@@ -153,9 +173,16 @@ bash run_night_api_tasks.sh
 | `serve_model_app.py` | 模型推理 Web 界面 |
 | `quiz_app.py` | 人机答题 Web 界面 |
 | `generate_teacher_labels_api.py` | API 教师标签生成 |
+| `generate_teacher_labels_local.py` | 本地 Hugging Face 教师标签生成 |
+| `generate_teacher_labels_local_logprobs.py` | 本地软标签生成 |
 | `generate_teacher_labels_vllm.py` | vLLM 本地教师标签生成 |
+| `generate_teacher_soft_labels_multivote.py` | 多教师投票软标签生成 |
+| `prepare_soft_labels.py` | 软标签预处理 |
+| `merge_teacher_soft_labels.py` | 软标签合并 |
+| `apply_temperature.py` | 教师分布温度缩放 |
 | `build_selective_distill_dataset.py` | 蒸馏数据集构造 |
-| `common_env.sh` | 环境变量解析 |
+| `fisher_rao_analysis.py` | Fisher-Rao 信息几何分析 |
+| `manifold_curvature_analysis.py` | 流形曲率分析 |
 
 ---
 
@@ -199,11 +226,14 @@ bash run_night_api_tasks.sh
 
 ## 文档
 
-- [docs/用户手册.md](docs/%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.md) — 项目用户手册（环境、部署、启动、调用与 Python 文件功能说明）
-- [`docs/thesis_experiment_report.md`](docs/thesis_experiment_report.md) — 完整实验报告（含所有模块结果与分析）
-- [`docs/defense_qa_preparation.md`](docs/defense_qa_preparation.md) — 答辩 Q&A 准备
-- [`docs/analysis_distill_bottleneck.md`](docs/analysis_distill_bottleneck.md) — 蒸馏瓶颈分析
-- 各模块 `README.md` — 模块级复现指南
+- [docs/用户手册_提交版.md](docs/%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C_%E6%8F%90%E4%BA%A4%E7%89%88.md) — 当前提交版用户手册
+- [docs/thesis_experiment_report.md](docs/thesis_experiment_report.md) — 完整实验报告
+- [docs/defense_qa_preparation.md](docs/defense_qa_preparation.md) — 答辩 Q&A 准备
+- [docs/analysis_distill_bottleneck.md](docs/analysis_distill_bottleneck.md) — 蒸馏瓶颈分析
+- [docs/multi_teacher_ensemble_plan.md](docs/multi_teacher_ensemble_plan.md) — 多教师集成方案记录
+- [docs/report_module13_14b_distill.md](docs/report_module13_14b_distill.md) — Module 13 实验报告
+- [thesis/thesis_submission.md](thesis/thesis_submission.md) — 当前论文提交稿正文
+- 各模块 README.md — 模块级复现指南
 
 ---
 

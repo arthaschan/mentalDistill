@@ -70,6 +70,13 @@ source setup.env
 bash check_env.sh
 ```
 
+## 数据来源说明
+
+- 上游 CMExam 仓库的 data 目录当前包含 3 个 CSV：test_with_annotations.csv、train.csv、val.csv。
+- 本仓库当前代码路径不直接读取上游的 train.csv 或 val.csv。
+- 当前实验统一使用 [shared/cmexam_full.csv](shared/cmexam_full.csv) 作为本地总表输入；按现有数据约定，它对应的是从上游带注释总表整理后的汇总文件。
+- [scripts/resplit_dental_data.py](scripts/resplit_dental_data.py#L23) 和 [scripts/resplit_fulldata.py](scripts/resplit_fulldata.py#L23) 都是从 [shared/cmexam_full.csv](shared/cmexam_full.csv) 再拆分出 train/val/test，并进一步提取牙科子集。
+
 ---
 
 ## 实验模块总览

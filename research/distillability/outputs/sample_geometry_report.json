@@ -1,0 +1,93 @@
+{
+  "teachers": [
+    {
+      "label": "Qwen14B_real",
+      "n_samples": 4608,
+      "n_correct": 3963,
+      "n_wrong": 645,
+      "teacher_acc": 86.0,
+      "overall": {
+        "fr_to_gt": {
+          "n": 4608,
+          "mean": 0.4504,
+          "std": 1.0161,
+          "min": 0.0,
+          "max": 3.1416
+        },
+        "logdet_g": {
+          "n": 4608,
+          "mean": 21.4237,
+          "std": 4.5727,
+          "min": 2.2468,
+          "max": 24.0
+        },
+        "boundary": {
+          "n": 4608,
+          "mean": 0.0,
+          "std": 0.0006,
+          "min": 0.0,
+          "max": 0.0242
+        },
+        "entropy": {
+          "n": 4608,
+          "mean": 0.0477,
+          "std": 0.1548,
+          "min": 0.0,
+          "max": 1.251
+        },
+        "margin": {
+          "n": 4608,
+          "mean": 0.9627,
+          "std": 0.1413,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "peak": {
+          "n": 4608,
+          "mean": 0.9805,
+          "std": 0.0742,
+          "min": 0.3597,
+          "max": 1.0
+        }
+      },
+      "correct_vs_wrong": {
+        "fr_to_gt": {
+          "correct_mean": 0.0515,
+          "wrong_mean": 2.9016,
+          "cohens_d": -12.1898,
+          "auc_correct": 0.0
+        },
+        "logdet_g": {
+          "correct_mean": 22.3626,
+          "wrong_mean": 15.6548,
+          "cohens_d": 1.7038,
+          "auc_correct": 0.8598
+        },
+        "boundary": {
+          "correct_mean": 0.0,
+          "wrong_mean": 0.0001,
+          "cohens_d": -0.1702,
+          "auc_correct": 0.1904
+        },
+        "entropy": {
+          "correct_mean": 0.024,
+          "wrong_mean": 0.1929,
+          "cohens_d": -1.1781,
+          "auc_correct": 0.1425
+        },
+        "margin": {
+          "correct_mean": 0.9811,
+          "wrong_mean": 0.8499,
+          "cohens_d": 0.9807,
+          "auc_correct": 0.8567
+        },
+        "peak": {
+          "correct_mean": 0.9903,
+          "wrong_mean": 0.9203,
+          "cohens_d": 0.9989,
+          "auc_correct": 0.8569
+        }
+      }
+    }
+  ]
+}

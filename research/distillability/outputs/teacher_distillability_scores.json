@@ -1,0 +1,38 @@
+{
+  "note": "PRIOR distillability predictors. Computed from teacher logprobs ONLY; no student-distillation outcome was used. Freeze (git commit) before any Phase-2 student training to enable prospective validation.",
+  "teachers": [
+    {
+      "label": "Qwen32B",
+      "n_samples": 4608,
+      "teacher_acc": 89.43,
+      "disagree_rate": 10.57,
+      "geom_auc": 0.8694,
+      "mean_logdet_g": 21.4878,
+      "correct_wrong_sep": 1.9818,
+      "distillability_index": 2.4899,
+      "predicted_rank": 1
+    },
+    {
+      "label": "Qwen14B",
+      "n_samples": 4608,
+      "teacher_acc": 86.0,
+      "disagree_rate": 14.0,
+      "geom_auc": 0.8563,
+      "mean_logdet_g": 21.4237,
+      "correct_wrong_sep": 1.7038,
+      "distillability_index": 1.7242,
+      "predicted_rank": 2
+    },
+    {
+      "label": "Llama70B",
+      "n_samples": 2223,
+      "teacher_acc": 51.64,
+      "disagree_rate": 48.36,
+      "geom_auc": 0.6628,
+      "mean_logdet_g": 6.0544,
+      "correct_wrong_sep": 0.4796,
+      "distillability_index": -4.214,
+      "predicted_rank": 3
+    }
+  ]
+}

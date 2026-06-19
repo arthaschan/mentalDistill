@@ -1,0 +1,21 @@
+{
+  "csv": "research/distillability/outputs/sample_geometry_Llama70B_real.csv",
+  "n_samples": 2223,
+  "n_correct": 1148,
+  "teacher_acc": 51.64,
+  "combined_cv_auc": 0.6628,
+  "standardized_weights": {
+    "logdet_g": 0.2262,
+    "boundary": -0.0432,
+    "entropy": -0.2534,
+    "margin": 0.1017,
+    "peak": 0.0933
+  },
+  "single_feature_auc": {
+    "logdet_g": 0.6569,
+    "boundary": 0.6257,
+    "entropy": 0.6665,
+    "margin": 0.6583,
+    "peak": 0.6619
+  }
+}

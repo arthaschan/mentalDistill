@@ -47,6 +47,14 @@ check*.py
 extract_docx.py
 search_docx.py
 
+# Phase-2 distillability: large/regenerable artifacts (keep scripts + small reports + predictions.json)
+research/distillability/teacher_labels/
+research/distillability/datasets/
+research/distillability/runs/
+research/distillability/*.log
+research/distillability/litsearch_results.txt
+research/distillability/outputs/*.csv
+
 # Model weights / checkpoints (never commit)
 *.safetensors
 *.ckpt

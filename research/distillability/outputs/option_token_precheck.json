@@ -1,0 +1,41 @@
+{
+  "reports": [
+    {
+      "label": "phi-4",
+      "model_dir": "/home/student/arthas/mentalDistill/research/models/phi-4",
+      "passed": true,
+      "issues": [],
+      "mapping": {
+        "A": 32,
+        "B": 33,
+        "C": 34,
+        "D": 35,
+        "E": 36
+      }
+    },
+    {
+      "label": "gemma-2-27b-it",
+      "model_dir": "/home/student/arthas/mentalDistill/research/models/gemma-2-27b-it",
+      "passed": null,
+      "issues": [
+        "not downloaded"
+      ]
+    },
+    {
+      "label": "GLM-4-32B-0414",
+      "model_dir": "/home/student/arthas/mentalDistill/research/models/GLM-4-32B-0414",
+      "passed": null,
+      "issues": [
+        "not downloaded"
+      ]
+    },
+    {
+      "label": "Yi-1.5-34B-Chat",
+      "model_dir": "/home/student/arthas/mentalDistill/research/models/Yi-1.5-34B-Chat",
+      "passed": null,
+      "issues": [
+        "not downloaded"
+      ]
+    }
+  ]
+}

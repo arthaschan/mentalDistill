@@ -1,0 +1,21 @@
+{
+  "csv": "research/distillability/outputs/sample_geometry_Qwen32B_real.csv",
+  "n_samples": 4608,
+  "n_correct": 4121,
+  "teacher_acc": 89.43,
+  "combined_cv_auc": 0.8702,
+  "standardized_weights": {
+    "logdet_g": 0.8616,
+    "boundary": 0.0257,
+    "entropy": -0.1962,
+    "margin": -0.001,
+    "peak": 0.0022
+  },
+  "single_feature_auc": {
+    "logdet_g": 0.8739,
+    "boundary": 0.8299,
+    "entropy": 0.8764,
+    "margin": 0.8764,
+    "peak": 0.8766
+  }
+}

@@ -226,9 +226,19 @@ def main():
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_text},
             ]
-            input_text = tokenizer.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
+            try:
+                input_text = tokenizer.apply_chat_template(
+                    messages, tokenize=False, add_generation_prompt=True
+                )
+            except Exception:
+                # Some chat templates (e.g. Gemma-2) reject a separate system role.
+                # Fall back to folding the system prompt into the user turn.
+                fold_messages = [
+                    {"role": "user", "content": f"{system_prompt}\n\n{user_text}"},
+                ]
+                input_text = tokenizer.apply_chat_template(
+                    fold_messages, tokenize=False, add_generation_prompt=True
+                )
             inputs = tokenizer(input_text, return_tensors="pt").to(model.device)
 
             with torch.no_grad():

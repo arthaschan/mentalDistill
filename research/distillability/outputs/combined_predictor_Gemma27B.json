@@ -1,0 +1,21 @@
+{
+  "csv": "research/distillability/outputs/sample_geometry_Gemma27B.csv",
+  "n_samples": 4608,
+  "n_correct": 2654,
+  "teacher_acc": 57.6,
+  "combined_cv_auc": 0.7617,
+  "standardized_weights": {
+    "logdet_g": 1.0787,
+    "boundary": 0.1187,
+    "entropy": -0.1088,
+    "margin": -0.0304,
+    "peak": -0.0832
+  },
+  "single_feature_auc": {
+    "logdet_g": 0.7624,
+    "boundary": 0.7419,
+    "entropy": 0.7584,
+    "margin": 0.7553,
+    "peak": 0.7565
+  }
+}

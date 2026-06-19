@@ -1,0 +1,82 @@
+{
+  "note": "PRIOR distillability predictors. Computed from teacher logprobs ONLY; no student-distillation outcome was used. Freeze (git commit) before any Phase-2 student training to enable prospective validation.",
+  "teachers": [
+    {
+      "label": "Qwen32B",
+      "n_samples": 4608,
+      "teacher_acc": 89.43,
+      "disagree_rate": 10.57,
+      "geom_auc": 0.8694,
+      "mean_logdet_g": 21.4878,
+      "correct_wrong_sep": 1.9818,
+      "distillability_index": 3.921,
+      "predicted_rank": 1
+    },
+    {
+      "label": "Qwen14B",
+      "n_samples": 4608,
+      "teacher_acc": 86.0,
+      "disagree_rate": 14.0,
+      "geom_auc": 0.8563,
+      "mean_logdet_g": 21.4237,
+      "correct_wrong_sep": 1.7038,
+      "distillability_index": 2.656,
+      "predicted_rank": 2
+    },
+    {
+      "label": "GLM32B",
+      "n_samples": 4608,
+      "teacher_acc": 83.29,
+      "disagree_rate": 16.71,
+      "geom_auc": 0.8785,
+      "mean_logdet_g": 5.9768,
+      "correct_wrong_sep": 1.4764,
+      "distillability_index": 2.3125,
+      "predicted_rank": 3
+    },
+    {
+      "label": "Yi34B",
+      "n_samples": 4608,
+      "teacher_acc": 77.39,
+      "disagree_rate": 22.61,
+      "geom_auc": 0.815,
+      "mean_logdet_g": 6.2617,
+      "correct_wrong_sep": 1.1547,
+      "distillability_index": -0.3076,
+      "predicted_rank": 4
+    },
+    {
+      "label": "Llama70B",
+      "n_samples": 4608,
+      "teacher_acc": 72.79,
+      "disagree_rate": 27.21,
+      "geom_auc": 0.8183,
+      "mean_logdet_g": 10.6971,
+      "correct_wrong_sep": 1.0648,
+      "distillability_index": -0.835,
+      "predicted_rank": 5
+    },
+    {
+      "label": "Gemma27B",
+      "n_samples": 4608,
+      "teacher_acc": 57.6,
+      "disagree_rate": 42.4,
+      "geom_auc": 0.7614,
+      "mean_logdet_g": 5.8474,
+      "correct_wrong_sep": 1.0131,
+      "distillability_index": -3.3477,
+      "predicted_rank": 6
+    },
+    {
+      "label": "Phi4",
+      "n_samples": 4608,
+      "teacher_acc": 54.51,
+      "disagree_rate": 45.49,
+      "geom_auc": 0.7453,
+      "mean_logdet_g": 6.8143,
+      "correct_wrong_sep": 0.8309,
+      "distillability_index": -4.3992,
+      "predicted_rank": 7
+    }
+  ]
+}

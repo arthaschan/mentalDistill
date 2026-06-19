@@ -12,18 +12,22 @@
     "H2_algorithm_scaling": "Per-teacher (geom_top50 minus random_top50) student-accuracy gain INCREASES with that teacher's geom_auc. I.e. geometry-based KL-sample filtering helps more for teachers whose errors are more geometrically separable.",
     "H3_weak_teacher": "Low-DI teachers should be predictable as poor distillation sources WITHOUT training a student."
   },
+  "raw_features_note": "The TRULY frozen quantities are each teacher's prior features (teacher_acc, geom_auc, correct_wrong_sep) — computed from teacher logprobs ONLY, never from student-distillation outcomes. distillability_index (DI) is a z-standardized composite over a teacher SET, so its absolute value shifts with set composition; predicted_rank is what the prospective H1 test uses. Ranks below are on the N=7 set using the Llama70B Phase-1 anchor (see llama70b_caveat).",
+  "llama70b_caveat": "Llama-3.3-70B's Phase-1 frozen anchor (teacher_acc 51.64, geom_auc 0.6628, n=2223) was generated via vLLM+AWQ on a 2223-sample subset, whereas ALL other teachers (Qwen/GLM/Phi/Yi/Gemma) use the HF-bf16 full 4608-sample pipeline. Re-scoring Llama70B on the SAME full-4608 HF pipeline gives teacher_acc 72.79, geom_auc 0.8183, correct_wrong_sep 1.0648 (n=4608). We keep the 2223 value as the pre-registered anchor (predicted_rank below) and ALSO report the 4608-consistent variant as a sensitivity check in the final H1 correlation. Both are recorded; neither is chosen post-hoc to fit distillation results.",
   "teachers": {
     "_committed_before_phase2_distillation": [
-      {"label": "Qwen2.5-32B", "teacher_acc": 89.43, "geom_auc": 0.8694, "correct_wrong_sep": 1.9818, "distillability_index": 2.4899, "predicted_rank": 1, "status": "prior_known (Phase-1)"},
-      {"label": "Qwen2.5-14B", "teacher_acc": 86.00, "geom_auc": 0.8563, "correct_wrong_sep": 1.7038, "distillability_index": 1.7242, "predicted_rank": 2, "status": "prior_known (Phase-1)"},
-      {"label": "Llama-3.3-70B", "teacher_acc": 51.64, "geom_auc": 0.6628, "correct_wrong_sep": 0.4796, "distillability_index": -4.2140, "predicted_rank": 3, "status": "prior_known (Phase-1)"}
+      {"label": "Qwen2.5-32B", "teacher_acc": 89.43, "geom_auc": 0.8694, "correct_wrong_sep": 1.9818, "predicted_rank": 1, "status": "prior_known (Phase-1), full-4608 HF pipeline"},
+      {"label": "Qwen2.5-14B", "teacher_acc": 86.00, "geom_auc": 0.8563, "correct_wrong_sep": 1.7038, "predicted_rank": 2, "status": "prior_known (Phase-1), full-4608 HF pipeline"},
+      {"label": "Llama-3.3-70B", "teacher_acc": 51.64, "geom_auc": 0.6628, "correct_wrong_sep": 0.4796, "predicted_rank": 7, "status": "prior_known (Phase-1), n=2223 vLLM+AWQ subset — SEE llama70b_caveat", "alt_full4608": {"teacher_acc": 72.79, "geom_auc": 0.8183, "correct_wrong_sep": 1.0648, "predicted_rank_full4608": 5}}
     ],
-    "_phase2_new_to_be_filled_BEFORE_their_distillation": [
-      {"label": "phi-4", "repo": "microsoft/phi-4", "status": "PENDING geometry prediction"},
-      {"label": "GLM-4-32B-0414", "repo": "zai-org/GLM-4-32B-0414", "status": "PENDING geometry prediction"},
-      {"label": "Yi-1.5-34B-Chat", "repo": "01-ai/Yi-1.5-34B-Chat", "status": "PENDING geometry prediction"},
-      {"label": "gemma-2-27b-it", "repo": "google/gemma-2-27b-it", "status": "PENDING geometry prediction"}
+    "_phase2_new_frozen_BEFORE_distillation": [
+      {"label": "phi-4", "repo": "microsoft/phi-4", "teacher_acc": 54.51, "geom_auc": 0.7453, "correct_wrong_sep": 0.8309, "predicted_rank": 6, "status": "FROZEN (logprobs-only prior). NOTE: phi-4 + GLM distillation already executed before this commit; their scores are logprobs-only priors (no distillation outcome used), so they remain valid priors, but their git freeze is later than Yi/Gemma."},
+      {"label": "GLM-4-32B-0414", "repo": "zai-org/GLM-4-32B-0414", "teacher_acc": 83.29, "geom_auc": 0.8785, "correct_wrong_sep": 1.4764, "predicted_rank": 3, "status": "FROZEN (logprobs-only prior). Distillation already executed before this commit — see phi-4 note."},
+      {"label": "Yi-1.5-34B-Chat", "repo": "01-ai/Yi-1.5-34B-Chat", "teacher_acc": 77.39, "geom_auc": 0.8150, "correct_wrong_sep": 1.1547, "predicted_rank": 4, "status": "FROZEN BEFORE distillation — genuine prospective pre-registration"},
+      {"label": "gemma-2-27b-it", "repo": "google/gemma-2-27b-it", "teacher_acc": 57.60, "geom_auc": 0.7614, "correct_wrong_sep": 1.0131, "predicted_rank": 5, "status": "FROZEN BEFORE distillation — genuine prospective pre-registration"}
     ]
   },
-  "protocol": "For each new teacher: (1) generate real logprobs, (2) compute DI via frozen predictor, (3) APPEND its DI + predicted_rank here and git-commit (its individual freeze line), (4) ONLY THEN run student distillation (3 seeds, Stage-1, vs baseline + random control). Distillation gains are recorded separately in phase2 results, never back-edited into this file's predictions."
+  "predicted_DI_ranking_N7_anchor2223": ["Qwen2.5-32B", "Qwen2.5-14B", "GLM-4-32B-0414", "Yi-1.5-34B-Chat", "gemma-2-27b-it", "phi-4", "Llama-3.3-70B"],
+  "predicted_DI_ranking_N7_full4608": ["Qwen2.5-32B", "Qwen2.5-14B", "GLM-4-32B-0414", "Yi-1.5-34B-Chat", "Llama-3.3-70B", "gemma-2-27b-it", "phi-4"],
+  "protocol": "For each new teacher: (1) generate real logprobs, (2) compute prior features via frozen predictor, (3) APPEND its features + predicted_rank here and git-commit (its individual freeze line), (4) ONLY THEN run student distillation (3 seeds, Stage-1, vs baseline + random control). Distillation gains are recorded separately in phase2 results, never back-edited into this file's predictions."
 }

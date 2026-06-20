@@ -79,3 +79,27 @@ Thumbs.db
 english
 aiea/MIND*
 
+# 下载的公开数据集（用 research/distillability/scripts/load_mcq_dataset.py 重新生成）
+data_ext/
+
+# 跨数据集实验的教师 logprobs（大，可由脚本重新生成）
+research/distillability/teacher_labels_ext/
+
+# 参考文献 PDF（受版权保护，仅保留在 H100 本地用于核验，不上传）
+thesis/reference/*.pdf
+aiea/*.pdf
+
+# CMExam 数据集（不可公开提交：源 CSV、牙科子集、各模块重分割与融合数据）
+# 仅保留处理/重分割脚本，数据本身由持证用户从 CMExam 官方获取后本地重建
+shared/cmexam_full.csv
+shared/data/cmexam_dental_*.jsonl
+thesis/reference/*CMExam*.html
+**/data/train.jsonl
+**/data/test.jsonl
+**/data/val.jsonl
+**/data/test_dental.jsonl
+**/data/val_dental.jsonl
+**/data/train_need_teacher.jsonl
+**/data/train_cot.jsonl
+**/data/train_fused_*.jsonl
+

@@ -88,8 +88,38 @@
 
 ---
 
-## 5. 检索方法与可复现
+## 6. 第二轮检索（2026-06-19 夜）：training-free 教师选择 + 迁移性指标对标
 
-- 工具：`research/distillability/scripts/litsearch.py`（arXiv + Semantic Scholar API，带限流退避）
-- 原始结果：`research/distillability/litsearch_results.txt`
-- 局限：Semantic Scholar 免费 API 限流严重，部分查询未返回；未覆盖中文文献库、专利、Google Scholar 全文。建议正式投稿前用机构访问补一次 Google Scholar + ACL Anthology 全文检索，并人工核对第 2、3 节点名出的 5-6 篇最近邻论文全文。
+> 重心扩到论文可能的新主线"training-free 可蒸馏性预测"。原始结果：`research/distillability/litsearch_round2_results.txt`（litsearch.py round2）。
+
+### 6.1 关键发现（对新颖性有利）
+
+**A. "选教师"vs"选学生架构"——方向不同，无直接撞车**
+- `DisWOT: Student Architecture Search for Distillation WithOut Training` (2023)：最像的标题，但做的是**无训练选学生架构**，用师生架构相似度，**不是选教师、不用教师输出分布几何**。方向正交，不构成威胁。
+
+**B. 迁移性指标（LogME/LEEP/PACTran/MetaRank/TransRate）大量存在，但全部用于"选预训练源模型"，无一用于"蒸馏教师选择"**
+- `LogME` (ICML 2021)、`LEEP` (ICML 2020)、`PACTran` (2022)、`MetaRank: Task-Aware Metric Selection for MTE` (2025)、`Transferability Metrics for Selecting Source Model Ensembles` (2021) 等：
+  全部针对 **transfer learning 的源模型选择**（选哪个 backbone 迁移到下游），**没有一篇把这些指标用于"选哪个教师做知识蒸馏"**。
+- **这恰好确认了本研究的桥接贡献是新的**：把迁移性估计（MTE）的方法论迁移到"蒸馏教师可蒸馏性预测"场景，并做多指标系统比较。已在 `transferability_scores.py` 实现 LogME/LEEP 作为对标基线。
+
+**C. 未发现"training-free 蒸馏教师可蒸馏性预测 + 多指标系统比较"的完全对应工作。**
+
+### 6.2 更新后的论文定位（防御审稿人）
+
+- 必须对标的最强基线：LogME / LEEP（迁移性社区标准）。已实现并纳入指标家族对比表。
+- 新颖性陈述升级为两条：
+  1. **问题桥接**："首次将迁移性估计（MTE）方法论系统应用于知识蒸馏的 training-free 教师选择，并发现可蒸馏性的可预测部分主要由教师整体可靠性这一潜变量驱动。"
+  2. **多指标 benchmark**：在 N≥7 教师 × 多数据集上系统比较几何/准确率/熵/LEEP/LogME，给出哪个指标最鲁棒——无论几何赢不赢都是干净结论。
+- 审稿人"为什么不用 LogME"的攻击：已通过实现 + 对标预先化解。
+
+### 6.3 仍需的人工精查（投稿前）
+- Google Scholar / ACL Anthology / OpenReview 精查"distillation teacher selection without training"、"transferability estimation knowledge distillation" 最近 2 年全文。
+- 重点读 DisWOT 全文，明确"选学生架构"vs"选教师"的边界在论文里写清。
+
+---
+
+## 7. 检索方法与可复现
+
+- 工具：`research/distillability/scripts/litsearch.py`（arXiv + Semantic Scholar API，带限流退避；`round2` 参数跑第二轮）
+- 原始结果：`research/distillability/litsearch_results.txt`（第一轮，几何）+ `litsearch_round2_results.txt`（第二轮，教师选择+迁移性）
+- 局限：Semantic Scholar 免费 API 限流严重，部分查询未返回；未覆盖中文文献库、专利、Google Scholar 全文。建议正式投稿前用机构访问补一次 Google Scholar + ACL Anthology 全文检索，并人工核对第 2、3、6 节点名出的最近邻论文全文。

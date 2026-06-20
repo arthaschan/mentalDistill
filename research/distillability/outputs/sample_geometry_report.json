@@ -1,91 +1,91 @@
 {
   "teachers": [
     {
-      "label": "Qwen14B_real",
+      "label": "Gemma27B",
       "n_samples": 4608,
-      "n_correct": 3963,
-      "n_wrong": 645,
-      "teacher_acc": 86.0,
+      "n_correct": 2654,
+      "n_wrong": 1954,
+      "teacher_acc": 57.6,
       "overall": {
         "fr_to_gt": {
           "n": 4608,
-          "mean": 0.4504,
-          "std": 1.0161,
-          "min": 0.0,
-          "max": 3.1416
+          "mean": 1.3598,
+          "std": 1.307,
+          "min": 0.0089,
+          "max": 3.1338
         },
         "logdet_g": {
           "n": 4608,
-          "mean": 21.4237,
-          "std": 4.5727,
-          "min": 2.2468,
-          "max": 24.0
+          "mean": 5.8474,
+          "std": 1.9051,
+          "min": 1.9307,
+          "max": 10.7219
         },
         "boundary": {
           "n": 4608,
-          "mean": 0.0,
-          "std": 0.0006,
+          "mean": 0.0022,
+          "std": 0.0058,
           "min": 0.0,
-          "max": 0.0242
+          "max": 0.0914
         },
         "entropy": {
           "n": 4608,
-          "mean": 0.0477,
-          "std": 0.1548,
-          "min": 0.0,
-          "max": 1.251
+          "mean": 0.2435,
+          "std": 0.3231,
+          "min": 0.0003,
+          "max": 1.4651
         },
         "margin": {
           "n": 4608,
-          "mean": 0.9627,
-          "std": 0.1413,
+          "mean": 0.851,
+          "std": 0.2479,
           "min": 0.0,
           "max": 1.0
         },
         "peak": {
           "n": 4608,
-          "mean": 0.9805,
-          "std": 0.0742,
-          "min": 0.3597,
+          "mean": 0.9148,
+          "std": 0.141,
+          "min": 0.3345,
           "max": 1.0
         }
       },
       "correct_vs_wrong": {
         "fr_to_gt": {
-          "correct_mean": 0.0515,
-          "wrong_mean": 2.9016,
-          "cohens_d": -12.1898,
-          "auc_correct": 0.0
+          "correct_mean": 0.2843,
+          "wrong_mean": 2.8205,
+          "cohens_d": -6.8456,
+          "auc_correct": 0.0001
         },
         "logdet_g": {
-          "correct_mean": 22.3626,
-          "wrong_mean": 15.6548,
-          "cohens_d": 1.7038,
-          "auc_correct": 0.8598
+          "correct_mean": 6.5794,
+          "wrong_mean": 4.8532,
+          "cohens_d": 1.0131,
+          "auc_correct": 0.7624
         },
         "boundary": {
-          "correct_mean": 0.0,
-          "wrong_mean": 0.0001,
-          "cohens_d": -0.1702,
-          "auc_correct": 0.1904
+          "correct_mean": 0.0012,
+          "wrong_mean": 0.0034,
+          "cohens_d": -0.393,
+          "auc_correct": 0.2581
         },
         "entropy": {
-          "correct_mean": 0.024,
-          "wrong_mean": 0.1929,
-          "cohens_d": -1.1781,
-          "auc_correct": 0.1425
+          "correct_mean": 0.1499,
+          "wrong_mean": 0.3706,
+          "cohens_d": -0.7257,
+          "auc_correct": 0.2416
         },
         "margin": {
-          "correct_mean": 0.9811,
-          "wrong_mean": 0.8499,
-          "cohens_d": 0.9807,
-          "auc_correct": 0.8567
+          "correct_mean": 0.9104,
+          "wrong_mean": 0.7703,
+          "cohens_d": 0.5884,
+          "auc_correct": 0.7553
         },
         "peak": {
-          "correct_mean": 0.9903,
-          "wrong_mean": 0.9203,
-          "cohens_d": 0.9989,
-          "auc_correct": 0.8569
+          "correct_mean": 0.9492,
+          "wrong_mean": 0.868,
+          "cohens_d": 0.6002,
+          "auc_correct": 0.7565
         }
       }
     }

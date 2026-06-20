@@ -17,9 +17,10 @@ source "$REPO_ROOT/shared/common_env.sh"
 resolve_python
 resolve_model_dir BASE_MODEL_14B Qwen2.5-14B-Instruct
 
-DS_DIR="$MODULE_DIR/datasets"
+DS_DIR="${DS_DIR:-$MODULE_DIR/datasets}"
 DATA15="$REPO_ROOT/15_fulldata_resplit/data"
-RUN_ROOT="$MODULE_DIR/runs/$(date +%Y%m%d_%H%M%S)_taskA"
+RUN_TAG="${RUN_TAG:-taskA}"
+RUN_ROOT="$MODULE_DIR/runs/$(date +%Y%m%d_%H%M%S)_${RUN_TAG}"
 STAGE1="$REPO_ROOT/shared/train_choice_head_distill.py"
 SEED="${SEED:-42}"
 

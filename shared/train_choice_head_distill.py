@@ -17,6 +17,23 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, get_cosine_schedul
 OPTION_LETTERS = ["A", "B", "C", "D", "E"]
 
 
+# Prompt 语言可切换: 默认 zh (原中文牙科 prompt, 保持 CMExam 行为完全不变);
+# 设 DISTILL_PROMPT_LANG=en 用英文通用医学 prompt (跨数据集实验如 MedQA 用)。
+_PROMPT_LANG = os.environ.get("DISTILL_PROMPT_LANG", "zh").lower()
+
+
+def build_mcq_prompt(q, opts):
+    """返回 (system_line, user_block) 用于拼 chat prompt。"""
+    if _PROMPT_LANG == "en":
+        system_line = ("You are a medical expert. Output exactly one letter "
+                       "(A, B, C, D, or E) as the answer, with no explanation or spaces.\n")
+        user_block = f"Question: {q}\nOptions:\n{opts}\n"
+    else:
+        system_line = ("你是一名专业的牙科医生，只需输出一个字母（A、B、C、D、E）作为结果，不要附带任何解释或空格。\n")
+        user_block = f"问题：{q}\n选项：\n{opts}\n"
+    return system_line, user_block
+
+
 def set_global_seed(seed: int, deterministic: bool = False):
     random.seed(seed)
     np.random.seed(seed)
@@ -52,13 +69,14 @@ def evaluate_generation(model, tokenizer, file_path, device, max_new_tokens=4):
     correct = 0
     model.eval()
     for q, opts, ans in samples:
+        sys_line, user_block = build_mcq_prompt(q, opts)
         prompt = (
             "<|im_start|>system\n"
-            "你是一名专业的牙科医生，只需输出一个字母（A、B、C、D、E）作为结果，不要附带任何解释或空格。\n"
-            "<|im_end|>\n"
+            + sys_line
+            + "<|im_end|>\n"
             "<|im_start|>user\n"
-            f"问题：{q}\n选项：\n{opts}\n"
-            "<|im_end|>\n"
+            + user_block
+            + "<|im_end|>\n"
             "<|im_start|>assistant\n"
         )
         inputs = tokenizer(prompt, return_tensors="pt", truncation=True).to(device)
@@ -112,13 +130,14 @@ class DentalChoiceHeadDataset(Dataset):
         if ans not in OPTION_LETTERS:
             ans = "A"
 
+        sys_line, user_block = build_mcq_prompt(q, opts)
         prompt_prefix = (
             "<|im_start|>system\n"
-            "你是一名专业的牙科医生，只需输出一个字母（A、B、C、D、E）作为结果，不要附带任何解释或空格。\n"
-            "<|im_end|>\n"
+            + sys_line
+            + "<|im_end|>\n"
             "<|im_start|>user\n"
-            f"问题：{q}\n选项：\n{opts}\n"
-            "<|im_end|>\n"
+            + user_block
+            + "<|im_end|>\n"
             "<|im_start|>assistant\n"
         )
         text = prompt_prefix + f"{ans}<|im_end|>"

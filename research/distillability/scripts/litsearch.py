@@ -6,6 +6,10 @@ import urllib.request, urllib.parse, urllib.error, json, time, re, sys
 
 OUT = "research/distillability/litsearch_results.txt"
 
+# 第二轮检索: 重心扩到 "training-free 教师/源选择 + 迁移性指标对标 + 表征探针"
+# 输出到独立文件, 不覆盖第一轮的几何检索结果.
+OUT2 = "research/distillability/litsearch_round2_results.txt"
+
 # Three claim layers x query battery
 QUERIES = {
  "L1_measurement": [
@@ -86,5 +90,57 @@ def main():
         f.write("\n[DONE]\n")
     print(f"saved {OUT}")
 
+
+# 第二轮查询电池: training-free 教师/源选择 + 迁移性指标 + 表征探针
+QUERIES2 = {
+ "T1_training_free_teacher_selection": [
+   "training-free teacher selection knowledge distillation",
+   "predicting distillation performance without training student",
+   "which teacher to distill from selection",
+   "distillation gain prediction distillability metric",
+   "estimate knowledge distillation effectiveness a priori",
+   "teacher ranking distillation before training",
+ ],
+ "T2_transferability_estimation": [
+   "transferability estimation LogME source model selection",
+   "LEEP transferability metric pretrained model selection",
+   "TransRate H-score transferability transfer learning",
+   "transferability estimation knowledge distillation teacher",
+   "model selection without fine-tuning transferability score",
+ ],
+ "T3_teacher_quality_vs_gain": [
+   "teacher accuracy distillation student performance relationship",
+   "stronger teacher worse student capacity gap distillation",
+   "calibration error teacher selection distillation",
+   "expected calibration error predict transfer accuracy",
+ ],
+ "T6_representation_probe": [
+   "linear probe predict model correctness hidden states",
+   "CKA representation similarity distillation transfer",
+   "representation geometry knowledge distillation layer probing",
+ ],
+}
+
+
+def main2():
+    with open(OUT2,"w",encoding="utf-8") as f:
+        f.write("PRIOR-ART SEARCH round 2: training-free teacher selection + transferability metrics\n")
+        f.write(f"generated {time.strftime('%Y-%m-%d %H:%M')}\n\n")
+        for layer,qs in QUERIES2.items():
+            f.write("#"*88+f"\n# {layer}\n"+"#"*88+"\n")
+            for q in qs:
+                f.write(f"\n=== QUERY: {q} ===\n")
+                f.write("-- arXiv --\n"+"\n".join(arxiv(q))+"\n")
+                f.flush(); time.sleep(3)
+                f.write("-- Semantic Scholar --\n"+"\n".join(ss(q))+"\n")
+                f.flush(); time.sleep(6)
+        f.write("\n[DONE]\n")
+    print(f"saved {OUT2}")
+
+
 if __name__=="__main__":
-    main()
+    mode = sys.argv[1] if len(sys.argv) > 1 else "round1"
+    if mode == "round2":
+        main2()
+    else:
+        main()

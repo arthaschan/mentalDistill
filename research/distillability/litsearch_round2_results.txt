@@ -1,0 +1,500 @@
+PRIOR-ART SEARCH round 2: training-free teacher selection + transferability metrics
+generated 2026-06-19 21:59
+
+########################################################################################
+# T1_training_free_teacher_selection
+########################################################################################
+
+=== QUERY: training-free teacher selection knowledge distillation ===
+-- arXiv --
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2020] Triplet Loss for Knowledge Distillation
+        In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the mod
+  [2026] DistillLens: Symmetric Knowledge Distillation Through Logit Lens
+        Standard Knowledge Distillation (KD) compresses Large Language Models (LLMs) by optimizing final outputs, yet it typically treats the teacher's intermediate layer's thought process as a black box. While feature-based distillation attempts t
+  [2023] Multi-teacher knowledge distillation as an effective method for compressing ensembles of neural networks
+        Deep learning has contributed greatly to many successes in artificial intelligence in recent years. Today, it is possible to train models that have thousands of layers and hundreds of billions of parameters. Large-scale deep models have ach
+  [2023] Categories of Response-Based, Feature-Based, and Relation-Based Knowledge Distillation
+        Deep neural networks have achieved remarkable performance for artificial intelligence tasks. The success behind intelligent systems often relies on large-scale models with high computational complexity and storage costs. The over-parameteri
+  [2018] Knowledge Distillation with Feature Maps for Image Classification
+        The model reduction problem that eases the computation costs and latency of complex deep learning architectures has received an increasing number of investigations owing to its importance in model deployment. One promising method is knowled
+  [2024] Densely Distilling Cumulative Knowledge for Continual Learning
+        Continual learning, involving sequential training on diverse tasks, often faces catastrophic forgetting. While knowledge distillation-based approaches exhibit notable success in preventing forgetting, we pinpoint a limitation in their abili
+  [2024] Teacher as a Lenient Expert: Teacher-Agnostic Data-Free Knowledge Distillation
+        Data-free knowledge distillation (DFKD) aims to distill pretrained knowledge to a student model with the help of a generator without using original data. In such data-free scenarios, achieving stable performance of DFKD is essential due to 
+-- Semantic Scholar --
+  [2024] Teacher-Free Knowledge Distillation Based on Non-Progressive Meta-Learned Multi Ranking Selection (IEEE Access; cites=0)
+        Knowledge Distillation (KD) is the procedure of extracting useful information from a previously trained model using an algorithm. The successful distillation pulls up the distilling model accuracy. In the context of model compression, the t
+  [2025] Seeing the Whole Picture: Distribution-Guided Data-Free Distillation for Semantic Segmentation (arXiv.org; cites=1)
+        Semantic segmentation requires a holistic understanding of the physical world, as it assigns semantic labels to spatially continuous and structurally coherent objects rather than to isolated pixels. However, existing data-free knowledge dis
+  [2024] A Teacher-Free Graph Knowledge Distillation Framework With Dual Self-Distillation (IEEE Transactions on Knowledge and Data Engineering; cites=27)
+        Recent years have witnessed great success in handling graph-related tasks with Graph Neural Networks (GNNs). Despite their great academic success, Multi-Layer Perceptrons (MLPs) remain the primary workhorse for practical industrial applicat
+  [2025] AgentDistill: Training-Free Agent Distillation with Generalizable MCP Boxes (arXiv.org; cites=15)
+        While knowledge distillation has become a mature field for compressing large language models (LLMs) into smaller ones by aligning their outputs or internal representations, the distillation of LLM-based agents, which involve planning, memor
+  [2025] Data-Free Knowledge Distillation with Diffusion Models (IEEE International Conference on Multimedia and Expo; cites=15)
+        Recently Data-Free Knowledge Distillation (DFKD) has garnered attention and can transfer knowledge from a teacher neural network to a student neural network without requiring any access to training data. Although diffusion models are adept 
+  [2023] Adapt Your Teacher: Improving Knowledge Distillation for Exemplar-free Continual Learning (2023 IEEE/CVF International Conference on Computer Vision Workshops (ICCVW); cites=25)
+        In this work, we investigate exemplar-free class incremental learning (CIL) with knowledge distillation (KD) as a regularization strategy, aiming to prevent forgetting. KD-based methods are successfully used in CIL, but they often struggle 
+  [2024] Teacher as a Lenient Expert: Teacher-Agnostic Data-Free Knowledge Distillation (AAAI Conference on Artificial Intelligence; cites=10)
+        Data-free knowledge distillation (DFKD) aims to distill pretrained knowledge to a student model with the help of a generator without using original data. In such data-free scenarios, achieving stable performance of DFKD is essential due to 
+  [2025] KDRL: Post-Training Reasoning LLMs via Unified Knowledge Distillation and Reinforcement Learning (arXiv.org; cites=23)
+        Recent advances in large language model (LLM) post-training have leveraged two distinct paradigms to enhance reasoning capabilities: reinforcement learning (RL) and knowledge distillation (KD). While RL enables the emergence of complex reas
+
+=== QUERY: predicting distillation performance without training student ===
+-- arXiv --
+  [2023] Towards a Smaller Student: Capacity Dynamic Distillation for Efficient Image Retrieval
+        Previous Knowledge Distillation based efficient image retrieval methods employs a lightweight network as the student model for fast inference. However, the lightweight student model lacks adequate representation capacity for effective knowl
+  [2023] DisWOT: Student Architecture Search for Distillation WithOut Training
+        Knowledge distillation (KD) is an effective training strategy to improve the lightweight student models under the guidance of cumbersome teachers. However, the large architecture difference across the teacher-student pairs limits the distil
+  [2017] Finding Bottlenecks: Predicting Student Attrition with Unsupervised Classifier
+        With pressure to increase graduation rates and reduce time to degree in higher education, it is important to identify at-risk students early. Automated early warning systems are therefore highly desirable. In this paper, we use unsupervised
+  [2022] Dataset Distillation by Matching Training Trajectories
+        Dataset distillation is the task of synthesizing a small dataset such that a model trained on the synthetic set will match the test accuracy of the model trained on the full dataset. In this paper, we propose a new formulation that optimize
+  [2018] Distilling with Performance Enhanced Students
+        The task of accelerating large neural networks on general purpose hardware has, in recent years, prompted the use of channel pruning to reduce network size. However, the efficacy of pruning based approaches has since been called into questi
+  [2023] Performance of Genetic Algorithms in the Context of Software Model Refactoring
+        Software systems continuously evolve due to new functionalities, requirements, or maintenance activities. In the context of software evolution, software refactoring has gained a strategic relevance. The space of possible software refactorin
+  [2021] Sparse Distillation: Speeding Up Text Classification by Using Bigger Student Models
+        Distilling state-of-the-art transformer models into lightweight student models is an effective way to reduce computation cost at inference time. The student models are typically compact transformers with fewer parameters, while expensive op
+  [2020] Differentiable Feature Aggregation Search for Knowledge Distillation
+        Knowledge distillation has become increasingly important in model compression. It boosts the performance of a miniaturized student network with the supervision of the output distribution and feature maps from a sophisticated teacher network
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: which teacher to distill from selection ===
+-- arXiv --
+  [2025] Distill Any Depth: Distillation Creates a Stronger Monocular Depth Estimator
+        Recent advances in zero-shot monocular depth estimation(MDE) have significantly improved generalization by unifying depth distributions through normalized depth representations and by leveraging large-scale unlabeled data via pseudo-label d
+  [2025] In Good GRACEs: Principled Teacher Selection for Knowledge Distillation
+        Knowledge distillation is an efficient strategy to use data generated by large "teacher" language models to train smaller capable "student" models, but selecting the optimal teacher for a specific student-task combination requires expensive
+  [2026] On-Policy Distillation with Best-of-N Teacher Rollout Selection
+        On-policy distillation (OPD), which supervises a student on its own sampled trajectories, has emerged as a data-efficient post-training method for improving reasoning while avoiding the reward dependence of reinforcement learning and the ca
+  [2023] Distilling Calibrated Student from an Uncalibrated Teacher
+        Knowledge distillation is a common technique for improving the performance of a shallow student network by transferring information from a teacher network, which in general, is comparatively large and deep. These teacher networks are pre-tr
+  [2021] Undistillable: Making A Nasty Teacher That CANNOT teach students
+        Knowledge Distillation (KD) is a widely used technique to transfer knowledge from pre-trained teacher models to (usually more lightweight) student models. However, in certain situations, this technique is more of a curse than a blessing. Fo
+  [2022] Knowledge Distillation from A Stronger Teacher
+        Unlike existing knowledge distillation methods focus on the baseline settings, where the teacher models and training strategies are not that strong and competing as state-of-the-art approaches, this paper presents a method dubbed DIST to di
+  [2018] Communication of Prospective Teachers with Students in Mathematics Learning at Senior High School (SMA)
+        This study aims to describe the communication of prospective teachers in learning mathematics. The research was conducted in SMAN 1 Madura. The subject of this research is PLP student from Mathematics Education Study Program of Madura Unive
+  [2021] Unbiased Teacher for Semi-Supervised Object Detection
+        Semi-supervised learning, i.e., training networks with both labeled and unlabeled data, has made significant progress recently. However, existing works have primarily focused on image classification tasks and neglected object detection whic
+-- Semantic Scholar --
+  [2021] Show, Attend and Distill: Knowledge Distillation via Attention-based Feature Matching (AAAI Conference on Artificial Intelligence; cites=196)
+        Knowledge distillation extracts general knowledge from a pretrained teacher network and provides guidance to a target student network. Most studies manually tie intermediate features of the teacher and student, and transfer knowledge throug
+  [2024] C2KD: Bridging the Modality Gap for Cross-Modal Knowledge Distillation (Computer Vision and Pattern Recognition; cites=71)
+        
+  [2024] Pre-training Distillation for Large Language Models: A Design Space Exploration (Annual Meeting of the Association for Computational Linguistics; cites=18)
+        Knowledge distillation (KD) aims to transfer knowledge from a large teacher model to a smaller student model. Previous work applying KD in the field of large language models (LLMs) typically focused on the post-training phase, where the stu
+  [2025] Distilling a Small Utility-Based Passage Selector to Enhance Retrieval-Augmented Generation (SIGIR-AP; cites=0)
+        Retrieval-augmented generation (RAG) enhances large language models (LLMs) by incorporating retrieved information. Standard retrieval process prioritized relevance, focusing on topical alignment between queries and passages. In contrast, in
+  [2024] EPSD: Early Pruning with Self-Distillation for Efficient Model Compression (AAAI Conference on Artificial Intelligence; cites=12)
+        Neural network compression techniques, such as knowledge distillation (KD) and network pruning, have received increasing attention. Recent work `Prune, then Distill' reveals that a pruned student-friendly teacher network can benefit the per
+  [2024] Patch-Level Knowledge Distillation and Regularization for Missing Modality Medical Image Segmentation (IEEE International Conference on Acoustics, Speech, and Signal Processing; cites=3)
+        In the context of medical image segmentation, complementary information among multi-modality images can improve segmentation performance. However, acquiring the complete multi-modality data in clinical settings is difficult. To tackle this 
+  [2023] Monocular 3D Object Detection with LiDAR Guided Semi Supervised Active Learning (IEEE Workshop/Winter Conference on Applications of Computer Vision; cites=19)
+        We propose a novel semi-supervised active learning framework for monocular 3D object detection with LiDAR guidance (MonoLiG), which leverages all modalities of collected data during model development. We utilize LiDAR to guide the data sele
+  [2023] Digital twin-assisted knowledge distillation framework for heterogeneous federated learning (China Communications; cites=18)
+        In this paper, to deal with the heterogeneity in federated learning (FL) systems, a knowledge distillation (KD) driven training framework for FL is proposed, where each user can select its neural network model on demand and distill knowledg
+
+=== QUERY: distillation gain prediction distillability metric ===
+-- arXiv --
+  [2020] Triplet Loss for Knowledge Distillation
+        In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the mod
+  [2020] Differentiable Feature Aggregation Search for Knowledge Distillation
+        Knowledge distillation has become increasingly important in model compression. It boosts the performance of a miniaturized student network with the supervision of the output distribution and feature maps from a sophisticated teacher network
+  [2023] DREAM: Efficient Dataset Distillation by Representative Matching
+        Dataset distillation aims to synthesize small datasets with little information loss from original large-scale ones for reducing storage and training costs. Recent state-of-the-art methods mainly constrain the sample synthesis process by mat
+  [2018] Non-asymptotic assisted distillation of quantum coherence
+        We characterize the operational task of environment-assisted distillation of quantum coherence under different sets of free operations when only a finite supply of copies of a given state is available. We first evaluate the one-shot assiste
+  [2024] Diverse Score Distillation
+        Score distillation of 2D diffusion models has proven to be a powerful mechanism to guide 3D optimization, for example enabling text-based 3D generation or single-view reconstruction. A common limitation of existing score distillation formul
+  [2022] Dataset Distillation by Matching Training Trajectories
+        Dataset distillation is the task of synthesizing a small dataset such that a model trained on the synthetic set will match the test accuracy of the model trained on the full dataset. In this paper, we propose a new formulation that optimize
+  [2024] Generative Dataset Distillation: Balancing Global Structure and Local Details
+        In this paper, we propose a new dataset distillation method that considers balancing global structure and local details when distilling the information from a large dataset into a generative model. Dataset distillation has been proposed to 
+  [2023] Understanding the Role of the Projector in Knowledge Distillation
+        In this paper we revisit the efficacy of knowledge distillation as a function matching and metric learning problem. In doing so we verify three important design decisions, namely the normalisation, soft maximum function, and projection laye
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: estimate knowledge distillation effectiveness a priori ===
+-- arXiv --
+  [2014] Observation of the rare $B^0_s\toμ^+μ^-$ decay from the combined analysis of CMS and LHCb data
+        A joint measurement is presented of the branching fractions $B^0_s\toμ^+μ^-$ and $B^0\toμ^+μ^-$ in proton-proton collisions at the LHC by the CMS and LHCb experiments. The data samples were collected in 2011 at a centre-of-mass energy of 7 
+  [2008] Expected Performance of the ATLAS Experiment - Detector, Trigger and Physics
+        A detailed study is presented of the expected performance of the ATLAS detector. The reconstruction of tracks, leptons, photons, missing energy and jets is investigated, together with the performance of b-tagging and the trigger. The physic
+  [2026] Deep Search for Joint Sources of Gravitational Waves and High-Energy Neutrinos with IceCube During the Third Observing Run of LIGO and Virgo
+        The discovery of joint sources of high-energy neutrinos and gravitational waves has been a primary target for the LIGO, Virgo, KAGRA, and IceCube observatories. The joint detection of high-energy neutrinos and gravitational waves would prov
+  [2025] GWTC-4.0: Methods for Identifying and Characterizing Gravitational-wave Transients
+        The Gravitational-Wave Transient Catalog (GWTC) is a collection of candidate gravitational-wave transient signals identified and characterized by the LIGO-Virgo-KAGRA Collaboration. Producing the contents of the GWTC from detector data requ
+  [2017] Search for High-energy Neutrinos from Binary Neutron Star Merger GW170817 with ANTARES, IceCube, and the Pierre Auger Observatory
+        The Advanced LIGO and Advanced Virgo observatories recently discovered gravitational waves from a binary neutron star inspiral. A short gamma-ray burst (GRB) that followed the merger of this binary was also recorded by the Fermi Gamma-ray B
+  [2025] GWTC-4.0: An Introduction to Version 4.0 of the Gravitational-Wave Transient Catalog
+        The Gravitational-Wave Transient Catalog (GWTC) is a collection of short-duration (transient) gravitational wave signals identified by the LIGO-Virgo-KAGRA Collaboration in gravitational-wave data produced by the eponymous detectors. The ca
+  [2024] Ultralight vector dark matter search using data from the KAGRA O3GK run
+        Among the various candidates for dark matter (DM), ultralight vector DM can be probed by laser interferometric gravitational wave detectors through the measurement of oscillating length changes in the arm cavities. In this context, KAGRA ha
+  [2024] Swift-BAT GUANO follow-up of gravitational-wave triggers in the third LIGO-Virgo-KAGRA observing run
+        We present results from a search for X-ray/gamma-ray counterparts of gravitational-wave (GW) candidates from the third observing run (O3) of the LIGO-Virgo-KAGRA (LVK) network using the Swift Burst Alert Telescope (Swift-BAT). The search in
+-- Semantic Scholar --
+  [2025] Proposal of an Emotion Estimation Method for Speech Using Knowledge Distillation (2025 IEEE 13th Region 10 Humanitarian Technology Conference (R10-HTC); cites=0)
+        In this study, we propose a method for fast and accurate emotion estimation. Previous emotion estimation models are highly accurate, but they are computationally expensive and take a long time to estimate emotions, making them unsuitable fo
+  [2025] De-speckling of medical ultrasound image using metric-optimized knowledge distillation (Scientific Reports; cites=11)
+        Ultrasound imaging provides real-time views of internal organs, which are essential for accurate diagnosis and treatment. However, speckle noise, caused by wave interactions with tissues, creates a grainy texture that hides crucial details.
+  [2025] Knowledge Distillation and Enhanced Subdomain Adaptation Using Graph Convolutional Network for Resource-Constrained Bearing Fault Diagnosis (Knowledge-Based Systems; cites=3)
+        Bearing fault diagnosis under varying working conditions faces challenges, including a lack of labeled data, distribution discrepancies, and resource constraints. To address these issues, we propose a progressive knowledge distillation fram
+  [2024] CRKD: Enhanced Camera-Radar Object Detection with Cross-Modality Knowledge Distillation (Computer Vision and Pattern Recognition; cites=44)
+        In the field of 3D object detection for autonomous driving, LiDAR-Camera (LC) fusion is the top-performing sensor configuration. Still, LiDAR is relatively high cost, which hinders adoption of this technology for consumer automobiles. Alter
+  [2026] The Surprising Effectiveness of Canonical Knowledge Distillation for Semantic Segmentation (arXiv.org; cites=0)
+        Recent knowledge distillation (KD) methods for semantic segmentation introduce increasingly complex hand-crafted objectives, yet are typically evaluated under fixed iteration schedules. These objectives substantially increase per-iteration 
+  [2026] Improving the Efficiency and Effectiveness of LLM Knowledge Distillation for Conversational Search (?; cites=0)
+        Conversational Search (CS) considers retrieval of relevant documents based on conversational context. Large Language Models (LLMs) have significantly enhanced CS by enabling effective query rewriting. However, employing LLMs during inferenc
+  [2025] Optimizing Deep Learning Models for Resource‐Constrained Environments With Cluster‐Quantized Knowledge Distillation (Engineering Reports; cites=2)
+        Deep convolutional neural networks (CNNs) are highly effective in computer vision tasks but remain challenging to deploy in resource‐constrained environments due to their high computational and memory requirements. Conventional model compre
+  [2025] Knowledge Distillation for Underwater Feature Extraction and Matching via GAN-Synthesized Images (IEEE Robotics and Automation Letters; cites=2)
+        Autonomous Underwater Vehicles (AUVs) play a crucial role in underwater exploration. Vision-based methods offer cost-effective solutions for localization and mapping in the absence of conventional sensors like GPS and LiDAR. However, underw
+
+=== QUERY: teacher ranking distillation before training ===
+-- arXiv --
+  [2025] Enhancing Primary Teacher Training through Academic Portfolios in Advanced Mathematics Courses
+        The gap between theory and practice in mathematics education, particularly in primary-teacher education, necessitates innovative teaching methodologies. This paper explores the implementation of academic portfolios as a teaching innovation 
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2022] Dataset Distillation by Matching Training Trajectories
+        Dataset distillation is the task of synthesizing a small dataset such that a model trained on the synthetic set will match the test accuracy of the model trained on the full dataset. In this paper, we propose a new formulation that optimize
+  [2023] Baby Llama: knowledge distillation from an ensemble of teachers trained on a small dataset with no performance penalty
+        We present our submission to the BabyLM challenge, whose goal was to improve the sample efficiency of language models. We trained an ensemble consisting of a GPT-2 and small LLaMA models on the developmentally-plausible, 10M-word BabyLM dat
+  [2022] Toward Student-Oriented Teacher Network Training For Knowledge Distillation
+        How to conduct teacher training for knowledge distillation is still an open problem. It has been widely observed that a best-performing teacher does not necessarily yield the best-performing student, suggesting a fundamental discrepancy bet
+  [2024] Enhancing Visual Question Answering through Ranking-Based Hybrid Training and Multimodal Fusion
+        Visual Question Answering (VQA) is a challenging task that requires systems to provide accurate answers to questions based on image content. Current VQA models struggle with complex questions due to limitations in capturing and integrating 
+  [2020] Differentiable Feature Aggregation Search for Knowledge Distillation
+        Knowledge distillation has become increasingly important in model compression. It boosts the performance of a miniaturized student network with the supervision of the output distribution and feature maps from a sophisticated teacher network
+  [2025] TOM: An Open-Source Tongue Segmentation Method with Multi-Teacher Distillation and Task-Specific Data Augmentation
+        Tongue imaging serves as a valuable diagnostic tool, particularly in Traditional Chinese Medicine (TCM). The quality of tongue surface segmentation significantly affects the accuracy of tongue image classification and subsequent diagnosis i
+-- Semantic Scholar --
+  SS rate-limited after retries
+########################################################################################
+# T2_transferability_estimation
+########################################################################################
+
+=== QUERY: transferability estimation LogME source model selection ===
+-- arXiv --
+  [2021] LogME: Practical Assessment of Pre-trained Models for Transfer Learning
+        This paper studies task adaptive pre-trained model selection, an underexplored problem of assessing pre-trained models for the target task and select best ones from the model zoo \emph{without fine-tuning}. A few pilot works addressed the p
+  [2021] Transferability Estimation for Semantic Segmentation Task
+        Transferability estimation is a fundamental problem in transfer learning to predict how good the performance is when transferring a source model (or source task) to a target task. With the guidance of transferability score, we can efficient
+  [2024] Robust Estimation and Model Selection for the Controlled Directed Effect with Unmeasured Mediator-Outcome Confounders
+        Controlled Direct Effect (CDE) is one of the causal estimands used to evaluate both exposure and mediation effects on an outcome. When there are unmeasured confounders existing between the mediator and the outcome, the ordinary identificati
+  [2021] Practical Transferability Estimation for Image Classification Tasks
+        Transferability estimation is an essential problem in transfer learning to predict how good the performance is when transferring a source model (or source task) to a target task. Recent analytical transferability metrics have been widely us
+  [2015] Model Selection versus Model Averaging in Dose Finding Studies
+        Phase II dose finding studies in clinical drug development are typically conducted to adequately characterize the dose response relationship of a new drug. An important decision is then on the choice of a suitable dose response function to 
+  [2009] Tutorial on ABC rejection and ABC SMC for parameter estimation and model selection
+        In this tutorial we schematically illustrate four algorithms:   (1) ABC rejection for parameter estimation   (2) ABC SMC for parameter estimation   (3) ABC rejection for model selection on the joint space   (4) ABC SMC for model selection o
+  [2021] Transferability Metrics for Selecting Source Model Ensembles
+        We address the problem of ensemble selection in transfer learning: Given a large pool of source models we want to select an ensemble of models which, after fine-tuning on the target training set, yields the best performance on the target te
+  [2023] Building a Winning Team: Selecting Source Model Ensembles using a Submodular Transferability Estimation Approach
+        Estimating the transferability of publicly available pretrained models to a target task has assumed an important place for transfer learning tasks in recent years. Existing efforts propose metrics that allow a user to choose one model from 
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: LEEP transferability metric pretrained model selection ===
+-- arXiv --
+  [2020] LEEP: A New Measure to Evaluate Transferability of Learned Representations
+        We introduce a new measure to evaluate the transferability of representations learned by classifiers. Our measure, the Log Expected Empirical Prediction (LEEP), is simple and easy to compute: when given a classifier trained on a source data
+  [2022] PACTran: PAC-Bayesian Metrics for Estimating the Transferability of Pretrained Models to Classification Tasks
+        With the increasing abundance of pretrained models in recent years, the problem of selecting the best pretrained checkpoint for a particular downstream classification task has been gaining increased attention. Although several methods have 
+  [2026] MetricAnything: Scaling Metric Depth Pretraining with Noisy Heterogeneous Sources
+        Scaling has powered recent advances in vision foundation models, yet extending this paradigm to metric depth estimation remains challenging due to heterogeneous sensor noise, camera-dependent biases, and metric ambiguity in noisy cross-sour
+  [2025] MetaRank: Task-Aware Metric Selection for Model Transferability Estimation
+        Selecting an appropriate pre-trained source model is a critical, yet computationally expensive, task in transfer learning. Model Transferability Estimation (MTE) methods address this by providing efficient proxy metrics to rank models witho
+  [2015] Model Selection versus Model Averaging in Dose Finding Studies
+        Phase II dose finding studies in clinical drug development are typically conducted to adequately characterize the dose response relationship of a new drug. An important decision is then on the choice of a suitable dose response function to 
+  [2021] Transferability Estimation for Semantic Segmentation Task
+        Transferability estimation is a fundamental problem in transfer learning to predict how good the performance is when transferring a source model (or source task) to a target task. With the guidance of transferability score, we can efficient
+  [2022] A Simple Baseline that Questions the Use of Pretrained-Models in Continual Learning
+        With the success of pretraining techniques in representation learning, a number of continual learning methods based on pretrained models have been proposed. Some of these methods design continual learning mechanisms on the pre-trained repre
+  [2022] LinkBERT: Pretraining Language Models with Document Links
+        Language model (LM) pretraining can learn various knowledge from text corpora, helping downstream tasks. However, existing methods such as BERT model a single document, and do not capture dependencies or knowledge that span across documents
+-- Semantic Scholar --
+  [2022] PACTran: PAC-Bayesian Metrics for Estimating the Transferability of Pretrained Models to Classification Tasks (European Conference on Computer Vision; cites=40)
+        With the increasing abundance of pretrained models in recent years, the problem of selecting the best pretrained checkpoint for a particular downstream classification task has been gaining increased attention. Although several methods have 
+  [2025] MetaRank: Task-Aware Metric Selection for Model Transferability Estimation (arXiv.org; cites=0)
+        Selecting an appropriate pre-trained source model is a critical, yet computationally expensive, task in transfer learning. Model Transferability Estimation (MTE) methods address this by providing efficient proxy metrics to rank models witho
+  [2025] Rethinking Model Selection Beyond ImageNet Accuracy for Waste Classification (International Conference on Pattern Recognition Applications and Methods; cites=0)
+        : Waste streams are growing rapidly due to higher consumption rates, and they present repeating patterns that can be classified with high accuracy due to advances in computer vision. However, collecting and annotating large datasets is time
+  [2026] Model Specific Task Similarity for Vision Language Model Selection via Layer Conductance (arXiv.org; cites=0)
+        While open sourced Vision-Language Models (VLMs) have proliferated, selecting the optimal pretrained model for a specific downstream task remains challenging. Exhaustive evaluation is often infeasible due to computational constraints and da
+  [2024] One size does not fit all in evaluating model selection scores for image classification (Scientific Reports; cites=7)
+        Selecting pretrained models for image classification often involves computationally intensive finetuning. This study addresses a research gap in the standardized evaluation of transferability scores, which could simplify model selection by 
+  [2024] Efficient Transferability Assessment for Selection of Pre-trained Detectors (IEEE Workshop/Winter Conference on Applications of Computer Vision; cites=0)
+        Large-scale pre-training followed by downstream finetuning is an effective solution for transferring deeplearning-based models. Since finetuning all possible pretrained models is computational costly, we aim to predict the transferability p
+  [2025] Pathological Section Staining Transferring with Tailored Metric-based Model Selection (IEEE International Conference on Acoustics, Speech, and Signal Processing; cites=1)
+        As the important pathological section staining, Immunohistochemistry (IHC) staining uses labeled antibodies to highlight specific antigens, providing clearer results for malignancy identification compared with Hematoxylin and Eosin (H&E) st
+  [2023] Graph-based fine-grained model selection for multi-source domain (Pattern Analysis and Applications; cites=4)
+        
+
+=== QUERY: TransRate H-score transferability transfer learning ===
+-- arXiv --
+  [2022] Federated and Transfer Learning: A Survey on Adversaries and Defense Mechanisms
+        The advent of federated learning has facilitated large-scale data exchange amongst machine learning models while maintaining privacy. Despite its brief history, federated learning is rapidly evolving to make wider use more practical. One of
+  [2019] Transfer Learning Toolkit: Primers and Benchmarks
+        The transfer learning toolkit wraps the codes of 17 transfer learning models and provides integrated interfaces, allowing users to use those models by calling a simple function. It is easy for primary researchers to use this toolkit and to 
+  [2022] Transferability in Deep Learning: A Survey
+        The success of deep learning algorithms generally depends on large-scale data, while humans appear to have inherent ability of knowledge transfer, by recognizing and applying relevant knowledge from previous learning experiences when encoun
+  [2018] Transfer Learning and Organic Computing for Autonomous Vehicles
+        Autonomous Vehicles(AV) are one of the brightest promises of the future which would help cut down fatalities and improve travel time while working in harmony. Autonomous vehicles will face with challenging situations and experiences not see
+  [2025] Predicting concentration levels of air pollutants by transfer learning and recurrent neural network
+        Air pollution (AP) poses a great threat to human health, and people are paying more attention than ever to its prediction. Accurate prediction of AP helps people to plan for their outdoor activities and aids protecting human health. In this
+  [2021] Practical Transferability Estimation for Image Classification Tasks
+        Transferability estimation is an essential problem in transfer learning to predict how good the performance is when transferring a source model (or source task) to a target task. Recent analytical transferability metrics have been widely us
+  [2022] Transfer Learning with Pre-trained Conditional Generative Models
+        Transfer learning is crucial in training deep neural networks on new target tasks. Current transfer learning methods always assume at least one of (i) source and target task label spaces overlap, (ii) source datasets are available, and (iii
+  [2023] How good are variational autoencoders at transfer learning?
+        Variational autoencoders (VAEs) are used for transfer learning across various research domains such as music generation or medical image analysis. However, there is no principled way to assess before transfer which components to retrain or 
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: transferability estimation knowledge distillation teacher ===
+-- arXiv --
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2020] Triplet Loss for Knowledge Distillation
+        In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the mod
+  [2026] DistillLens: Symmetric Knowledge Distillation Through Logit Lens
+        Standard Knowledge Distillation (KD) compresses Large Language Models (LLMs) by optimizing final outputs, yet it typically treats the teacher's intermediate layer's thought process as a black box. While feature-based distillation attempts t
+  [2023] Multi-teacher knowledge distillation as an effective method for compressing ensembles of neural networks
+        Deep learning has contributed greatly to many successes in artificial intelligence in recent years. Today, it is possible to train models that have thousands of layers and hundreds of billions of parameters. Large-scale deep models have ach
+  [2018] Knowledge Distillation with Feature Maps for Image Classification
+        The model reduction problem that eases the computation costs and latency of complex deep learning architectures has received an increasing number of investigations owing to its importance in model deployment. One promising method is knowled
+  [2023] Categories of Response-Based, Feature-Based, and Relation-Based Knowledge Distillation
+        Deep neural networks have achieved remarkable performance for artificial intelligence tasks. The success behind intelligent systems often relies on large-scale models with high computational complexity and storage costs. The over-parameteri
+  [2024] Densely Distilling Cumulative Knowledge for Continual Learning
+        Continual learning, involving sequential training on diverse tasks, often faces catastrophic forgetting. While knowledge distillation-based approaches exhibit notable success in preventing forgetting, we pinpoint a limitation in their abili
+  [2020] Differentiable Feature Aggregation Search for Knowledge Distillation
+        Knowledge distillation has become increasingly important in model compression. It boosts the performance of a miniaturized student network with the supervision of the output distribution and feature maps from a sophisticated teacher network
+-- Semantic Scholar --
+  [2024] TIE-KD: Teacher-Independent and Explainable Knowledge Distillation for Monocular Depth Estimation (Image and Vision Computing; cites=9)
+        Monocular depth estimation (MDE) is essential for numerous applications yet is impeded by the substantial computational demands of accurate deep learning models. To mitigate this, we introduce a novel Teacher-Independent Explainable Knowled
+  [2025] Hybrid Knowledge Distillation for RGB-T Crowd Density Estimation in Smart Surveillance Systems (IEEE Internet of Things Journal; cites=30)
+        Crowd density estimation is a practical application task in which speed efficiency is as crucial as the accuracy of the results. Hence, we propose the hybrid knowledge distillation network (HKDNet) for RGB-thermal (RGB-T) crowd density esti
+  [2021] Orderly Dual-Teacher Knowledge Distillation for Lightweight Human Pose Estimation (arXiv.org; cites=3)
+        Although deep convolution neural networks (DCNN) have achieved excellent performance in human pose estimation, these networks often have a large number of parameters and computations, leading to the slow inference speed. For this issue, an 
+  [2025] Uncertainty-Aware Knowledge Distillation for Compact and Efficient 6DoF Pose Estimation (IEEE/RJS International Conference on Intelligent RObots and Systems; cites=4)
+        Compact and efficient 6DoF object pose estimation is crucial in applications such as robotics, augmented reality, and space autonomous navigation systems, where lightweight models are critical for real-time accurate performance. This paper 
+  [2025] Enhancing Bone Mineral Density Estimation from X-ray Images with Cross-Modal Knowledge Distillation (Knowledge Discovery and Data Mining; cites=2)
+        Dual-energy X-ray absorptiometry (DXA) enables accurate bone mineral density but requires specialized equipment and protocols. X-ray-based BMD screening offers opportunistic early detection, though prior methods struggle with X-ray intensit
+  [2025] Automatic network structure discovery of physics informed neural networks via knowledge distillation (Nature Communications; cites=17)
+        Partial differential equations (PDEs) are fundamental for modeling complex physical processes, often exhibiting structural features such as symmetries and conservation laws. While physics-informed neural networks (PINNs) can simulate and in
+  [2025] Teacher-Guided One-Shot Pruning via Context-Aware Knowledge Distillation (BigData Congress [Services Society]; cites=0)
+        Unstructured pruning remains a powerful strategy for compressing deep neural networks, yet it often demands iterative train-prune-retrain cycles, resulting in significant computational overhead. To address this challenge, we introduce a nov
+  [2025] Efficient WiFi-Based Human Pose Estimation via Lightweight Model Design with Knowledge Distillation (International Symposium on Embedded Multicore/Many-core Systems-on-Chip; cites=0)
+        Non-intrusive WiFi-based human pose estimation (HPE) using CSI is promising but challenging. Current methods rely on complex models with high computational demands, requiring extensive labeled data and struggling to model CSI data distribut
+
+=== QUERY: model selection without fine-tuning transferability score ===
+-- arXiv --
+  [2021] Differentially Private Fine-tuning of Language Models
+        We give simpler, sparser, and faster algorithms for differentially private fine-tuning of large-scale pre-trained language models, which achieve the state-of-the-art privacy versus utility tradeoffs on many standard NLP tasks. We propose a 
+  [2021] Partial Is Better Than All: Revisiting Fine-tuning Strategy for Few-shot Learning
+        The goal of few-shot learning is to learn a classifier that can recognize unseen classes from limited support data with labels. A common practice for this task is to train a model on the base set first and then transfer to novel classes thr
+  [2024] Fine-tuning with Very Large Dropout
+        It is impossible today to pretend that the practice of machine learning is always compatible with the idea that training and testing data follow the same distribution. Several authors have recently used ensemble techniques to show how scena
+  [2024] Evaluating Fine-Tuning Efficiency of Human-Inspired Learning Strategies in Medical Question Answering
+        Fine-tuning Large Language Models (LLMs) incurs considerable training costs, driving the need for data-efficient training with optimised data ordering. Human-inspired strategies offer a solution by organising data based on human learning pr
+  [2022] Learning to Perform Complex Tasks through Compositional Fine-Tuning of Language Models
+        How to usefully encode compositional task structure has long been a core challenge in AI. Recent work in chain of thought prompting has shown that for very large neural language models (LMs), explicitly demonstrating the inferential steps i
+  [2021] Legged Robots that Keep on Learning: Fine-Tuning Locomotion Policies in the Real World
+        Legged robots are physically capable of traversing a wide range of challenging environments, but designing controllers that are sufficiently robust to handle this diversity has been a long-standing challenge in robotics. Reinforcement learn
+  [2026] Selective Fine-Tuning for Targeted and Robust Concept Unlearning
+        Text guided diffusion models are used by millions of users, but can be easily exploited to produce harmful content. Concept unlearning methods aim at reducing the models' likelihood of generating harmful content. Traditionally, this has bee
+  [2023] Demystifying Instruction Mixing for Fine-tuning Large Language Models
+        Instruction tuning significantly enhances the performance of large language models (LLMs) across various tasks. However, the procedure to optimizing the mixing of instruction datasets for LLM fine-tuning is still poorly understood. This stu
+-- Semantic Scholar --
+  SS rate-limited after retries
+########################################################################################
+# T3_teacher_quality_vs_gain
+########################################################################################
+
+=== QUERY: teacher accuracy distillation student performance relationship ===
+-- arXiv --
+  [2024] Teacher-student relationship and teaching styles in primary education. A model of analysis
+        Purpose: The teacher role in the classroom can explain important aspects of the student's school experience. The teacher-student relationship, a central dimension of social capital, influences students' engagement, and the teaching style pl
+  [2021] Learning Student-Friendly Teacher Networks for Knowledge Distillation
+        We propose a novel knowledge distillation approach to facilitate the transfer of dark knowledge from a teacher to a student. Contrary to most of the existing methods that rely on effective training of student models given pretrained teacher
+  [2023] Distilling Calibrated Student from an Uncalibrated Teacher
+        Knowledge distillation is a common technique for improving the performance of a shallow student network by transferring information from a teacher network, which in general, is comparatively large and deep. These teacher networks are pre-tr
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2023] Towards a Smaller Student: Capacity Dynamic Distillation for Efficient Image Retrieval
+        Previous Knowledge Distillation based efficient image retrieval methods employs a lightweight network as the student model for fast inference. However, the lightweight student model lacks adequate representation capacity for effective knowl
+  [2021] Undistillable: Making A Nasty Teacher That CANNOT teach students
+        Knowledge Distillation (KD) is a widely used technique to transfer knowledge from pre-trained teacher models to (usually more lightweight) student models. However, in certain situations, this technique is more of a curse than a blessing. Fo
+  [2021] Fixing the Teacher-Student Knowledge Discrepancy in Distillation
+        Training a small student network with the guidance of a larger teacher network is an effective way to promote the performance of the student. Despite the different types, the guided knowledge used to distill is always kept unchanged for dif
+  [2024] Student-Oriented Teacher Knowledge Refinement for Knowledge Distillation
+        Knowledge distillation has become widely recognized for its ability to transfer knowledge from a large teacher network to a compact and more streamlined student network. Traditional knowledge distillation methods primarily follow a teacher-
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: stronger teacher worse student capacity gap distillation ===
+-- arXiv --
+  [2023] Towards a Smaller Student: Capacity Dynamic Distillation for Efficient Image Retrieval
+        Previous Knowledge Distillation based efficient image retrieval methods employs a lightweight network as the student model for fast inference. However, the lightweight student model lacks adequate representation capacity for effective knowl
+  [2026] Student Capacity Moderates Knowledge Distillation Effectiveness: A Systematic Study Across ResNet Teacher-Student Pairs on CIFAR-10
+        We investigate how teacher-student capacity relationships modulate knowledge distillation (KD) effectiveness in ResNet-based image classification on CIFAR-10. Across three teacher-student pairs -- R50-&gt;R18, R34-&gt;R18, and R50-&gt;R34 -
+  [2025] Dual-Forward Path Teacher Knowledge Distillation: Bridging the Capacity Gap Between Teacher and Student
+        Knowledge distillation (KD) provides an effective way to improve the performance of a student network under the guidance of pre-trained teachers. However, this approach usually brings in a large capacity gap between teacher and student netw
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2024] Student-Oriented Teacher Knowledge Refinement for Knowledge Distillation
+        Knowledge distillation has become widely recognized for its ability to transfer knowledge from a large teacher network to a compact and more streamlined student network. Traditional knowledge distillation methods primarily follow a teacher-
+  [2021] Learning Student-Friendly Teacher Networks for Knowledge Distillation
+        We propose a novel knowledge distillation approach to facilitate the transfer of dark knowledge from a teacher to a student. Contrary to most of the existing methods that rely on effective training of student models given pretrained teacher
+  [2023] Distilling Calibrated Student from an Uncalibrated Teacher
+        Knowledge distillation is a common technique for improving the performance of a shallow student network by transferring information from a teacher network, which in general, is comparatively large and deep. These teacher networks are pre-tr
+  [2022] Knowledge Distillation from A Stronger Teacher
+        Unlike existing knowledge distillation methods focus on the baseline settings, where the teacher models and training strategies are not that strong and competing as state-of-the-art approaches, this paper presents a method dubbed DIST to di
+-- Semantic Scholar --
+  [2025] Dual-Forward Path Teacher Knowledge Distillation: Bridging the Capacity Gap Between Teacher and Student (arXiv.org; cites=3)
+        Knowledge distillation (KD) provides an effective way to improve the performance of a student network under the guidance of pre-trained teachers. However, this approach usually brings in a large capacity gap between teacher and student netw
+  [2025] Mitigating the Capacity Gap in Knowledge Distillation via Iterative Tutoring (ACS/IEEE International Conference on Computer Systems and Applications; cites=0)
+        Large language models (LLMs) have resulted in significant improvements in understanding and generating natural language. However, their deployment in resourceconstrained environments is limited by their high computational demands. Hence, Kn
+  [2026] Student Capacity Moderates Knowledge Distillation Effectiveness: A Systematic Study Across ResNet Teacher-Student Pairs on CIFAR-10 (?; cites=0)
+        We investigate how teacher-student capacity relationships modulate knowledge distillation (KD) effectiveness in ResNet-based image classification on CIFAR-10. Across three teacher-student pairs -- R50->R18, R34->R18, and R50->R34 -- we comp
+  [2026] Revisiting the Capacity Gap in Chain-of-Thought Distillation from a Practical Perspective (arXiv.org; cites=1)
+        Chain-of-thought (CoT) distillation transfers reasoning behaviors from a strong teacher to a smaller student, but prior work reports a capacity gap: distillation may fail when the teacher-student capability mismatch is large. We revisit the
+  [2024] How to Trade Off the Quantity and Capacity of Teacher Ensemble: Learning Categorical Distribution to Stochastically Employ a Teacher for Distillation (AAAI Conference on Artificial Intelligence; cites=4)
+        We observe two phenomenons with respect to quantity and capacity: 1) more teacher is not always better for multi-teacher knowledge distillation, and 2) stronger teacher is not always better for single-teacher knowledge distillation. To trad
+  [2024] Generalizing Teacher Networks for Effective Knowledge Distillation Across Student Architectures (British Machine Vision Conference; cites=1)
+        Knowledge distillation (KD) is a model compression method that entails training a compact student model to emulate the performance of a more complex teacher model. However, the architectural capacity gap between the two models limits the ef
+  [2021] Student Customized Knowledge Distillation: Bridging the Gap Between Student and Teacher (IEEE International Conference on Computer Vision; cites=97)
+        Knowledge distillation (KD) transfers the dark knowledge from cumbersome networks (teacher) to lightweight (student) networks and expects the student to achieve more promising performance than training without the teacher’s knowledge. Howev
+  [2025] A Good Teacher Adapts Their Knowledge for Distillation (IEEE International Conference on Computer Vision; cites=6)
+        
+
+=== QUERY: calibration error teacher selection distillation ===
+-- arXiv --
+  [2023] Distilling Calibrated Student from an Uncalibrated Teacher
+        Knowledge distillation is a common technique for improving the performance of a shallow student network by transferring information from a teacher network, which in general, is comparatively large and deep. These teacher networks are pre-tr
+  [2025] The Role of Teacher Calibration in Knowledge Distillation
+        Knowledge Distillation (KD) has emerged as an effective model compression technique in deep learning, enabling the transfer of knowledge from a large teacher model to a compact student model. While KD has demonstrated significant success, i
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2025] In Good GRACEs: Principled Teacher Selection for Knowledge Distillation
+        Knowledge distillation is an efficient strategy to use data generated by large "teacher" language models to train smaller capable "student" models, but selecting the optimal teacher for a specific student-task combination requires expensive
+  [2023] Teacher Network Calibration Improves Cross-Quality Knowledge Distillation
+        We investigate cross-quality knowledge distillation (CQKD), a knowledge distillation method where knowledge from a teacher network trained with full-resolution images is transferred to a student network that takes as input low-resolution im
+  [2026] On-Policy Distillation with Best-of-N Teacher Rollout Selection
+        On-policy distillation (OPD), which supervises a student on its own sampled trajectories, has emerged as a data-efficient post-training method for improving reasoning while avoiding the reward dependence of reinforcement learning and the ca
+  [2020] Differentiable Feature Aggregation Search for Knowledge Distillation
+        Knowledge distillation has become increasingly important in model compression. It boosts the performance of a miniaturized student network with the supervision of the output distribution and feature maps from a sophisticated teacher network
+  [2021] Undistillable: Making A Nasty Teacher That CANNOT teach students
+        Knowledge Distillation (KD) is a widely used technique to transfer knowledge from pre-trained teacher models to (usually more lightweight) student models. However, in certain situations, this technique is more of a curse than a blessing. Fo
+-- Semantic Scholar --
+  [2022] Monitored Distillation for Positive Congruent Depth Completion (European Conference on Computer Vision; cites=47)
+        We propose a method to infer a dense depth map from a single image, its calibration, and the associated sparse point cloud. In order to leverage existing models (teachers) that produce putative depth maps, we propose an adaptive knowledge d
+  [2025] In Good GRACEs: Principled Teacher Selection for Knowledge Distillation (arXiv.org; cites=3)
+        Knowledge distillation is an efficient strategy to use data generated by large"teacher"language models to train smaller capable"student"models, but selecting the optimal teacher for a specific student-task combination requires expensive tri
+  [2025] The Role of Teacher Calibration in Knowledge Distillation (IEEE Access; cites=3)
+        Knowledge Distillation (KD) has emerged as an effective model compression technique in deep learning, enabling the transfer of knowledge from a large teacher model to a compact student model. While KD has demonstrated significant success, i
+  [2023] Teacher Network Calibration Improves Cross-Quality Knowledge Distillation (arXiv.org; cites=2)
+        We investigate cross-quality knowledge distillation (CQKD), a knowledge distillation method where knowledge from a teacher network trained with full-resolution images is transferred to a student network that takes as input low-resolution im
+  [2025] PQCAD-DM: Progressive Quantization and Calibration-Assisted Distillation for Extremely Efficient Diffusion Model (arXiv.org; cites=0)
+        Diffusion models excel in image generation but are computational and resource-intensive due to their reliance on iterative Markov chain processes, leading to error accumulation and limiting the effectiveness of naive compression techniques.
+  [2026] Soft Mean Expected Calibration Error (SMECE): A Calibration Metric for Probabilistic Labels (arXiv.org; cites=0)
+        The Expected Calibration Error (ece), the dominant calibration metric in machine learning, compares predicted probabilities against empirical frequencies of binary outcomes. This is appropriate when labels are binary events. However, many m
+  [2026] Benchmarking knowledge distillation for lightweight pneumonia detection: a multi-seed calibration study on PneumoniaMNIST. (BMC Research Notes; cites=0)
+        
+  [2026] Honest Teacher Knowledge Distillation: A Framework for Uncertainty-Aware Model Compression Using Gaussian Processes (IEEE Access; cites=0)
+        We introduce Honest Teacher Knowledge Distillation (HTKD), an uncertainty-aware distillation framework that transfers both knowledge and confidence from a teacher to a compact student by integrating Gaussian Process (GP)–based predictive un
+
+=== QUERY: expected calibration error predict transfer accuracy ===
+-- arXiv --
+  [2018] 'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer
+        Some scientists write literary fiction books in their spare time. If these books contain scientific knowledge, literary fiction becomes a mechanism of knowledge transfer. In this case, we could conceptualize literary fiction as non-formal k
+  [2025] Understanding Model Calibration -- A gentle introduction and visual exploration of calibration and the expected calibration error (ECE)
+        To be considered reliable, a model must be calibrated so that its confidence in each decision closely reflects its true outcome. In this blogpost we'll take a look at the most commonly used definition for calibration and then dive into a fr
+  [2025] Predicting concentration levels of air pollutants by transfer learning and recurrent neural network
+        Air pollution (AP) poses a great threat to human health, and people are paying more attention than ever to its prediction. Accurate prediction of AP helps people to plan for their outdoor activities and aids protecting human health. In this
+  [2012] Heat transfer in buildings : application to air solar heating and Trombe wall design
+        The aim of this paper is to briefly recall heat transfer modes and explain their integration within a software dedicated to building simulation (CODYRUN). Detailed elements of the validation of this software are presented and two applicatio
+  [2018] Planetary Spectrum Generator: an accurate online radiative transfer suite for atmospheres, comets, small bodies and exoplanets
+        We have developed an online radiative-transfer suite (https://psg.gsfc.nasa.gov) applicable to a broad range of planetary objects (e.g., planets, moons, comets, asteroids, TNOs, KBOs, exoplanets). The Planetary Spectrum Generator (PSG) can 
+  [2020] A Unified Calibration Framework for 21 cm Cosmology
+        Calibration precision is currently a limiting systematic in 21 cm cosmology experiments. While there are innumerable calibration approaches, most can be categorized as either `sky-based,' relying on an extremely accurate model of astronomic
+  [2022] Federated and Transfer Learning: A Survey on Adversaries and Defense Mechanisms
+        The advent of federated learning has facilitated large-scale data exchange amongst machine learning models while maintaining privacy. Despite its brief history, federated learning is rapidly evolving to make wider use more practical. One of
+  [2024] A Confidence Interval for the $\ell_2$ Expected Calibration Error
+        Recent advances in machine learning have significantly improved prediction accuracy in various applications. However, ensuring the calibration of probabilistic predictions remains a significant challenge. Despite efforts to enhance model ca
+-- Semantic Scholar --
+  SS rate-limited after retries
+########################################################################################
+# T6_representation_probe
+########################################################################################
+
+=== QUERY: linear probe predict model correctness hidden states ===
+-- arXiv --
+  [2026] Learning to Refine Hidden States for Reliable LLM Reasoning
+        Large language models show strong reasoning ability, but their internal reasoning process can remain unstable in complex multi-step settings, where early hidden-state errors may propagate to incorrect predictions. We propose ReLAR, a reinfo
+  [2026] Code Correctness Signals in LLM Hidden States: Pre-Generation Probing and Repair Geometry
+        Large language models encode rich information in their hidden states. This work asks whether code correctness is legible in the hidden states of Qwen3-4B-Instruct-2507, before it generates and as it repairs a failed attempt, studied on 444 
+  [2010] Spectroscopy as a test of Coulomb's law - A probe of the hidden sector
+        High precision spectroscopy can provide a sensitive tool to test Coulomb's law on atomic length scales. This can then be used to constrain particles such as extra "hidden" photons or minicharged particles that are predicted in many extensio
+  [2026] Linear Probes Detect Task Format, Not Reasoning Mode in Language Model Hidden States
+        Linear probing of large language model (LLM) hidden states is widely used to claim that models learn distinct representations for different reasoning types. We test this by probing Qwen3-14B on three benchmarks spanning the classical tricho
+  [2025] Reasoning Models Know When They're Right: Probing Hidden States for Self-Verification
+        Reasoning models have achieved remarkable performance on tasks like math and logical reasoning thanks to their ability to search during reasoning. However, they still suffer from overthinking, often performing unnecessary reasoning steps ev
+  [2024] SEP environment in the inner heliosphere from Solar Orbiter and Parker Solar Probe
+        The Sun drives a supersonic wind which inflates a giant plasma bubble in our very local interstellar neighborhood, the heliosphere. It is bathed in an extremely variable background of energetic ions and electrons which originate from a numb
+  [2014] Symmetry of the Excitations in the Hidden Order State of URu2Si2
+        We have performed polarized electronic Raman scattering on URu2Si2 single crystals at low temperature down to 8 K in the hidden order state and under magnetic field up to 10 T. The hidden order state is characterized by a sharp excitation a
+  [2015] Correctness of Backtest Engines
+        In recent years several trading platforms appeared which provide a backtest engine to calculate historic performance of self designed trading strategies on underlying candle data. The construction of a correct working backtest engine is, ho
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: CKA representation similarity distillation transfer ===
+-- arXiv --
+  [2011] Polynomial representations and categorifications of Fock Space
+        The rings of symmetric polynomials form an inverse system whose limit, the ring of symmetric functions, is the model for the bosonic Fock space representation of the affine Lie algebra. We categorify this construction by considering an inve
+  [2022] Application of Knowledge Distillation to Multi-task Speech Representation Learning
+        Model architectures such as wav2vec 2.0 and HuBERT have been proposed to learn speech representations from audio waveforms in a self-supervised manner. When they are combined with downstream tasks such as keyword spotting and speaker verifi
+  [2007] Finite-Dimensional Representations of Hyper Loop Algebras Over Non-Algebraically Closed Fields
+        We study finite-dimensional representations of hyper loop algebras over non-algebraically closed fields. The main results concern the classification of the irreducible representations, the construction of the Weyl modules, base change, tens
+  [2022] Reliability of CKA as a Similarity Measure in Deep Learning
+        Comparing learned neural representations in neural networks is a challenging but important problem, which has been approached in different ways. The Centered Kernel Alignment (CKA) similarity metric, particularly its linear variant, has rec
+  [2004] Structures and Representations of Generalized Path Algebras
+        It is shown that an algebra $Λ$ can be lifted with nilpotent Jacobson radical $r = r(Λ)$ and has a generalized matrix unit $\{e_{ii}\}_I$ with each $\bar e_{ii} $ in the center of $\bar Λ= Λ/r$ iff $Λ$ is isomorphic to a generalized path al
+  [2010] Representations of hom-Lie algebras
+        In this paper, we study representations of hom-Lie algebras. In particular, the adjoint representation and the trivial representation of hom-Lie algebras are studied in detail. Derivations, deformations, central extensions and derivation ex
+  [2016] Clifford theory for glider representations
+        Classical Clifford theory studies the decomposition of simple $G$-modules into simple $H$-modules for some normal subgroup $H \triangleleft G$. In this paper we deal with chains of normal subgroups $1 \triangleleft G_1 \triangleleft \cdots 
+  [2018] 'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer
+        Some scientists write literary fiction books in their spare time. If these books contain scientific knowledge, literary fiction becomes a mechanism of knowledge transfer. In this case, we could conceptualize literary fiction as non-formal k
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+=== QUERY: representation geometry knowledge distillation layer probing ===
+-- arXiv --
+  [2022] Application of Knowledge Distillation to Multi-task Speech Representation Learning
+        Model architectures such as wav2vec 2.0 and HuBERT have been proposed to learn speech representations from audio waveforms in a self-supervised manner. When they are combined with downstream tasks such as keyword spotting and speaker verifi
+  [2026] DistillLens: Symmetric Knowledge Distillation Through Logit Lens
+        Standard Knowledge Distillation (KD) compresses Large Language Models (LLMs) by optimizing final outputs, yet it typically treats the teacher's intermediate layer's thought process as a black box. While feature-based distillation attempts t
+  [2020] Triplet Loss for Knowledge Distillation
+        In recent years, deep learning has spread rapidly, and deeper, larger models have been proposed. However, the calculation cost becomes enormous as the size of the models becomes larger. Various techniques for compressing the size of the mod
+  [2018] Knowledge Distillation with Feature Maps for Image Classification
+        The model reduction problem that eases the computation costs and latency of complex deep learning architectures has received an increasing number of investigations owing to its importance in model deployment. One promising method is knowled
+  [2024] Densely Distilling Cumulative Knowledge for Continual Learning
+        Continual learning, involving sequential training on diverse tasks, often faces catastrophic forgetting. While knowledge distillation-based approaches exhibit notable success in preventing forgetting, we pinpoint a limitation in their abili
+  [2019] Revisiting Knowledge Distillation via Label Smoothing Regularization
+        Knowledge Distillation (KD) aims to distill the knowledge of a cumbersome teacher model into a lightweight student model. Its success is generally attributed to the privileged information on similarities among categories provided by the tea
+  [2023] Categories of Response-Based, Feature-Based, and Relation-Based Knowledge Distillation
+        Deep neural networks have achieved remarkable performance for artificial intelligence tasks. The success behind intelligent systems often relies on large-scale models with high computational complexity and storage costs. The over-parameteri
+  [2026] DeepFusion: Accelerating MoE Training via Federated Knowledge Distillation from Heterogeneous Edge Devices
+        Recent Mixture-of-Experts (MoE)-based large language models (LLMs) such as Qwen-MoE and DeepSeek-MoE are transforming generative AI in natural language processing. However, these models require vast and diverse training data. Federated lear
+-- Semantic Scholar --
+  SS rate-limited after retries
+
+[DONE]

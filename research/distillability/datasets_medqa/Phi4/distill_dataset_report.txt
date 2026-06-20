@@ -1,0 +1,15 @@
+{
+  "total": 8978,
+  "matched_soft": 8978,
+  "selected_for_distill": 5348,
+  "selected_ratio": 0.5957,
+  "teacher_disagree_count": 2569,
+  "teacher_disagree_ratio": 0.2861,
+  "selected_entropy_mean": 0.4203,
+  "selected_peak_mean": 0.8283,
+  "min_entropy": 0.01,
+  "smooth_eps": 0.0,
+  "min_margin": 0.0,
+  "only_disagree": false,
+  "output": "/home/student/arthas/mentalDistill/research/distillability/datasets_medqa/Phi4/train_head_distill.jsonl"
+}

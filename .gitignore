@@ -103,3 +103,6 @@ thesis/reference/*CMExam*.html
 **/data/train_cot.jsonl
 **/data/train_fused_*.jsonl
 
+21_ablation/data/                                                                                                        
+research/distillability/datasets_medqa/                                                                                  
+research/distillability/reports/logprobs.jsonl   

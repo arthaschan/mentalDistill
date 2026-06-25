@@ -1,0 +1,56 @@
+{
+  "label": "Qwen7B_holdout",
+  "n_samples": 4608,
+  "overall_acc": 81.42,
+  "mean_entropy": 0.0957,
+  "untrusted_fraction": 0.4989,
+  "untrusted_error_rate": 34.28,
+  "trusted_error_rate": 2.94,
+  "self_validation": {
+    "entropy_vs_human_difficulty_spearman": 0.3179,
+    "p_value": 1.0201790584990034e-108,
+    "verdict": "可信:不确定区对应人类真实难度"
+  },
+  "domain_map": {
+    "口腔医学": {
+      "n": 580,
+      "acc": 75.34,
+      "delta_vs_overall": -6.08
+    },
+    "中药学": {
+      "n": 563,
+      "acc": 79.93,
+      "delta_vs_overall": -1.49
+    },
+    "药学": {
+      "n": 575,
+      "acc": 80.0,
+      "delta_vs_overall": -1.42
+    },
+    "公卫预防": {
+      "n": 617,
+      "acc": 80.39,
+      "delta_vs_overall": -1.03
+    },
+    "中医学": {
+      "n": 198,
+      "acc": 81.31,
+      "delta_vs_overall": -0.11
+    },
+    "临床医学": {
+      "n": 1765,
+      "acc": 83.91,
+      "delta_vs_overall": 2.49
+    },
+    "中西医结合": {
+      "n": 310,
+      "acc": 86.13,
+      "delta_vs_overall": 4.71
+    }
+  },
+  "selective_distill": {
+    "keep_frac": 0.5,
+    "kept": 2309,
+    "dropped": 2299
+  }
+}

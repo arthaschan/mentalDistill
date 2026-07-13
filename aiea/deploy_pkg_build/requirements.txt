@@ -1,0 +1,9 @@
+# Choice-Head 14B 学生模型推理依赖
+# 注意：请先按官方指引安装匹配你 CUDA 版本的 PyTorch，再 pip install -r 本文件
+torch>=2.0.0
+transformers>=4.51.0
+peft>=0.7.0
+accelerate>=0.20.0
+numpy>=1.24.0
+safetensors>=0.4.0
+sentencepiece>=0.1.99

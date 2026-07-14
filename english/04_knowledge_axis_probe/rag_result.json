@@ -1,0 +1,9 @@
+{
+  "n": 94,
+  "closed_book": 65.96,
+  "rag": 87.23,
+  "delta_pp": 21.28,
+  "topk": 3,
+  "leak_thresh": 0.92,
+  "n_passages": 1497
+}

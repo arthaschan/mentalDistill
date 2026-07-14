@@ -1,0 +1,262 @@
+{
+  "teacher_prior": {
+    "GLM32B": {
+      "n": 636,
+      "acc": 72.64,
+      "mean_ent": 0.4101
+    },
+    "Gemma27B": {
+      "n": 636,
+      "acc": 65.72,
+      "mean_ent": 0.1842
+    },
+    "Phi4": {
+      "n": 636,
+      "acc": 69.34,
+      "mean_ent": 0.2744
+    },
+    "Qwen14B": {
+      "n": 636,
+      "acc": 70.6,
+      "mean_ent": 0.0832
+    },
+    "Qwen32B": {
+      "n": 636,
+      "acc": 73.9,
+      "mean_ent": 0.0831
+    },
+    "Qwen7B": {
+      "n": 636,
+      "acc": 62.58,
+      "mean_ent": 0.1761
+    },
+    "Yi34B": {
+      "n": 636,
+      "acc": 62.89,
+      "mean_ent": 0.2998
+    }
+  },
+  "order": [
+    "Qwen32B",
+    "GLM32B",
+    "Qwen14B",
+    "Phi4",
+    "Gemma27B",
+    "Yi34B",
+    "Qwen7B"
+  ],
+  "subjects": [
+    "Child Dental Health and Orthodontics",
+    "Dental Materials",
+    "Endodontics",
+    "Human Disease",
+    "Operative Dentistry",
+    "Oral Diagnosis",
+    "Oral Medicine",
+    "Oral Pathology",
+    "Oral Surgery",
+    "Oral and Maxillofacial Surgery",
+    "Patient Management",
+    "Periodontics",
+    "Pharmacology",
+    "Prosthodontics",
+    "Radiology",
+    "Restorative Dentistry"
+  ],
+  "subject_matrix": {
+    "GLM32B": {
+      "Child Dental Health and Orthodontics": 68.0,
+      "Dental Materials": 66.7,
+      "Endodontics": 81.6,
+      "Human Disease": 78.8,
+      "Operative Dentistry": 73.5,
+      "Oral Diagnosis": 62.1,
+      "Oral Medicine": 85.2,
+      "Oral Pathology": 83.9,
+      "Oral Surgery": 81.0,
+      "Oral and Maxillofacial Surgery": 67.4,
+      "Patient Management": 74.5,
+      "Periodontics": 83.6,
+      "Pharmacology": 95.0,
+      "Prosthodontics": 46.3,
+      "Radiology": 51.9,
+      "Restorative Dentistry": 39.3
+    },
+    "Gemma27B": {
+      "Child Dental Health and Orthodontics": 56.0,
+      "Dental Materials": 44.4,
+      "Endodontics": 60.5,
+      "Human Disease": 66.7,
+      "Operative Dentistry": 65.3,
+      "Oral Diagnosis": 60.3,
+      "Oral Medicine": 81.5,
+      "Oral Pathology": 64.5,
+      "Oral Surgery": 66.7,
+      "Oral and Maxillofacial Surgery": 72.1,
+      "Patient Management": 76.4,
+      "Periodontics": 76.7,
+      "Pharmacology": 83.3,
+      "Prosthodontics": 48.8,
+      "Radiology": 48.1,
+      "Restorative Dentistry": 42.9
+    },
+    "Phi4": {
+      "Child Dental Health and Orthodontics": 64.0,
+      "Dental Materials": 44.4,
+      "Endodontics": 68.4,
+      "Human Disease": 75.8,
+      "Operative Dentistry": 71.4,
+      "Oral Diagnosis": 74.1,
+      "Oral Medicine": 77.8,
+      "Oral Pathology": 80.6,
+      "Oral Surgery": 66.7,
+      "Oral and Maxillofacial Surgery": 67.4,
+      "Patient Management": 78.2,
+      "Periodontics": 75.3,
+      "Pharmacology": 85.0,
+      "Prosthodontics": 46.3,
+      "Radiology": 55.6,
+      "Restorative Dentistry": 42.9
+    },
+    "Qwen14B": {
+      "Child Dental Health and Orthodontics": 60.0,
+      "Dental Materials": 55.6,
+      "Endodontics": 71.1,
+      "Human Disease": 75.8,
+      "Operative Dentistry": 71.4,
+      "Oral Diagnosis": 63.8,
+      "Oral Medicine": 88.9,
+      "Oral Pathology": 80.6,
+      "Oral Surgery": 66.7,
+      "Oral and Maxillofacial Surgery": 65.1,
+      "Patient Management": 83.6,
+      "Periodontics": 78.1,
+      "Pharmacology": 86.7,
+      "Prosthodontics": 48.8,
+      "Radiology": 59.3,
+      "Restorative Dentistry": 46.4
+    },
+    "Qwen32B": {
+      "Child Dental Health and Orthodontics": 68.0,
+      "Dental Materials": 55.6,
+      "Endodontics": 78.9,
+      "Human Disease": 84.8,
+      "Operative Dentistry": 71.4,
+      "Oral Diagnosis": 72.4,
+      "Oral Medicine": 81.5,
+      "Oral Pathology": 80.6,
+      "Oral Surgery": 76.2,
+      "Oral and Maxillofacial Surgery": 72.1,
+      "Patient Management": 85.5,
+      "Periodontics": 74.0,
+      "Pharmacology": 90.0,
+      "Prosthodontics": 63.4,
+      "Radiology": 55.6,
+      "Restorative Dentistry": 46.4
+    },
+    "Qwen7B": {
+      "Child Dental Health and Orthodontics": 64.0,
+      "Dental Materials": 44.4,
+      "Endodontics": 65.8,
+      "Human Disease": 72.7,
+      "Operative Dentistry": 57.1,
+      "Oral Diagnosis": 65.5,
+      "Oral Medicine": 77.8,
+      "Oral Pathology": 67.7,
+      "Oral Surgery": 57.1,
+      "Oral and Maxillofacial Surgery": 62.8,
+      "Patient Management": 72.7,
+      "Periodontics": 61.6,
+      "Pharmacology": 78.3,
+      "Prosthodontics": 39.0,
+      "Radiology": 48.1,
+      "Restorative Dentistry": 46.4
+    },
+    "Yi34B": {
+      "Child Dental Health and Orthodontics": 52.0,
+      "Dental Materials": 40.7,
+      "Endodontics": 63.2,
+      "Human Disease": 72.7,
+      "Operative Dentistry": 44.9,
+      "Oral Diagnosis": 60.3,
+      "Oral Medicine": 74.1,
+      "Oral Pathology": 71.0,
+      "Oral Surgery": 57.1,
+      "Oral and Maxillofacial Surgery": 60.5,
+      "Patient Management": 83.6,
+      "Periodontics": 71.2,
+      "Pharmacology": 83.3,
+      "Prosthodontics": 48.8,
+      "Radiology": 48.1,
+      "Restorative Dentistry": 35.7
+    }
+  },
+  "per_subject_winner": {
+    "Child Dental Health and Orthodontics": [
+      "GLM32B",
+      68.0
+    ],
+    "Dental Materials": [
+      "GLM32B",
+      66.7
+    ],
+    "Endodontics": [
+      "GLM32B",
+      81.6
+    ],
+    "Human Disease": [
+      "Qwen32B",
+      84.8
+    ],
+    "Operative Dentistry": [
+      "GLM32B",
+      73.5
+    ],
+    "Oral Diagnosis": [
+      "Phi4",
+      74.1
+    ],
+    "Oral Medicine": [
+      "Qwen14B",
+      88.9
+    ],
+    "Oral Pathology": [
+      "GLM32B",
+      83.9
+    ],
+    "Oral Surgery": [
+      "GLM32B",
+      81.0
+    ],
+    "Oral and Maxillofacial Surgery": [
+      "Gemma27B",
+      72.1
+    ],
+    "Patient Management": [
+      "Qwen32B",
+      85.5
+    ],
+    "Periodontics": [
+      "GLM32B",
+      83.6
+    ],
+    "Pharmacology": [
+      "GLM32B",
+      95.0
+    ],
+    "Prosthodontics": [
+      "Qwen32B",
+      63.4
+    ],
+    "Radiology": [
+      "Qwen14B",
+      59.3
+    ],
+    "Restorative Dentistry": [
+      "Qwen14B",
+      46.4
+    ]
+  },
+  "single_teacher_dominates": false,
+  "distinct_subject_winners": 5
+}

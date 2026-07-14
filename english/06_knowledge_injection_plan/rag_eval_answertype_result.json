@@ -1,0 +1,9 @@
+{
+  "n": 94,
+  "closed_book": 65.96,
+  "rag": 65.96,
+  "delta_pp": 0.0,
+  "topk": 5,
+  "corpus": "answer-type",
+  "n_passages": 6424
+}

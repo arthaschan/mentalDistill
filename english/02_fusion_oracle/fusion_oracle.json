@@ -1,0 +1,63 @@
+{
+  "n_common": 636,
+  "teachers": [
+    "GLM32B",
+    "Gemma27B",
+    "Phi4",
+    "Qwen14B",
+    "Qwen32B",
+    "Qwen7B",
+    "Yi34B"
+  ],
+  "overall_acc": {
+    "GLM32B": 72.64,
+    "Gemma27B": 65.72,
+    "Phi4": 69.34,
+    "Qwen14B": 70.6,
+    "Qwen32B": 73.9,
+    "Qwen7B": 62.58,
+    "Yi34B": 62.89
+  },
+  "best_single": "Qwen32B",
+  "best_single_acc": 73.9,
+  "fusion": {
+    "best_single_Qwen32B": 73.9,
+    "oracle_anyright": 91.98,
+    "majority_vote": 72.8,
+    "conf_route": 73.74,
+    "domain_route_ORACLE": 77.2,
+    "domain_route_CV": 73.11,
+    "prob_avg": 72.96
+  },
+  "delta_vs_best_single": {
+    "best_single_Qwen32B": 0.0,
+    "oracle_anyright": 18.08,
+    "majority_vote": -1.1,
+    "conf_route": -0.16,
+    "domain_route_ORACLE": 3.3,
+    "domain_route_CV": -0.79,
+    "prob_avg": -0.94
+  },
+  "achievable_ceiling": 73.74,
+  "gap_pp": -0.16,
+  "oracle_ceiling_pp": 3.3,
+  "verdict": "NO-GO",
+  "subject_best_teacher": {
+    "Oral Medicine": "Qwen14B",
+    "Oral Surgery": "GLM32B",
+    "Periodontics": "GLM32B",
+    "Human Disease": "Qwen32B",
+    "Restorative Dentistry": "Qwen14B",
+    "Radiology": "Qwen14B",
+    "Child Dental Health and Orthodontics": "GLM32B",
+    "Dental Materials": "GLM32B",
+    "Pharmacology": "GLM32B",
+    "Oral Pathology": "GLM32B",
+    "Prosthodontics": "Qwen32B",
+    "Oral and Maxillofacial Surgery": "Gemma27B",
+    "Operative Dentistry": "GLM32B",
+    "Oral Diagnosis": "Phi4",
+    "Endodontics": "GLM32B",
+    "Patient Management": "Qwen32B"
+  }
+}

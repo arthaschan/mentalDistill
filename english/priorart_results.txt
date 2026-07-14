@@ -1,0 +1,137 @@
+===== PRIOR-ART BATTERY  2026-07-13 19:13 =====
+
+############## L1_choicehead_dental ##############
+
+--- Q: abs:"knowledge distillation" AND abs:dental AND abs:"multiple choice"
+[arXiv]
+  [no hits]
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: all:knowledge distillation dental exam student teacher
+[arXiv]
+  (2019) Revisiting Knowledge Distillation via Label Smoothing Regularization
+  (2020) Triplet Loss for Knowledge Distillation
+  (2024) Student-Oriented Teacher Knowledge Refinement for Knowledge Distillation
+  (2021) Learning Student-Friendly Teacher Networks for Knowledge Distillation
+  (2026) DistillLens: Symmetric Knowledge Distillation Through Logit Lens
+  (2021) Fixing the Teacher-Student Knowledge Discrepancy in Distillation
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: abs:"medical" AND abs:"multiple choice" AND abs:distillation AND (cat:cs.CL OR cat:cs.LG)
+[arXiv]
+  (2025) Beyond Distillation: Pushing the Limits of Medical LLM Reasoning with Minimalist Rule-Based RL
+  (2026) Med-CoReasoner: Reducing Language Disparities in Medical Reasoning via Language-Informed Co-Reasoning
+  (2021) You Can Do Better! If You Elaborate the Reason When Making Prediction
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: all:choice head distillation medical MCQ student surpasses teacher
+[arXiv]
+  (2024) Multiple Teachers-Meticulous Student: A Domain Adaptive Meta-Knowledge Distillation Model for Medical Image Classification
+  (2022) HEAD: HEtero-Assists Distillation for Heterogeneous Object Detectors
+  (2021) Learning Student-Friendly Teacher Networks for Knowledge Distillation
+  (2023) Distilling Calibrated Student from an Uncalibrated Teacher
+  (2019) Revisiting Knowledge Distillation via Label Smoothing Regularization
+  (2021) Undistillable: Making A Nasty Teacher That CANNOT teach students
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+############## L2_fusion_negative ##############
+
+--- Q: abs:"multi-teacher" AND abs:distillation AND abs:"knowledge distillation" AND (cat:cs.LG OR cat:cs.CL)
+[arXiv]
+  (2020) Differentiable Feature Aggregation Search for Knowledge Distillation
+  (2025) Bezier Distillation
+  (2021) One Teacher is Enough? Pre-trained Language Model Distillation from Multiple Teachers
+  (2024) 3MVRD: Multimodal Multi-task Multi-teacher Visually-Rich Form Document Understanding
+  (2026) Recursive Meta-Distillation: An Axiomatic Framework for Iterative Knowledge Refinement
+  (2026) Adaptive Weighting in Knowledge Distillation: An Axiomatic Framework for Multi-Scale Teacher Ensemble Optimization
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: all:multi teacher knowledge distillation ensemble does not help negative
+[arXiv]
+  (2023) Multi-teacher knowledge distillation as an effective method for compressing ensembles of neural networks
+  (2019) Revisiting Knowledge Distillation via Label Smoothing Regularization
+  (2020) Triplet Loss for Knowledge Distillation
+  (2020) Knowledge Distillation for Multi-task Learning
+  (2026) DistillLens: Symmetric Knowledge Distillation Through Logit Lens
+  (2018) Knowledge Distillation with Feature Maps for Image Classification
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: abs:"teacher selection" AND abs:distillation AND abs:"which teacher"
+[arXiv]
+  [no hits]
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: all:teacher complementarity routing distillation medical domain
+[arXiv]
+  (2024) Multiple Teachers-Meticulous Student: A Domain Adaptive Meta-Knowledge Distillation Model for Medical Image Classification
+  (2019) Exploring Object Relation in Mean Teacher for Cross-Domain Detection
+  (2026) Different Teachers, Different Capabilities: Sub-1B On-Device Distillation for Structured Text Enrichment
+  (2019) Revisiting Knowledge Distillation via Label Smoothing Regularization
+  (2020) Uncertainty-aware multi-view co-training for semi-supervised medical image segmentation and domain adaptation
+  (2026) MedP-CLIP: Medical CLIP with Region-Aware Prompt Integration
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+############## L3_entropy_consensus_difficulty ##############
+
+--- Q: abs:uncertainty AND abs:"question difficulty" AND abs:"large language model"
+[arXiv]
+  (2026) ReQuest: Rethinking-based Question-Aware Frame Selection for Long-Form Video QA
+  (2025) When an LLM is apprehensive about its answers -- and when its uncertainty is justified
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: all:LLM entropy question difficulty cross model consensus agreement
+[arXiv]
+  (2026) YouZhi: Towards High-Concurrency Financial LLMs via Adaptive GQA-to-MLA Transition
+  (2017) Cross-language Learning with Adversarial Neural Networks: Application to Community Question Answering
+  (2000) A Spacetime Foam Approach to the Schwarzschild-de Sitter Entropy
+  (2026) The Rényi entropy and entropic cosmology
+  (2017) Cross-Language Question Re-Ranking
+  (2022) EDCHO: High Order Exact Dynamic Consensus
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: abs:"model uncertainty" AND abs:"human difficulty" AND (cat:cs.CL OR cat:cs.LG)
+[arXiv]
+  [no hits]
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+--- Q: all:teacher confidence difficulty medical exam distillation label-free
+[arXiv]
+  (2019) Revisiting Knowledge Distillation via Label Smoothing Regularization
+  (2021) Confidence-Aware Multi-Teacher Knowledge Distillation
+  (2024) Multiple Teachers-Meticulous Student: A Domain Adaptive Meta-Knowledge Distillation Model for Medical Image Classification
+  (2022) GPT Takes the Bar Exam
+  (2023) Towards Lossless Dataset Distillation via Difficulty-Aligned Trajectory Matching
+  (2026) Different Teachers, Different Capabilities: Sub-1B On-Device Distillation for Structured Text Enrichment
+[S2]
+  [s2 error: HTTP Error 429: ]
+
+############## LANDMARK title checks ##############
+
+--- landmark: Does Knowledge Distillation Really Work
+  (2021) Does Knowledge Distillation Really Work? [Neural Information Processing Systems|cit=288]
+  (2022) Does Knowledge Distillation Really Work? [|cit=0]
+  (2024) Why does Knowledge Distillation Work? Rethink its Attention and Fidelity Mechanism [Expert systems with applications|cit=5]
+
+--- landmark: Strong Teacher is Not Necessary
+  [s2 error: HTTP Error 429: ]
+
+--- landmark: confidence-gated distillation
+  [s2 error: HTTP Error 429: ]
+
+--- landmark: distillation scaling laws
+  (2025) Distillation Scaling Laws [International Conference on Machine Learning|cit=51]
+  (2025) Utility Boundary of Dataset Distillation: Scaling and Configuration-Coverage Laws [arXiv.org|cit=0]
+  (2024) High-dimensional Analysis of Knowledge Distillation: Weak-to-Strong Generalization and Scaling Laws [International Conference on Learning Representations|cit=21]
+
+===== DONE =====

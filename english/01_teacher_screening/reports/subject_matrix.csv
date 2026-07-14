@@ -1,0 +1,18 @@
+subject,Qwen32B,GLM32B,Qwen14B,Phi4,Gemma27B,Yi34B,Qwen7B
+Child Dental Health and Orthodontics,68.0,68.0,60.0,64.0,56.0,52.0,64.0
+Dental Materials,55.6,66.7,55.6,44.4,44.4,40.7,44.4
+Endodontics,78.9,81.6,71.1,68.4,60.5,63.2,65.8
+Human Disease,84.8,78.8,75.8,75.8,66.7,72.7,72.7
+Operative Dentistry,71.4,73.5,71.4,71.4,65.3,44.9,57.1
+Oral Diagnosis,72.4,62.1,63.8,74.1,60.3,60.3,65.5
+Oral Medicine,81.5,85.2,88.9,77.8,81.5,74.1,77.8
+Oral Pathology,80.6,83.9,80.6,80.6,64.5,71.0,67.7
+Oral Surgery,76.2,81.0,66.7,66.7,66.7,57.1,57.1
+Oral and Maxillofacial Surgery,72.1,67.4,65.1,67.4,72.1,60.5,62.8
+Patient Management,85.5,74.5,83.6,78.2,76.4,83.6,72.7
+Periodontics,74.0,83.6,78.1,75.3,76.7,71.2,61.6
+Pharmacology,90.0,95.0,86.7,85.0,83.3,83.3,78.3
+Prosthodontics,63.4,46.3,48.8,46.3,48.8,48.8,39.0
+Radiology,55.6,51.9,59.3,55.6,48.1,48.1,48.1
+Restorative Dentistry,46.4,39.3,46.4,42.9,42.9,35.7,46.4
+OVERALL,73.9,72.64,70.6,69.34,65.72,62.89,62.58

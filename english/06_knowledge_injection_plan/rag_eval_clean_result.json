@@ -1,0 +1,10 @@
+{
+  "n": 94,
+  "closed_book": 65.96,
+  "rag": 67.02,
+  "delta_pp": 1.06,
+  "topk": 3,
+  "emb_model": "BAAI/bge-large-en-v1.5",
+  "maxsim_median": 0.727,
+  "n_passages": 29128
+}

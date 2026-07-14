@@ -1,0 +1,26 @@
+# ── english/ 提交策略：只提交代码+文档+小结果，排除大文件/版权/可再生产物 ──
+
+# 版权教材 PDF（不可重分发）
+*.pdf
+
+# 模型训练产物 / checkpoint / LoRA adapter（可由脚本重训，体积GB级）
+03_main_distill/runs/
+03_main_distill/runs_diag/
+05_lineB_cn_dental/runs/
+
+# 向量库 / 语料（可由脚本重建，含版权派生文本，192M）
+06_knowledge_injection_plan/corpus/
+
+# 数据集：派生自版权书籍/CMExam 的题目文本，不公开重分发（可由抽取脚本重建）
+*.jsonl
+dataset/*.csv
+dataset/single_best_all.jsonl
+
+# 日志
+logs/
+*.log
+
+# 训练/评估的中间结果目录里的大产物
+**/best/
+**/checkpoints/
+**/outputs/

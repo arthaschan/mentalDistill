@@ -1,0 +1,8 @@
+{
+  "n": 94,
+  "closed_book": 65.96,
+  "rag_rerank": 65.96,
+  "delta_pp": 0.0,
+  "pool": 100,
+  "topk": 5
+}

@@ -1,0 +1,16 @@
+{
+  "_maxsim_dist": {
+    "gt_0.92": 0,
+    "gt_0.85": 1,
+    "gt_0.75": 20,
+    "median": 0.686
+  },
+  "ALL@thr0.92": 87.23,
+  "ALL@thr0.85": 87.23,
+  "ALL@thr0.75": 84.04,
+  "ALL@thr0.6": 77.66,
+  "MedMCQA_only@thr0.92": 67.02,
+  "MedMCQA_only@thr0.85": 67.02,
+  "MedMCQA_only@thr0.75": 67.02,
+  "MedMCQA_only@thr0.6": 63.83
+}

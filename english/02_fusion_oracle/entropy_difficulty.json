@@ -1,0 +1,131 @@
+{
+  "n_common": 636,
+  "n_teachers": 7,
+  "teachers": [
+    "GLM32B",
+    "Gemma27B",
+    "Phi4",
+    "Qwen14B",
+    "Qwen32B",
+    "Qwen7B",
+    "Yi34B"
+  ],
+  "H4_entropy_locates_errors": {
+    "GLM32B": {
+      "acc": 72.64,
+      "high_entropy_err": 47.48,
+      "low_entropy_err": 7.23,
+      "err_ratio": 6.57
+    },
+    "Gemma27B": {
+      "acc": 65.72,
+      "high_entropy_err": 56.29,
+      "low_entropy_err": 12.26,
+      "err_ratio": 4.59
+    },
+    "Phi4": {
+      "acc": 69.34,
+      "high_entropy_err": 51.26,
+      "low_entropy_err": 10.06,
+      "err_ratio": 5.09
+    },
+    "Qwen14B": {
+      "acc": 70.6,
+      "high_entropy_err": 49.19,
+      "low_entropy_err": 10.94,
+      "err_ratio": 4.5
+    },
+    "Qwen32B": {
+      "acc": 73.9,
+      "high_entropy_err": 44.92,
+      "low_entropy_err": 8.76,
+      "err_ratio": 5.13
+    },
+    "Qwen7B": {
+      "acc": 62.58,
+      "high_entropy_err": 57.23,
+      "low_entropy_err": 17.61,
+      "err_ratio": 3.25
+    },
+    "Yi34B": {
+      "acc": 62.89,
+      "high_entropy_err": 55.97,
+      "low_entropy_err": 18.24,
+      "err_ratio": 3.07
+    }
+  },
+  "5d_entropy_vs_consensus": {
+    "per_teacher": {
+      "GLM32B": {
+        "entropy_vs_consensus_rho": 0.611,
+        "p_perm": 0.001
+      },
+      "Gemma27B": {
+        "entropy_vs_consensus_rho": 0.6288,
+        "p_perm": 0.001
+      },
+      "Phi4": {
+        "entropy_vs_consensus_rho": 0.6275,
+        "p_perm": 0.001
+      },
+      "Qwen14B": {
+        "entropy_vs_consensus_rho": 0.4722,
+        "p_perm": 0.001
+      },
+      "Qwen32B": {
+        "entropy_vs_consensus_rho": 0.5337,
+        "p_perm": 0.001
+      },
+      "Qwen7B": {
+        "entropy_vs_consensus_rho": 0.4926,
+        "p_perm": 0.001
+      },
+      "Yi34B": {
+        "entropy_vs_consensus_rho": 0.4636,
+        "p_perm": 0.001
+      }
+    },
+    "mean_entropy_vs_consensus_rho": 0.6945,
+    "p_perm": 0.001
+  },
+  "consensus_gradient": {
+    "0": {
+      "n": 250,
+      "mean_teacher_ent": 0.0508
+    },
+    "1": {
+      "n": 88,
+      "mean_teacher_ent": 0.1874
+    },
+    "2": {
+      "n": 66,
+      "mean_teacher_ent": 0.292
+    },
+    "3": {
+      "n": 38,
+      "mean_teacher_ent": 0.3518
+    },
+    "4": {
+      "n": 44,
+      "mean_teacher_ent": 0.3746
+    },
+    "5": {
+      "n": 47,
+      "mean_teacher_ent": 0.4172
+    },
+    "6": {
+      "n": 52,
+      "mean_teacher_ent": 0.4318
+    },
+    "7": {
+      "n": 51,
+      "mean_teacher_ent": 0.3312
+    }
+  },
+  "5d_null_surface": {
+    "mean_entropy_vs_stem_length_rho": 0.046,
+    "mean_entropy_vs_negation_count_rho": 0.0855,
+    "consensus_vs_stem_length_rho": -0.0657,
+    "note": "near-zero => entropy/difficulty is NOT a surface-text artifact"
+  }
+}

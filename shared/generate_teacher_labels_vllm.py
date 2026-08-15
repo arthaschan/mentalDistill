@@ -29,7 +29,7 @@ SYSTEM_PROMPT = (
 )
 
 
-def build_question_text(item):
+def build_question_text(item, trailing=""):
     q = str(item.get("Question") or item.get("question") or "").strip()
     options = item.get("Options") or item.get("options") or {}
     lines = [q]
@@ -41,7 +41,7 @@ def build_question_text(item):
         opt_text = str(options).strip()
         if opt_text:
             lines.append(opt_text)
-    lines.append("请只输出一个大写字母（A/B/C/D/E）。")
+    lines.append(trailing or "请只输出一个大写字母（A/B/C/D/E）。")
     return "\n".join(lines)
 
 
@@ -65,6 +65,8 @@ def main():
     parser.add_argument("--output", type=str, required=True)
     parser.add_argument("--system_prompt", type=str, default=None)
     parser.add_argument("--gt_field", type=str, default="Answer")
+    parser.add_argument("--trailing_instruction_file", type=str, default="",
+                        help="可选：用户提示末尾追加的指令文本文件（默认中文）")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--batch_size", type=int, default=64,
                         help="vLLM batch size for prompt processing")
@@ -79,6 +81,10 @@ def main():
     system_prompt = SYSTEM_PROMPT
     if args.system_prompt:
         system_prompt = Path(args.system_prompt).read_text(encoding="utf-8").strip()
+
+    trailing = ""
+    if args.trailing_instruction_file:
+        trailing = Path(args.trailing_instruction_file).read_text(encoding="utf-8").strip()
 
     # Load dataset
     rows = []
@@ -149,7 +155,7 @@ def main():
     # Build prompts using chat template
     prompts = []
     for _, item in todo:
-        user_text = build_question_text(item)
+        user_text = build_question_text(item, trailing=trailing)
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_text},

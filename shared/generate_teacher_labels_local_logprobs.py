@@ -34,7 +34,7 @@ SYSTEM_PROMPT = (
 )
 
 
-def build_question_text(item):
+def build_question_text(item, trailing=""):
     q = str(item.get("Question") or item.get("question") or "").strip()
     options = item.get("Options") or item.get("options") or {}
     lines = [q]
@@ -46,7 +46,7 @@ def build_question_text(item):
         opt_text = str(options).strip()
         if opt_text:
             lines.append(opt_text)
-    lines.append("请只输出一个大写字母（A/B/C/D/E）。")
+    lines.append(trailing or "请只输出一个大写字母（A/B/C/D/E）。")
     return "\n".join(lines)
 
 
@@ -130,6 +130,8 @@ def main():
                         help="断点续传：跳过已处理的样本")
     parser.add_argument("--gt_field", type=str, default="Answer",
                         help="GT 答案字段名")
+    parser.add_argument("--trailing_instruction_file", type=str, default="",
+                        help="可选：用户提示末尾追加的指令文本文件（默认中文）")
     args = parser.parse_args()
 
     model_path = Path(args.model_path)
@@ -140,6 +142,10 @@ def main():
     system_prompt = SYSTEM_PROMPT
     if args.system_prompt:
         system_prompt = Path(args.system_prompt).read_text(encoding="utf-8").strip()
+
+    trailing = ""
+    if args.trailing_instruction_file:
+        trailing = Path(args.trailing_instruction_file).read_text(encoding="utf-8").strip()
 
     # 加载数据
     rows = []
@@ -221,7 +227,7 @@ def main():
                 skipped += 1
                 continue
 
-            user_text = build_question_text(item)
+            user_text = build_question_text(item, trailing=trailing)
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_text},

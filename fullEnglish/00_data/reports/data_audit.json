@@ -1,0 +1,76 @@
+{
+  "medmcqa_train_sample": 10000,
+  "screen_per_source": 200,
+  "train": {
+    "n": 20488,
+    "source": {
+      "medmcqa": 10000,
+      "medqa": 10178,
+      "mmlu": 310
+    },
+    "n_options": {
+      "4": 10310,
+      "5": 10178
+    }
+  },
+  "val": {
+    "n": 1272,
+    "source": {
+      "medqa": 1272
+    },
+    "n_options": {
+      "5": 1272
+    }
+  },
+  "test_medqa": {
+    "n": 1273,
+    "n_options": {
+      "5": 1273
+    }
+  },
+  "test_medmcqa": {
+    "n": 4183,
+    "n_options": {
+      "4": 4183
+    }
+  },
+  "test_mmlu": {
+    "n": 2837,
+    "n_options": {
+      "4": 2837
+    },
+    "subjects": {
+      "anatomy": 135,
+      "clinical_knowledge": 265,
+      "college_biology": 144,
+      "college_medicine": 173,
+      "high_school_biology": 310,
+      "human_aging": 223,
+      "human_sexuality": 131,
+      "medical_genetics": 100,
+      "nutrition": 306,
+      "professional_medicine": 272,
+      "professional_psychology": 612,
+      "virology": 166
+    }
+  },
+  "test_pubmedqa": {
+    "n": 1000,
+    "n_options": {
+      "3": 1000
+    },
+    "answer_balance": {
+      "A": 55.2,
+      "B": 33.8,
+      "C": 11.0
+    }
+  },
+  "screen_input": {
+    "n": 600,
+    "source": {
+      "medmcqa": 200,
+      "medqa": 200,
+      "mmlu": 200
+    }
+  }
+}

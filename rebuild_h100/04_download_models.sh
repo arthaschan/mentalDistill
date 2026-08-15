@@ -13,10 +13,6 @@ command -v huggingface-cli >/dev/null 2>&1 && DL="huggingface-cli download"
 # 若部分模型需登录: huggingface-cli login  (gemma/llama 等 gated 需先申请权限)
 # 格式: <repo_id> -> models/<本地目录名>
 declare -A M=(
-  ["Qwen/Qwen2.5-0.5B-Instruct"]="Qwen2.5-0.5B-Instruct"
-  ["Qwen/Qwen2.5-1.5B-Instruct"]="Qwen2.5-1.5B-Instruct"
-  ["Qwen/Qwen2.5-3B-Instruct"]="Qwen2.5-3B-Instruct"
-  ["Qwen/Qwen2.5-7B-Instruct"]="Qwen2.5-7B-Instruct"
   ["Qwen/Qwen2.5-14B-Instruct"]="Qwen2.5-14B-Instruct"
   ["Qwen/Qwen2.5-32B-Instruct"]="Qwen2.5-32B-Instruct"
   ["Qwen/Qwen3-14B"]="Qwen3-14B"

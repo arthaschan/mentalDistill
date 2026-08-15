@@ -1,0 +1,6 @@
+{
+  "name": "GeminiFlash",
+  "model": "gemini-flash-latest",
+  "api_base": "https://generativelanguage.googleapis.com/v1beta/openai",
+  "api_key_env": "GEMINI_API_KEY"
+}

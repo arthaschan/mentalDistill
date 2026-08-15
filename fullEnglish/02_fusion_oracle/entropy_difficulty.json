@@ -1,0 +1,85 @@
+{
+  "n_common": 600,
+  "n_teachers": 4,
+  "teachers": [
+    "Llama70B-AWQ",
+    "Phi4",
+    "Qwen14B",
+    "Qwen32B"
+  ],
+  "H4_entropy_locates_errors": {
+    "Llama70B-AWQ": {
+      "acc": 79.5,
+      "high_entropy_err": 37.18,
+      "low_entropy_err": 6.19,
+      "err_ratio": 6.01
+    },
+    "Phi4": {
+      "acc": 72.0,
+      "high_entropy_err": 50.33,
+      "low_entropy_err": 5.67,
+      "err_ratio": 8.88
+    },
+    "Qwen14B": {
+      "acc": 67.83,
+      "high_entropy_err": 54.88,
+      "low_entropy_err": 9.9,
+      "err_ratio": 5.54
+    },
+    "Qwen32B": {
+      "acc": 72.67,
+      "high_entropy_err": 48.33,
+      "low_entropy_err": 10.27,
+      "err_ratio": 4.7
+    }
+  },
+  "5d_entropy_vs_consensus": {
+    "per_teacher": {
+      "Llama70B-AWQ": {
+        "rho": 0.4287,
+        "p_perm": 0.001
+      },
+      "Phi4": {
+        "rho": 0.577,
+        "p_perm": 0.001
+      },
+      "Qwen14B": {
+        "rho": 0.497,
+        "p_perm": 0.001
+      },
+      "Qwen32B": {
+        "rho": 0.4406,
+        "p_perm": 0.001
+      }
+    },
+    "mean_entropy_vs_consensus_rho": 0.6288,
+    "p_perm": 0.001
+  },
+  "consensus_gradient": {
+    "0": {
+      "n": 344,
+      "mean_teacher_ent": 0.0266
+    },
+    "1": {
+      "n": 69,
+      "mean_teacher_ent": 0.1563
+    },
+    "2": {
+      "n": 54,
+      "mean_teacher_ent": 0.2353
+    },
+    "3": {
+      "n": 61,
+      "mean_teacher_ent": 0.2615
+    },
+    "4": {
+      "n": 72,
+      "mean_teacher_ent": 0.2403
+    }
+  },
+  "5d_null_surface": {
+    "mean_entropy_vs_stem_length_rho": -0.0056,
+    "mean_entropy_vs_negation_count_rho": 0.1364,
+    "consensus_vs_stem_length_rho": 0.0534
+  }
+}

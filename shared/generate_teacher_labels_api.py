@@ -42,7 +42,7 @@ def load_jsonl(path):
     return rows
 
 
-def build_question_text(item):
+def build_question_text(item, trailing=""):
     q = str(item.get("Question") or item.get("question") or "").strip()
     options = item.get("Options") or item.get("options") or {}
     lines = [q]
@@ -56,7 +56,7 @@ def build_question_text(item):
         if opt_text:
             lines.append(opt_text)
 
-    lines.append("请只输出一个大写字母（A/B/C/D/E）。")
+    lines.append(trailing or "请只输出一个大写字母（A/B/C/D/E）。")
     return "\n".join(lines)
 
 
@@ -167,6 +167,8 @@ def main():
     parser.add_argument("--cooldown_every", type=int, default=0)
     parser.add_argument("--cooldown_sec", type=float, default=0.0)
     parser.add_argument("--resume", action="store_true", help="append to existing output and skip processed samples")
+    parser.add_argument("--trailing_instruction_file", default="",
+                        help="可选：用户提示末尾追加的指令文本文件（默认中文 '请只输出一个大写字母'）")
     args = parser.parse_args()
 
     with open(args.candidate, "r", encoding="utf-8") as f:
@@ -174,6 +176,11 @@ def main():
 
     with open(args.system_prompt, "r", encoding="utf-8") as f:
         system_prompt = f.read().strip()
+
+    trailing = ""
+    if args.trailing_instruction_file:
+        with open(args.trailing_instruction_file, "r", encoding="utf-8") as f:
+            trailing = f.read().strip()
 
     rows = load_jsonl(args.dataset)
     random.seed(args.seed)
@@ -209,7 +216,7 @@ def main():
         for i, item in enumerate(rows, start=1):
             if sample_key(item) in done_keys:
                 continue
-            prompt = build_question_text(item)
+            prompt = build_question_text(item, trailing=trailing)
             total += 1
             try:
                 raw = call_openai_compatible(

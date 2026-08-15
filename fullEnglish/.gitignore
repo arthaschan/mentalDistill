@@ -1,18 +1,20 @@
-# 只推送 md 文件和 data/ 目录，忽略其余所有内容
-# 原始数据、下载脚本、缓存、zip 包等一律不进远端仓库
+# fullEnglish — 只忽略「可重新生成的产物」，保留代码/配置/文档/结果报告/原始数据。
 
-# 忽略所有文件和目录
-*
+# ── 数据切分产物（由 00_data/build_data.py 重新生成）──
+00_data/out/
 
-# 保留目录结构（使 git 能进入子目录）
-!*/
+# ── 教师 logprobs 与 API 标签（由筛选/标注脚本重新生成）──
+01_teacher_screening/logprobs/
+01_teacher_screening/labels/
 
-# 保留本 .gitignore 本身
-!.gitignore
+# ── 主蒸馏：教师标签 + 训练数据 + 训练产物 ──
+03_main_distill/labels/
+03_main_distill/data/
+03_main_distill/runs/
 
-# 保留所有 Markdown 文档
-!*.md
+# ── 图表 PNG（由 figures/make_figures.py 重新生成）──
+figures/*.png
 
-# 保留 data 目录及其全部内容
-!data/
-!data/**
+# ── Python 缓存 ──
+__pycache__/
+*.pyc

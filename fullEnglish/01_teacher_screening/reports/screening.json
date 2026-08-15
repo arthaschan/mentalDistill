@@ -1,0 +1,81 @@
+{
+  "teacher_prior": {
+    "DeepSeekV3": {
+      "n": 600,
+      "acc": 81.67,
+      "mean_ent": null
+    },
+    "Llama70B-AWQ": {
+      "n": 600,
+      "acc": 79.5,
+      "mean_ent": 0.0547
+    },
+    "Phi4": {
+      "n": 600,
+      "acc": 72.0,
+      "mean_ent": 0.2426
+    },
+    "Qwen14B": {
+      "n": 600,
+      "acc": 67.83,
+      "mean_ent": 0.0767
+    },
+    "Qwen32B": {
+      "n": 600,
+      "acc": 72.67,
+      "mean_ent": 0.0652
+    }
+  },
+  "order": [
+    "DeepSeekV3",
+    "Llama70B-AWQ",
+    "Qwen32B",
+    "Phi4",
+    "Qwen14B"
+  ],
+  "best_teacher": "DeepSeekV3",
+  "per_source_acc": {
+    "DeepSeekV3": {
+      "medmcqa": 74.5,
+      "medqa": 80.5,
+      "mmlu": 90.0
+    },
+    "Llama70B-AWQ": {
+      "medmcqa": 70.0,
+      "medqa": 80.5,
+      "mmlu": 88.0
+    },
+    "Phi4": {
+      "medmcqa": 62.0,
+      "medqa": 73.0,
+      "mmlu": 81.0
+    },
+    "Qwen14B": {
+      "medmcqa": 57.5,
+      "medqa": 66.5,
+      "mmlu": 79.5
+    },
+    "Qwen32B": {
+      "medmcqa": 62.0,
+      "medqa": 71.0,
+      "mmlu": 85.0
+    }
+  },
+  "per_source_winner": {
+    "medmcqa": [
+      "DeepSeekV3",
+      74.5
+    ],
+    "medqa": [
+      "DeepSeekV3",
+      80.5
+    ],
+    "mmlu": [
+      "DeepSeekV3",
+      90.0
+    ]
+  },
+  "student_name": "Qwen32B",
+  "student_zero_shot_acc": 72.67,
+  "headroom_pp": 9.0
+}

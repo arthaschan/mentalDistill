@@ -1,0 +1,35 @@
+{
+  "n_common": 600,
+  "teachers": [
+    "DeepSeekV3",
+    "Llama70B-AWQ",
+    "Phi4",
+    "Qwen14B",
+    "Qwen32B"
+  ],
+  "overall_acc": {
+    "DeepSeekV3": 81.67,
+    "Llama70B-AWQ": 79.5,
+    "Phi4": 72.0,
+    "Qwen14B": 67.83,
+    "Qwen32B": 72.67
+  },
+  "best_single": "DeepSeekV3",
+  "best_single_acc": 81.67,
+  "fusion": {
+    "best_single": 81.67,
+    "oracle_anyright": 92.0,
+    "majority_vote": 75.5,
+    "prob_avg": 75.5,
+    "conf_route": 76.17,
+    "domain_route_CV": 81.17
+  },
+  "achievable_ceiling": 81.17,
+  "gap_pp": -0.5,
+  "verdict": "NO-GO",
+  "per_source_best": {
+    "medmcqa": "DeepSeekV3",
+    "medqa": "DeepSeekV3",
+    "mmlu": "DeepSeekV3"
+  }
+}

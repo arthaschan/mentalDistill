@@ -1,0 +1,17 @@
+{
+  "test_medqa": {
+    "n_dental": 114,
+    "teacher_acc": 82.46,
+    "total": 1273
+  },
+  "test_medmcqa": {
+    "n_dental": 799,
+    "teacher_acc": 66.71,
+    "total": 4183
+  },
+  "test_mmlu": {
+    "n_dental": 67,
+    "teacher_acc": 88.06,
+    "total": 2837
+  }
+}

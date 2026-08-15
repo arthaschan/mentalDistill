@@ -1,0 +1,45 @@
+模型 LLM-Research/Llama-3.3-70B-Instruct: 42 个文件, 共 141.1 GB, 12 线程
+  [  0.0%] 0.0/141.1 GB 0.0 MB/s  done   configuration.json
+  [  0.0%] 0.0/141.1 GB 0.0 MB/s  done   .gitattributes
+  [  0.0%] 0.0/141.1 GB 0.0 MB/s  done   LICENSE
+  [  0.0%] 0.0/141.1 GB 0.0 MB/s  done   config.json
+  [  0.0%] 0.0/141.1 GB 0.0 MB/s  done   generation_config.json
+  [  3.3%] 4.7/141.1 GB 4.4 MB/s  done   model-00011-of-00030.safetensors
+  [  6.8%] 9.7/141.1 GB 8.4 MB/s  done   model-00008-of-00030.safetensors
+  [ 10.2%] 14.3/141.1 GB 12.4 MB/s  done   model-00012-of-00030.safetensors
+  [ 13.7%] 19.3/141.1 GB 14.2 MB/s  done   model-00009-of-00030.safetensors
+  [ 17.0%] 24.0/141.1 GB 15.7 MB/s  done   model-00002-of-00030.safetensors
+  [ 20.3%] 28.6/141.1 GB 17.2 MB/s  done   model-00005-of-00030.safetensors
+  [ 23.8%] 33.6/141.1 GB 19.6 MB/s  done   model-00003-of-00030.safetensors
+  [ 27.1%] 38.2/141.1 GB 22.2 MB/s  done   model-00001-of-00030.safetensors
+  [ 30.4%] 42.9/141.1 GB 23.6 MB/s  done   model-00007-of-00030.safetensors
+  [ 33.7%] 47.5/141.1 GB 25.3 MB/s  done   model-00010-of-00030.safetensors
+  [ 37.0%] 52.2/141.1 GB 26.8 MB/s  done   model-00015-of-00030.safetensors
+  [ 40.3%] 56.9/141.1 GB 28.9 MB/s  done   model-00006-of-00030.safetensors
+  [ 43.8%] 61.8/141.1 GB 29.3 MB/s  done   model-00004-of-00030.safetensors
+  [ 47.3%] 66.8/141.1 GB 27.1 MB/s  done   model-00014-of-00030.safetensors
+  [ 50.6%] 71.5/141.1 GB 26.8 MB/s  done   model-00021-of-00030.safetensors
+  [ 53.9%] 76.1/141.1 GB 27.2 MB/s  done   model-00017-of-00030.safetensors
+  [ 57.2%] 80.8/141.1 GB 28.8 MB/s  done   model-00022-of-00030.safetensors
+  [ 60.8%] 85.8/141.1 GB 30.2 MB/s  done   model-00023-of-00030.safetensors
+  [ 64.3%] 90.8/141.1 GB 30.5 MB/s  done   model-00024-of-00030.safetensors
+  [ 64.3%] 90.8/141.1 GB 30.5 MB/s  done   model.safetensors.index.json
+  [ 64.3%] 90.8/141.1 GB 30.5 MB/s  done   README.md
+  [ 64.3%] 90.8/141.1 GB 30.4 MB/s  done   special_tokens_map.json
+  [ 64.3%] 90.8/141.1 GB 30.4 MB/s  done   tokenizer.json
+  [ 64.3%] 90.8/141.1 GB 30.4 MB/s  done   tokenizer_config.json
+  [ 64.3%] 90.8/141.1 GB 30.4 MB/s  done   USE_POLICY.md
+  [ 67.6%] 95.4/141.1 GB 31.0 MB/s  done   model-00016-of-00030.safetensors
+  [ 71.2%] 100.4/141.1 GB 29.9 MB/s  done   model-00013-of-00030.safetensors
+  [ 74.7%] 105.4/141.1 GB 30.7 MB/s  done   model-00019-of-00030.safetensors
+  [ 78.2%] 110.4/141.1 GB 31.8 MB/s  done   model-00018-of-00030.safetensors
+  [ 79.7%] 112.5/141.1 GB 32.1 MB/s  done   model-00030-of-00030.safetensors
+  [ 83.0%] 117.2/141.1 GB 32.4 MB/s  done   model-00025-of-00030.safetensors
+  [ 86.3%] 121.8/141.1 GB 32.8 MB/s  done   model-00026-of-00030.safetensors
+  [ 89.6%] 126.5/141.1 GB 31.4 MB/s  done   model-00020-of-00030.safetensors
+  [ 93.2%] 131.5/141.1 GB 31.3 MB/s  done   model-00029-of-00030.safetensors
+  [ 96.5%] 136.1/141.1 GB 31.0 MB/s  done   model-00027-of-00030.safetensors
+  [100.0%] 141.1/141.1 GB 28.8 MB/s  done   model-00028-of-00030.safetensors
+
+完成: 41/42 文件
+  失败: original -> FAIL: 404 Client Error: Not Found for url: https://modelscope.cn/models/LLM-Research/Llama-3.3-70B-Instruct/resolve/master/original

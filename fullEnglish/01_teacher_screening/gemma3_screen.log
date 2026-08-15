@@ -1,0 +1,39 @@
+Loaded 600 samples from fullEnglish/00_data/out/screen_input.jsonl
+Loading model from models/gemma-3-27b-it ...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/12 [00:00<?, ?it/s]Loading checkpoint shards:   8%|▊         | 1/12 [00:00<00:08,  1.28it/s]Loading checkpoint shards:  17%|█▋        | 2/12 [00:01<00:07,  1.32it/s]Loading checkpoint shards:  25%|██▌       | 3/12 [00:02<00:06,  1.33it/s]Loading checkpoint shards:  33%|███▎      | 4/12 [00:03<00:06,  1.33it/s]Loading checkpoint shards:  42%|████▏     | 5/12 [00:03<00:05,  1.32it/s]Loading checkpoint shards:  50%|█████     | 6/12 [00:04<00:04,  1.31it/s]Loading checkpoint shards:  58%|█████▊    | 7/12 [00:05<00:03,  1.31it/s]Loading checkpoint shards:  67%|██████▋   | 8/12 [00:06<00:02,  1.34it/s]Loading checkpoint shards:  75%|███████▌  | 9/12 [00:06<00:02,  1.36it/s]Loading checkpoint shards:  83%|████████▎ | 10/12 [00:07<00:01,  1.37it/s]Loading checkpoint shards:  92%|█████████▏| 11/12 [00:08<00:00,  1.35it/s]Loading checkpoint shards: 100%|██████████| 12/12 [00:08<00:00,  1.44it/s]
+Model loaded.
+Option token IDs: {'A': 236776, 'B': 236799, 'C': 236780, 'D': 236796, 'E': 236788}
+  A -> token_id=236776 -> decoded='A'
+  B -> token_id=236799 -> decoded='B'
+  C -> token_id=236780 -> decoded='C'
+  D -> token_id=236796 -> decoded='D'
+  E -> token_id=236788 -> decoded='E'
+  [50/600] processed=50 correct=38/50 (76.0%) avg_entropy=0.022
+  [100/600] processed=100 correct=74/100 (74.0%) avg_entropy=0.021
+  [150/600] processed=150 correct=114/150 (76.0%) avg_entropy=0.023
+  [200/600] processed=200 correct=150/200 (75.0%) avg_entropy=0.024
+  [250/600] processed=250 correct=179/250 (71.6%) avg_entropy=0.029
+  [300/600] processed=300 correct=214/300 (71.3%) avg_entropy=0.030
+  [350/600] processed=350 correct=249/350 (71.1%) avg_entropy=0.027
+  [400/600] processed=400 correct=294/400 (73.5%) avg_entropy=0.026
+  [450/600] processed=450 correct=324/450 (72.0%) avg_entropy=0.027
+  [500/600] processed=500 correct=357/500 (71.4%) avg_entropy=0.027
+  [550/600] processed=550 correct=391/550 (71.1%) avg_entropy=0.026
+  [600/600] processed=600 correct=423/600 (70.5%) avg_entropy=0.029
+
+==================================================
+Teacher Label Summary (with real logprobs)
+==================================================
+Model:          gemma-3-27b-it
+Total:          600
+Parsed:         600
+Correct:        423
+Teacher Acc:    70.50%
+Mismatch:       177 (29.50%)
+Avg Entropy:    0.0295
+Skipped(resume):0
+Output:         fullEnglish/01_teacher_screening/logprobs/Gemma3-27B_logprobs.jsonl
+
+Note: TeacherDist contains REAL probability distribution,
+      no label smoothing needed. Feed directly to distillation.

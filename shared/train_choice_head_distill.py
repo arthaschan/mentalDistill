@@ -11,7 +11,7 @@ import torch.nn.functional as F
 from peft import LoraConfig, PeftModel, get_peft_model
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer, get_cosine_schedule_with_warmup
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, get_cosine_schedule_with_warmup
 
 
 OPTION_LETTERS = ["A", "B", "C", "D", "E"]
@@ -20,6 +20,10 @@ OPTION_LETTERS = ["A", "B", "C", "D", "E"]
 # Prompt 语言可切换: 默认 zh (原中文牙科 prompt, 保持 CMExam 行为完全不变);
 # 设 DISTILL_PROMPT_LANG=en 用英文通用医学 prompt (跨数据集实验如 MedQA 用)。
 _PROMPT_LANG = os.environ.get("DISTILL_PROMPT_LANG", "zh").lower()
+
+# 设 DISTILL_USE_CHAT_TEMPLATE=1 时用 tokenizer 自带 chat template 拼 prompt
+# （Llama/Gemma 等非 Qwen 模型用；默认 0 保持 Qwen 硬编码 <|im_start|> 历史行为不变）。
+_USE_CHAT_TEMPLATE = os.environ.get("DISTILL_USE_CHAT_TEMPLATE", "0") == "1"
 
 
 def build_mcq_prompt(q, opts):
@@ -32,6 +36,51 @@ def build_mcq_prompt(q, opts):
         system_line = ("你是一名专业的牙科医生，只需输出一个字母（A、B、C、D、E）作为结果，不要附带任何解释或空格。\n")
         user_block = f"问题：{q}\n选项：\n{opts}\n"
     return system_line, user_block
+
+
+def apply_prompt_template(tokenizer, sys_line, user_block):
+    """把 system/user 拼成 (prompt_prefix, 答案后闭合串)。
+
+    _USE_CHAT_TEMPLATE=1 时用 tokenizer 自带 chat template（Llama/Gemma 等），
+    否则用 Qwen 硬编码 <|im_start|> 格式（默认，保持历史行为不变）。
+    """
+    if _USE_CHAT_TEMPLATE:
+        msgs = [
+            {"role": "system", "content": sys_line},
+            {"role": "user", "content": user_block},
+        ]
+        prefix = tokenizer.apply_chat_template(
+            msgs, tokenize=False, add_generation_prompt=True
+        )
+        return prefix, ""
+    prefix = (
+        "<|im_start|>system\n"
+        + sys_line
+        + "<|im_end|>\n"
+        "<|im_start|>user\n"
+        + user_block
+        + "<|im_end|>\n"
+        "<|im_start|>assistant\n"
+    )
+    return prefix, "<|im_end|>"
+
+
+def load_base_model(model_name, quantize, device):
+    """加载 base 模型。quantize='4bit' 走 QLoRA(bitsandbytes NF4)，否则 bf16。"""
+    if quantize == "4bit":
+        bnb_cfg = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
+        )
+        return AutoModelForCausalLM.from_pretrained(
+            model_name, quantization_config=bnb_cfg,
+            device_map={"": device}, trust_remote_code=True,
+        )
+    return AutoModelForCausalLM.from_pretrained(
+        model_name, torch_dtype=torch.bfloat16, trust_remote_code=True
+    )
 
 
 def set_global_seed(seed: int, deterministic: bool = False):
@@ -70,15 +119,7 @@ def evaluate_generation(model, tokenizer, file_path, device, max_new_tokens=4):
     model.eval()
     for q, opts, ans in samples:
         sys_line, user_block = build_mcq_prompt(q, opts)
-        prompt = (
-            "<|im_start|>system\n"
-            + sys_line
-            + "<|im_end|>\n"
-            "<|im_start|>user\n"
-            + user_block
-            + "<|im_end|>\n"
-            "<|im_start|>assistant\n"
-        )
+        prompt, _ = apply_prompt_template(tokenizer, sys_line, user_block)
         inputs = tokenizer(prompt, return_tensors="pt", truncation=True).to(device)
         outputs = model.generate(**inputs, max_new_tokens=max_new_tokens)
         gen = tokenizer.decode(outputs[0][inputs["input_ids"].size(1):], skip_special_tokens=True)
@@ -131,20 +172,13 @@ class DentalChoiceHeadDataset(Dataset):
             ans = "A"
 
         sys_line, user_block = build_mcq_prompt(q, opts)
-        prompt_prefix = (
-            "<|im_start|>system\n"
-            + sys_line
-            + "<|im_end|>\n"
-            "<|im_start|>user\n"
-            + user_block
-            + "<|im_end|>\n"
-            "<|im_start|>assistant\n"
-        )
-        text = prompt_prefix + f"{ans}<|im_end|>"
+        prompt_prefix, closing = apply_prompt_template(self.tokenizer, sys_line, user_block)
+        text = prompt_prefix + f"{ans}{closing}"
+        # 不 padding（动态 padding 由 collate_fn 按 batch 内最长处理），避免把中位数 272 的
+        # 序列强行补到 1024 浪费 ~4 倍算力。loss 只看答案 token，padding 不影响结果。
         enc = self.tokenizer(
             text,
             truncation=True,
-            padding="max_length",
             max_length=self.max_length,
             return_tensors="pt",
         )
@@ -153,7 +187,6 @@ class DentalChoiceHeadDataset(Dataset):
 
         labels = enc["input_ids"].squeeze().clone()
         labels[:prefix_len] = -100
-        labels[enc["attention_mask"].squeeze() == 0] = -100
 
         distill_mask = 1 if str(row.get("SelectiveSource", "")).strip() == "clean_teacher" else self.default_distill_mask
 
@@ -220,6 +253,8 @@ def main():
     parser.add_argument("--test_path", type=str, default="")
     parser.add_argument("--output_dir", type=str, required=True)
     parser.add_argument("--num_epochs", type=int, default=1)
+    parser.add_argument("--max_length", type=int, default=1024,
+                        help="序列截断上限（动态 padding，只做截断不补 1024）")
     parser.add_argument("--batch_size", type=int, default=2)
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4)
     parser.add_argument("--learning_rate", type=float, default=1.2e-4)
@@ -229,6 +264,8 @@ def main():
     parser.add_argument("--default_distill_mask", type=int, choices=[0, 1], default=0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--deterministic", action="store_true")
+    parser.add_argument("--quantize", type=str, choices=["none", "4bit"], default="none",
+                        help="模型加载量化: none=bf16(默认), 4bit=QLoRA(bitsandbytes NF4, 供 70B 等大模型)")
     parser.add_argument("--resume_from", type=str, default="")
     parser.add_argument("--warmup_ratio", type=float, default=0.1,
                         help="Fraction of total steps for linear warmup (0=no warmup)")
@@ -240,13 +277,18 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        args.model_name,
-        eos_token="<|endoftext|>",
-        pad_token="<|endoftext|>",
-        unk_token="<|endoftext|>",
-        trust_remote_code=True,
-    )
+    if _USE_CHAT_TEMPLATE:
+        tokenizer = AutoTokenizer.from_pretrained(args.model_name, trust_remote_code=True)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(
+            args.model_name,
+            eos_token="<|endoftext|>",
+            pad_token="<|endoftext|>",
+            unk_token="<|endoftext|>",
+            trust_remote_code=True,
+        )
 
     option_token_ids = []
     for ch in OPTION_LETTERS:
@@ -257,13 +299,32 @@ def main():
     ds = DentalChoiceHeadDataset(
         args.data_path,
         tokenizer,
+        max_length=args.max_length,
         default_distill_mask=args.default_distill_mask,
     )
+
+    def collate_fn(batch):
+        """动态 padding：按 batch 内最长序列补齐，避免固定 1024 浪费算力。"""
+        pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
+        max_len = max(b["input_ids"].size(0) for b in batch)
+
+        def _pad(t, val):
+            return F.pad(t, (0, max_len - t.size(0)), value=val)
+
+        return {
+            "input_ids": torch.stack([_pad(b["input_ids"], pad_id) for b in batch]),
+            "attention_mask": torch.stack([_pad(b["attention_mask"], 0) for b in batch]),
+            "labels": torch.stack([_pad(b["labels"], -100) for b in batch]),
+            "teacher_dist": torch.stack([b["teacher_dist"] for b in batch]),
+            "gt_option": torch.stack([b["gt_option"] for b in batch]),
+            "distill_mask": torch.stack([b["distill_mask"] for b in batch]),
+        }
+
     g = torch.Generator()
     g.manual_seed(args.seed)
-    dl = DataLoader(ds, batch_size=args.batch_size, shuffle=True, generator=g)
+    dl = DataLoader(ds, batch_size=args.batch_size, shuffle=True, generator=g, collate_fn=collate_fn)
 
-    base = AutoModelForCausalLM.from_pretrained(args.model_name, torch_dtype=torch.bfloat16, trust_remote_code=True)
+    base = load_base_model(args.model_name, args.quantize, device)
     if args.resume_from and os.path.isdir(args.resume_from):
         model = PeftModel.from_pretrained(base, args.resume_from, is_trainable=True)
     else:
@@ -277,7 +338,9 @@ def main():
         )
         model = get_peft_model(base, lora_cfg)
 
-    model = model.to(device)
+    # 4bit 模型已由 device_map 放置，.to(device) 多余且可能破坏量化层；bf16 才需要显式搬 GPU。
+    if args.quantize != "4bit":
+        model = model.to(device)
     model.train()
 
     optim = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=0.01)
@@ -351,9 +414,10 @@ def main():
         print(f"[BEST] val_acc={best_val_acc:.2f}% at epoch {best_val_epoch}")
         best_dir = os.path.join(args.output_dir, "best")
         if os.path.isdir(best_dir):
-            best_base = AutoModelForCausalLM.from_pretrained(args.model_name, torch_dtype=torch.bfloat16, trust_remote_code=True)
+            best_base = load_base_model(args.model_name, args.quantize, device)
             best_model = PeftModel.from_pretrained(best_base, best_dir)
-            best_model = best_model.to(device)
+            if args.quantize != "4bit":
+                best_model = best_model.to(device)
             test_acc = evaluate_generation(best_model, tokenizer, args.test_path, device)
             print(f"[TEST-BEST] epoch={best_val_epoch} test_acc={test_acc:.2f}%")
             del best_model, best_base

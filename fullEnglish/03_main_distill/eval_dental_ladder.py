@@ -207,6 +207,8 @@ def main():
             if tok.pad_token is None:
                 tok.pad_token = tok.eos_token
             model = load_base_model(m["path"], m["quantize"], device)
+            if m["quantize"] != "4bit":
+                model = model.to(device)
             model.eval()
             results.setdefault("zeroshot", {})[name] = eval_model(model, tok, dental)
             del model

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/UlIoDIzmcYXJGofORjWL7OUwrg0</id>
+  <title>arXiv Query: search_query=all:"DentalBench"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-08-17T13:55:52Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22DentalBench%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2508.20416v1</id>
+    <title>DentalBench: Benchmarking and Advancing LLMs Capability for Bilingual Dentistry Understanding</title>
+    <updated>2025-08-28T04:35:51Z</updated>
+    <link href="https://arxiv.org/abs/2508.20416v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.20416v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in large language models (LLMs) and medical LLMs (Med-LLMs) have demonstrated strong performance on general medical benchmarks. However, their capabilities in specialized medical fields, such as dentistry which require deeper domain-specific knowledge, remain underexplored due to the lack of targeted evaluation resources. In this paper, we introduce DentalBench, the first comprehensive bilingual benchmark designed to evaluate and advance LLMs in the dental domain. DentalBench consists of two main components: DentalQA, an English-Chinese question-answering (QA) benchmark with 36,597 questions spanning 4 tasks and 16 dental subfields; and DentalCorpus, a large-scale, high-quality corpus with 337.35 million tokens curated for dental domain adaptation, supporting both supervised fine-tuning (SFT) and retrieval-augmented generation (RAG). We evaluate 14 LLMs, covering proprietary, open-source, and medical-specific models, and reveal significant performance gaps across task types and languages. Further experiments with Qwen-2.5-3B demonstrate that domain adaptation substantially improves model performance, particularly on knowledge-intensive and terminology-focused tasks, and highlight the importance of domain-specific benchmarks for developing trustworthy and effective LLMs tailored to healthcare applications.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-28T04:35:51Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hengchuan Zhu</name>
+    </author>
+    <author>
+      <name>Yihuan Xu</name>
+    </author>
+    <author>
+      <name>Yichen Li</name>
+    </author>
+    <author>
+      <name>Zijie Meng</name>
+    </author>
+    <author>
+      <name>Zuozhu Liu</name>
+    </author>
+  </entry>
+</feed>

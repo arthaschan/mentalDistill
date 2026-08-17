@@ -49,9 +49,12 @@ def apply_prompt_template(tokenizer, sys_line, user_block):
             {"role": "system", "content": sys_line},
             {"role": "user", "content": user_block},
         ]
-        prefix = tokenizer.apply_chat_template(
-            msgs, tokenize=False, add_generation_prompt=True
-        )
+        kwargs = {"tokenize": False, "add_generation_prompt": True}
+        # Qwen3 等带 thinking 开关的模板：强制非思考模式，否则会吐推理链被 max_new_tokens 截断。
+        # 仅当模板本身引用了 enable_thinking 才传，Llama/Gemma 模板无此变量，不受影响。
+        if "enable_thinking" in (tokenizer.chat_template or ""):
+            kwargs["enable_thinking"] = False
+        prefix = tokenizer.apply_chat_template(msgs, **kwargs)
         return prefix, ""
     prefix = (
         "<|im_start|>system\n"

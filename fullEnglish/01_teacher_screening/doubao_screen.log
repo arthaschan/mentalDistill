@@ -1,0 +1,32 @@
+[PROGRESS] scanned=20/600 newly_valid=20 failed=0 total_valid=20
+[PROGRESS] scanned=40/600 newly_valid=40 failed=0 total_valid=40
+[PROGRESS] scanned=60/600 newly_valid=60 failed=0 total_valid=60
+[PROGRESS] scanned=80/600 newly_valid=80 failed=0 total_valid=80
+[PROGRESS] scanned=100/600 newly_valid=100 failed=0 total_valid=100
+[PROGRESS] scanned=120/600 newly_valid=120 failed=0 total_valid=120
+[ERR] {"index": 125, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=300)", "question": "A 71-year-old woman with type 2 diabetes mellitus and hypertension comes to the emergency department because of a 3-day "}
+[PROGRESS] scanned=140/600 newly_valid=139 failed=1 total_valid=139
+[PROGRESS] scanned=160/600 newly_valid=159 failed=1 total_valid=159
+[PROGRESS] scanned=180/600 newly_valid=179 failed=1 total_valid=179
+[PROGRESS] scanned=200/600 newly_valid=199 failed=1 total_valid=199
+[PROGRESS] scanned=220/600 newly_valid=219 failed=1 total_valid=219
+[PROGRESS] scanned=240/600 newly_valid=239 failed=1 total_valid=239
+[PROGRESS] scanned=260/600 newly_valid=259 failed=1 total_valid=259
+[PROGRESS] scanned=280/600 newly_valid=279 failed=1 total_valid=279
+[PROGRESS] scanned=300/600 newly_valid=299 failed=1 total_valid=299
+[PROGRESS] scanned=320/600 newly_valid=319 failed=1 total_valid=319
+[PROGRESS] scanned=340/600 newly_valid=339 failed=1 total_valid=339
+[PROGRESS] scanned=360/600 newly_valid=359 failed=1 total_valid=359
+[PROGRESS] scanned=380/600 newly_valid=379 failed=1 total_valid=379
+[PROGRESS] scanned=400/600 newly_valid=399 failed=1 total_valid=399
+[PROGRESS] scanned=420/600 newly_valid=419 failed=1 total_valid=419
+[PROGRESS] scanned=440/600 newly_valid=439 failed=1 total_valid=439
+[PROGRESS] scanned=460/600 newly_valid=459 failed=1 total_valid=459
+[PROGRESS] scanned=480/600 newly_valid=479 failed=1 total_valid=479
+[PROGRESS] scanned=500/600 newly_valid=499 failed=1 total_valid=499
+[PROGRESS] scanned=520/600 newly_valid=519 failed=1 total_valid=519
+[PROGRESS] scanned=540/600 newly_valid=539 failed=1 total_valid=539
+[PROGRESS] scanned=560/600 newly_valid=559 failed=1 total_valid=559
+[PROGRESS] scanned=580/600 newly_valid=579 failed=1 total_valid=579
+[PROGRESS] scanned=600/600 newly_valid=599 failed=1 total_valid=599
+[DONE] attempted=600 newly_valid=599 failed=1 total_valid=599 output=fullEnglish/01_teacher_screening/labels/Doubao.jsonl

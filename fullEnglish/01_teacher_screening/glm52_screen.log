@@ -1,0 +1,39 @@
+[ERR] {"index": 20, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "When would you do trans-vaginal sonography in post-menopausal bleeding if endometrial thickness is?"}
+[PROGRESS] scanned=20/600 newly_valid=19 failed=1 total_valid=19
+[PROGRESS] scanned=40/600 newly_valid=39 failed=1 total_valid=39
+[PROGRESS] scanned=60/600 newly_valid=59 failed=1 total_valid=59
+[PROGRESS] scanned=80/600 newly_valid=79 failed=1 total_valid=79
+[PROGRESS] scanned=100/600 newly_valid=99 failed=1 total_valid=99
+[PROGRESS] scanned=120/600 newly_valid=119 failed=1 total_valid=119
+[ERR] {"index": 126, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "A 14-year-old boy is brought to the emergency department by his mother after falling from the jungle gym and developing "}
+[ERR] {"index": 127, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "A 32-year-old female is brought to the emergency room by her friend for acute onset abdominal pain. She states that she "}
+[PROGRESS] scanned=140/600 newly_valid=137 failed=3 total_valid=137
+[PROGRESS] scanned=160/600 newly_valid=157 failed=3 total_valid=157
+[PROGRESS] scanned=180/600 newly_valid=177 failed=3 total_valid=177
+[PROGRESS] scanned=200/600 newly_valid=197 failed=3 total_valid=197
+[ERR] {"index": 211, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "All are structures lying deep to the hyoglossus muscle except:"}
+[PROGRESS] scanned=220/600 newly_valid=216 failed=4 total_valid=216
+[ERR] {"index": 224, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "A 31-year-old woman, gravida 2, para 1, at 32 weeks' gestation presents to the emergency department for clear vaginal di"}
+[PROGRESS] scanned=240/600 newly_valid=235 failed=5 total_valid=235
+[PROGRESS] scanned=260/600 newly_valid=255 failed=5 total_valid=255
+[ERR] {"index": 267, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "A 47-year-old man presents with hemoptysis, diffuse muscle pain, and shortness of breath. He has had these symptoms befo"}
+[PROGRESS] scanned=280/600 newly_valid=274 failed=6 total_valid=274
+[PROGRESS] scanned=300/600 newly_valid=294 failed=6 total_valid=294
+[PROGRESS] scanned=320/600 newly_valid=314 failed=6 total_valid=314
+[PROGRESS] scanned=340/600 newly_valid=334 failed=6 total_valid=334
+[PROGRESS] scanned=360/600 newly_valid=354 failed=6 total_valid=354
+[ERR] {"index": 370, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "A medical student is preparing a patient for an appendectomy. He is asked by the surgeon to disinfect the patient’s skin"}
+[PROGRESS] scanned=380/600 newly_valid=373 failed=7 total_valid=373
+[PROGRESS] scanned=400/600 newly_valid=393 failed=7 total_valid=393
+[PROGRESS] scanned=420/600 newly_valid=413 failed=7 total_valid=413
+[PROGRESS] scanned=440/600 newly_valid=433 failed=7 total_valid=433
+[PROGRESS] scanned=460/600 newly_valid=453 failed=7 total_valid=453
+[PROGRESS] scanned=480/600 newly_valid=473 failed=7 total_valid=473
+[PROGRESS] scanned=500/600 newly_valid=493 failed=7 total_valid=493
+[PROGRESS] scanned=520/600 newly_valid=513 failed=7 total_valid=513
+[ERR] {"index": 522, "error": "HTTPSConnectionPool(host='ark.cn-beijing.volces.com', port=443): Read timed out. (read timeout=120)", "question": "A 22-year-old woman comes to the physician for a routine health examination. She feels well but asks for advice about sm"}
+[PROGRESS] scanned=540/600 newly_valid=532 failed=8 total_valid=532
+[PROGRESS] scanned=560/600 newly_valid=552 failed=8 total_valid=552
+[PROGRESS] scanned=580/600 newly_valid=572 failed=8 total_valid=572
+[PROGRESS] scanned=600/600 newly_valid=592 failed=8 total_valid=592
+[DONE] attempted=600 newly_valid=592 failed=8 total_valid=592 output=fullEnglish/01_teacher_screening/labels/GLM5-2.jsonl

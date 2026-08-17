@@ -25,3 +25,8 @@
   [ 77.5%] 50.8/65.5 GB 22.7 MB/s  done   model-00013-of-00017.safetensors
   [ 83.4%] 54.7/65.5 GB 23.7 MB/s  done   model-00003-of-00017.safetensors
   [ 89.4%] 58.6/65.5 GB 23.7 MB/s  done   model-00015-of-00017.safetensors
+  [ 95.3%] 62.5/65.5 GB 23.9 MB/s  done   model-00016-of-00017.safetensors
+  [100.0%] 65.5/65.5 GB 21.7 MB/s  done   model-00017-of-00017.safetensors
+
+完成: 28/28 文件
+全部下载完成 -> models/Qwen3-32B

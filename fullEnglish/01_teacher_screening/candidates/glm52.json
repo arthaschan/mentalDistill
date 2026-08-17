@@ -1,0 +1,6 @@
+{
+  "name": "GLM5-2",
+  "model": "glm-5-2-260617",
+  "api_base": "https://ark.cn-beijing.volces.com/api/v3",
+  "api_key_env": "DOUBAO_API_KEY"
+}

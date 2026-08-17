@@ -1,0 +1,6 @@
+{
+  "name": "DeepSeekV4Pro",
+  "model": "deepseek-v4-pro-260425",
+  "api_base": "https://ark.cn-beijing.volces.com/api/v3",
+  "api_key_env": "DOUBAO_API_KEY"
+}

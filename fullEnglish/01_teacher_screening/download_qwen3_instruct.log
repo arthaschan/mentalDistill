@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/student/arthas/mentalDistill/fullEnglish/01_teacher_screening/parallel_ms_download.py", line 101, in <module>
+    main()
+  File "/home/student/arthas/mentalDistill/fullEnglish/01_teacher_screening/parallel_ms_download.py", line 61, in main
+    files = get_files(mid)
+            ^^^^^^^^^^^^^^
+  File "/home/student/arthas/mentalDistill/fullEnglish/01_teacher_screening/parallel_ms_download.py", line 24, in get_files
+    r.raise_for_status()
+  File "/home/student/anaconda3/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://modelscope.cn/api/v1/models/Qwen/Qwen3-32B-Instruct/repo/files?Revision=master&Root=

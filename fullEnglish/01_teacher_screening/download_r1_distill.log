@@ -1,0 +1,21 @@
+模型 deepseek-ai/DeepSeek-R1-Distill-Qwen-32B: 18 个文件, 共 65.5 GB, 12 线程
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   .gitattributes
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   config.json
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   generation_config.json
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   LICENSE
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   configuration.json
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   model.safetensors.index.json
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   tokenizer_config.json
+  [  0.0%] 0.0/65.5 GB 0.0 MB/s  done   README.md
+  [  0.0%] 0.0/65.5 GB 0.7 MB/s  done   tokenizer.json
+  [  6.2%] 4.1/65.5 GB 1.9 MB/s  done   model-00008-of-000008.safetensors
+  [ 19.6%] 12.9/65.5 GB 3.6 MB/s  done   model-00006-of-000008.safetensors
+  [ 33.0%] 21.7/65.5 GB 6.0 MB/s  done   model-00001-of-000008.safetensors
+  [ 46.4%] 30.4/65.5 GB 8.0 MB/s  done   model-00003-of-000008.safetensors
+  [ 59.8%] 39.2/65.5 GB 10.0 MB/s  done   model-00007-of-000008.safetensors
+  [ 73.2%] 48.0/65.5 GB 10.3 MB/s  done   model-00002-of-000008.safetensors
+  [ 86.6%] 56.8/65.5 GB 12.2 MB/s  done   model-00004-of-000008.safetensors
+  [100.0%] 65.5/65.5 GB 13.5 MB/s  done   model-00005-of-000008.safetensors
+
+完成: 17/18 文件
+  失败: figures -> FAIL: 404 Client Error: Not Found for url: https://modelscope.cn/models/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B/resolve/master/figures

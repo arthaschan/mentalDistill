@@ -1,0 +1,505 @@
+{
+  "teachers": {
+    "flash": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "covered": 114,
+          "acc": 82.46
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "covered": 799,
+          "acc": 66.71
+        },
+        "test_mmlu": {
+          "n": 67,
+          "covered": 67,
+          "acc": 88.06
+        }
+      },
+      "combined_n": 980,
+      "combined": 70.0,
+      "low_coverage": false
+    },
+    "dsv4pro": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "covered": 108,
+          "acc": 97.22
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "covered": 0,
+          "acc": null
+        },
+        "test_mmlu": {
+          "n": 67,
+          "covered": 63,
+          "acc": 95.24
+        }
+      },
+      "combined_n": 171,
+      "combined": 96.49,
+      "low_coverage": true
+    },
+    "glm52": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "covered": 13,
+          "acc": 84.62
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "covered": 18,
+          "acc": 55.56
+        },
+        "test_mmlu": {
+          "n": 67,
+          "covered": 0,
+          "acc": null
+        }
+      },
+      "combined_n": 31,
+      "combined": 67.74,
+      "low_coverage": true
+    },
+    "doubao": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "covered": 16,
+          "acc": 87.5
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "covered": 17,
+          "acc": 70.59
+        },
+        "test_mmlu": {
+          "n": 67,
+          "covered": 0,
+          "acc": null
+        }
+      },
+      "combined_n": 33,
+      "combined": 78.79,
+      "low_coverage": true
+    }
+  },
+  "zeroshot": {
+    "Qwen3-32B": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "acc": 72.81
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "acc": 59.57
+        },
+        "test_mmlu": {
+          "n": 67,
+          "acc": 83.58
+        }
+      },
+      "combined_n": 980,
+      "combined": 62.76
+    },
+    "Qwen2.5-32B": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "acc": 74.56
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "acc": 58.32
+        },
+        "test_mmlu": {
+          "n": 67,
+          "acc": 77.61
+        }
+      },
+      "combined_n": 980,
+      "combined": 61.53
+    },
+    "Qwen2.5-14B": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "acc": 61.4
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "acc": 54.07
+        },
+        "test_mmlu": {
+          "n": 67,
+          "acc": 74.63
+        }
+      },
+      "combined_n": 980,
+      "combined": 56.33
+    },
+    "Llama-3.3-70B": {
+      "per_source": {
+        "test_medqa": {
+          "n": 114,
+          "acc": 70.18
+        },
+        "test_medmcqa": {
+          "n": 799,
+          "acc": 59.2
+        },
+        "test_mmlu": {
+          "n": 67,
+          "acc": 80.6
+        }
+      },
+      "combined_n": 980,
+      "combined": 61.94
+    }
+  },
+  "combos": [
+    {
+      "teacher": "Qwen2.5-14B",
+      "teacher_acc": 56.33,
+      "teacher_low_coverage": false,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": -6.43,
+      "predicted_trained": 66.51,
+      "predicted_delta": 10.18,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-14B",
+      "teacher_acc": 56.33,
+      "teacher_low_coverage": false,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": -5.61,
+      "predicted_trained": 65.78,
+      "predicted_delta": 9.45,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-14B",
+      "teacher_acc": 56.33,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": -5.2,
+      "predicted_trained": 65.79,
+      "predicted_delta": 9.46,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-32B",
+      "teacher_acc": 61.53,
+      "teacher_low_coverage": false,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": -1.23,
+      "predicted_trained": 66.51,
+      "predicted_delta": 4.98,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Llama-3.3-70B",
+      "teacher_acc": 61.94,
+      "teacher_low_coverage": false,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": -0.82,
+      "predicted_trained": 66.51,
+      "predicted_delta": 4.57,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-32B",
+      "teacher_acc": 61.53,
+      "teacher_low_coverage": false,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": -0.41,
+      "predicted_trained": 65.78,
+      "predicted_delta": 4.25,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Llama-3.3-70B",
+      "teacher_acc": 61.94,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": 0.41,
+      "predicted_trained": 65.79,
+      "predicted_delta": 3.85,
+      "candidate_4pp": true,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen3-32B",
+      "teacher_acc": 62.76,
+      "teacher_low_coverage": false,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": 0.82,
+      "predicted_trained": 65.78,
+      "predicted_delta": 3.02,
+      "candidate_4pp": true,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen3-32B",
+      "teacher_acc": 62.76,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": 1.23,
+      "predicted_trained": 65.79,
+      "predicted_delta": 3.03,
+      "candidate_4pp": true,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "glm52",
+      "teacher_acc": 67.74,
+      "teacher_low_coverage": true,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": 4.98,
+      "predicted_trained": 66.51,
+      "predicted_delta": -1.23,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "Qwen2.5-32B",
+      "teacher_acc": 61.53,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 5.2,
+      "predicted_trained": 60.33,
+      "predicted_delta": -1.2,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "Llama-3.3-70B",
+      "teacher_acc": 61.94,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 5.61,
+      "predicted_trained": 60.33,
+      "predicted_delta": -1.61,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "glm52",
+      "teacher_acc": 67.74,
+      "teacher_low_coverage": true,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": 5.8,
+      "predicted_trained": 65.78,
+      "predicted_delta": -1.96,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "glm52",
+      "teacher_acc": 67.74,
+      "teacher_low_coverage": true,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": 6.21,
+      "predicted_trained": 65.79,
+      "predicted_delta": -1.95,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "Qwen3-32B",
+      "teacher_acc": 62.76,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 6.43,
+      "predicted_trained": 60.33,
+      "predicted_delta": -2.43,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "flash",
+      "teacher_acc": 70.0,
+      "teacher_low_coverage": false,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": 7.24,
+      "predicted_trained": 66.51,
+      "predicted_delta": -3.49,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "flash",
+      "teacher_acc": 70.0,
+      "teacher_low_coverage": false,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": 8.06,
+      "predicted_trained": 65.78,
+      "predicted_delta": -4.22,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "flash",
+      "teacher_acc": 70.0,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": 8.47,
+      "predicted_trained": 65.79,
+      "predicted_delta": -4.21,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "glm52",
+      "teacher_acc": 67.74,
+      "teacher_low_coverage": true,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 11.41,
+      "predicted_trained": 60.33,
+      "predicted_delta": -7.41,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "flash",
+      "teacher_acc": 70.0,
+      "teacher_low_coverage": false,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 13.67,
+      "predicted_trained": 60.33,
+      "predicted_delta": -9.67,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "doubao",
+      "teacher_acc": 78.79,
+      "teacher_low_coverage": true,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": 16.03,
+      "predicted_trained": 66.51,
+      "predicted_delta": -12.28,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "doubao",
+      "teacher_acc": 78.79,
+      "teacher_low_coverage": true,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": 16.85,
+      "predicted_trained": 65.78,
+      "predicted_delta": -13.01,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "doubao",
+      "teacher_acc": 78.79,
+      "teacher_low_coverage": true,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": 17.26,
+      "predicted_trained": 65.79,
+      "predicted_delta": -13.0,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "doubao",
+      "teacher_acc": 78.79,
+      "teacher_low_coverage": true,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 22.46,
+      "predicted_trained": 60.33,
+      "predicted_delta": -18.46,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "dsv4pro",
+      "teacher_acc": 96.49,
+      "teacher_low_coverage": true,
+      "student": "Qwen3-32B",
+      "student_zero": 62.76,
+      "gap": 33.73,
+      "predicted_trained": 66.51,
+      "predicted_delta": -29.98,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "dsv4pro",
+      "teacher_acc": 96.49,
+      "teacher_low_coverage": true,
+      "student": "Llama-3.3-70B",
+      "student_zero": 61.94,
+      "gap": 34.55,
+      "predicted_trained": 65.78,
+      "predicted_delta": -30.71,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "dsv4pro",
+      "teacher_acc": 96.49,
+      "teacher_low_coverage": true,
+      "student": "Qwen2.5-32B",
+      "student_zero": 61.53,
+      "gap": 34.96,
+      "predicted_trained": 65.79,
+      "predicted_delta": -30.7,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "dsv4pro",
+      "teacher_acc": 96.49,
+      "teacher_low_coverage": true,
+      "student": "Qwen2.5-14B",
+      "student_zero": 56.33,
+      "gap": 40.16,
+      "predicted_trained": 60.33,
+      "predicted_delta": -36.16,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    }
+  ],
+  "n_dental": 980
+}

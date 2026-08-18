@@ -1,0 +1,55 @@
+{
+  "teacher": {
+    "test_medqa": 79.34,
+    "test_medmcqa": 74.29,
+    "test_mmlu": 88.14
+  },
+  "zeroshot": {
+    "test_medqa": 70.07,
+    "test_medmcqa": 67.58,
+    "test_mmlu": 84.77,
+    "test_pubmedqa": 55.2
+  },
+  "per_seed": {
+    "s11": {
+      "test_medqa": 15.79,
+      "test_medmcqa": 19.15,
+      "test_mmlu": 11.63,
+      "test_pubmedqa": 25.2
+    },
+    "s42": {
+      "test_medqa": 14.61,
+      "test_medmcqa": 18.86,
+      "test_mmlu": 9.69,
+      "test_pubmedqa": 22.1
+    },
+    "s8": {
+      "test_medqa": 15.87,
+      "test_medmcqa": 18.24,
+      "test_mmlu": 10.22,
+      "test_pubmedqa": 22.0
+    }
+  },
+  "summary": {
+    "test_medqa": [
+      15.42,
+      0.71
+    ],
+    "test_medmcqa": [
+      18.75,
+      0.46
+    ],
+    "test_mmlu": [
+      10.51,
+      1.0
+    ],
+    "test_pubmedqa": [
+      23.1,
+      1.82
+    ]
+  },
+  "combined_teacher": 79.8,
+  "combined_zeroshot": 73.84,
+  "combined_student": 15.42,
+  "combined_baseline": 77.6
+}

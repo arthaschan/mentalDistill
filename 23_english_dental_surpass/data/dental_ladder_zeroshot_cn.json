@@ -1,0 +1,206 @@
+{
+  "teachers": {
+    "DeepSeek-V3": {
+      "combined": 79.2,
+      "combined_n": 125,
+      "note": "README 口径(125题)"
+    }
+  },
+  "zeroshot": {
+    "Llama-3.3-70B": {
+      "n": 250,
+      "acc": 63.2
+    },
+    "Qwen3-32B": {
+      "n": 250,
+      "acc": 79.6
+    },
+    "Qwen2.5-32B": {
+      "n": 250,
+      "acc": 82.4
+    },
+    "Qwen2.5-14B": {
+      "n": 250,
+      "acc": 77.6
+    }
+  },
+  "combos": [
+    {
+      "teacher": "Llama-3.3-70B",
+      "teacher_acc": 63.2,
+      "student": "Qwen2.5-32B",
+      "student_zero": 82.4,
+      "gap": -19.2,
+      "predicted_trained": 86.4,
+      "predicted_delta": 23.2,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Llama-3.3-70B",
+      "teacher_acc": 63.2,
+      "student": "Qwen3-32B",
+      "student_zero": 79.6,
+      "gap": -16.4,
+      "predicted_trained": 83.6,
+      "predicted_delta": 20.4,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Llama-3.3-70B",
+      "teacher_acc": 63.2,
+      "student": "Qwen2.5-14B",
+      "student_zero": 77.6,
+      "gap": -14.4,
+      "predicted_trained": 82.4,
+      "predicted_delta": 19.2,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-14B",
+      "teacher_acc": 77.6,
+      "student": "Qwen2.5-32B",
+      "student_zero": 82.4,
+      "gap": -4.8,
+      "predicted_trained": 86.4,
+      "predicted_delta": 8.8,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "DeepSeek-V3",
+      "teacher_acc": 79.2,
+      "student": "Qwen2.5-32B",
+      "student_zero": 82.4,
+      "gap": -3.2,
+      "predicted_trained": 86.4,
+      "predicted_delta": 7.2,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen3-32B",
+      "teacher_acc": 79.6,
+      "student": "Qwen2.5-32B",
+      "student_zero": 82.4,
+      "gap": -2.8,
+      "predicted_trained": 86.4,
+      "predicted_delta": 6.8,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-14B",
+      "teacher_acc": 77.6,
+      "student": "Qwen3-32B",
+      "student_zero": 79.6,
+      "gap": -2.0,
+      "predicted_trained": 83.6,
+      "predicted_delta": 6.0,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "DeepSeek-V3",
+      "teacher_acc": 79.2,
+      "student": "Qwen3-32B",
+      "student_zero": 79.6,
+      "gap": -0.4,
+      "predicted_trained": 83.6,
+      "predicted_delta": 4.4,
+      "candidate_4pp": false,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "DeepSeek-V3",
+      "teacher_acc": 79.2,
+      "student": "Qwen2.5-14B",
+      "student_zero": 77.6,
+      "gap": 1.6,
+      "predicted_trained": 82.4,
+      "predicted_delta": 3.2,
+      "candidate_4pp": true,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen3-32B",
+      "teacher_acc": 79.6,
+      "student": "Qwen2.5-14B",
+      "student_zero": 77.6,
+      "gap": 2.0,
+      "predicted_trained": 82.4,
+      "predicted_delta": 2.8,
+      "candidate_4pp": true,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-32B",
+      "teacher_acc": 82.4,
+      "student": "Qwen3-32B",
+      "student_zero": 79.6,
+      "gap": 2.8,
+      "predicted_trained": 83.6,
+      "predicted_delta": 1.2,
+      "candidate_4pp": true,
+      "surpass_predicted": true
+    },
+    {
+      "teacher": "Qwen2.5-32B",
+      "teacher_acc": 82.4,
+      "student": "Qwen2.5-14B",
+      "student_zero": 77.6,
+      "gap": 4.8,
+      "predicted_trained": 82.4,
+      "predicted_delta": 0.0,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "Qwen2.5-14B",
+      "teacher_acc": 77.6,
+      "student": "Llama-3.3-70B",
+      "student_zero": 63.2,
+      "gap": 14.4,
+      "predicted_trained": 67.2,
+      "predicted_delta": -10.4,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "DeepSeek-V3",
+      "teacher_acc": 79.2,
+      "student": "Llama-3.3-70B",
+      "student_zero": 63.2,
+      "gap": 16.0,
+      "predicted_trained": 67.2,
+      "predicted_delta": -12.0,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "Qwen3-32B",
+      "teacher_acc": 79.6,
+      "student": "Llama-3.3-70B",
+      "student_zero": 63.2,
+      "gap": 16.4,
+      "predicted_trained": 67.2,
+      "predicted_delta": -12.4,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    },
+    {
+      "teacher": "Qwen2.5-32B",
+      "teacher_acc": 82.4,
+      "student": "Llama-3.3-70B",
+      "student_zero": 63.2,
+      "gap": 19.2,
+      "predicted_trained": 67.2,
+      "predicted_delta": -15.2,
+      "candidate_4pp": false,
+      "surpass_predicted": false
+    }
+  ],
+  "n_dental": 250
+}

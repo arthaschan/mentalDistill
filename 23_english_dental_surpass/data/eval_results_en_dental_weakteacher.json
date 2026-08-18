@@ -1,0 +1,15 @@
+{
+  "weak_teacher": {
+    "name": "Qwen3-32B(弱老师)",
+    "acc": 62.76
+  },
+  "flash": 70.0,
+  "qwen25_32b_trained": 65.65,
+  "llama70b_per_seed": {
+    "s11": 65.41,
+    "s42": 64.39,
+    "s8": 68.57
+  },
+  "llama70b_mean": 66.12,
+  "llama70b_std": 2.18
+}

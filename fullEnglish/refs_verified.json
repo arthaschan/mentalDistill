@@ -1,0 +1,34 @@
+{
+  "1503.02531": {
+    "ok": true,
+    "title": "Distilling the Knowledge in a Neural Network"
+  },
+  "2009.13081": {
+    "ok": true,
+    "title": "What Disease does this Patient Have? A Large-scale Open Domain Question Answering Dataset from Medical Exams"
+  },
+  "2203.14371": {
+    "ok": true,
+    "title": "MedMCQA : A Large-scale Multi-Subject Multi-Choice Dataset for Medical domain Question Answering"
+  },
+  "2009.03300": {
+    "ok": true,
+    "title": "Measuring Massive Multitask Language Understanding"
+  },
+  "1909.06146": {
+    "ok": true,
+    "title": "PubMedQA: A Dataset for Biomedical Research Question Answering"
+  },
+  "2306.03030": {
+    "ok": true,
+    "title": "Benchmarking Large Language Models on CMExam -- A Comprehensive Chinese Medical Exam Dataset"
+  },
+  "2508.20416": {
+    "ok": true,
+    "title": "DentalBench: Benchmarking and Advancing LLMs Capability for Bilingual Dentistry Understanding"
+  },
+  "2306.12079": {
+    "ok": false,
+    "title": "FLGo: A Fully Customizable Federated Learning Platform"
+  }
+}

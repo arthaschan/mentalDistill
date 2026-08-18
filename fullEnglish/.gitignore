@@ -13,7 +13,6 @@
 03_main_distill/runs/
 
 # ── 图表 PNG（由 figures/make_figures.py 重新生成）──
-figures/*.png
 
 # ── Python 缓存 ──
 __pycache__/

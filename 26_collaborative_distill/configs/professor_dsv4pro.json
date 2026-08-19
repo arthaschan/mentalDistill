@@ -1,0 +1,6 @@
+{
+  "name": "DeepSeek-V4-Pro",
+  "model": "deepseek-v4-pro",
+  "api_base": "https://api.deepseek.com/v1",
+  "api_key_env": "DEEPSEEK_API_KEY"
+}

@@ -109,6 +109,57 @@ bash check_env.sh
 
 ---
 
+## 论文核心实验：学生超越教师（三场景，可复现）
+
+当前论文（`fullEnglish/论文_牙科journal版.md`）只报告"学生超越教师"成立的三个场景。三者训练超参数**完全一致**：
+
+- 蒸馏方式：Choice-Head，α=0（纯标准答案监督，不用教师软标签）
+- LoRA：rank 16，alpha 32
+- 学习率 1e-4，batch size 1 × 梯度累积 8，训练 1 轮（1 epoch）
+- 唯一差异：Llama-3.3-70B 因 70B 显存限制改用 QLoRA 4bit（其余 bf16）
+
+| 场景 | 文件夹 | 学生 | 教师基准 | 训练数据 | 种子 | 结果（训练后 vs 教师） |
+|------|--------|------|---------|---------|------|----------------------|
+| 中文牙科 | `22_chinese_dental_surpass` | Qwen3-32B | DeepSeek-V4-flash（79.20%） | CMExam 全学科 4,608（口腔医学 580） | 11/42/8 | 82.40%±0.80，超 +3.20 |
+| 英文全科·无印度 | `27_english_general_noindia` | Qwen2.5-32B / Llama-3.3-70B | Qwen3-32B（80.22%） | 无印度 10,168 | 42 | 82.19% / 82.09%，超 +1.97 / +1.87 |
+| 英文牙科·无印度 | `28_english_dental_noindia` | 复用 27 的 adapter | Qwen3-32B（72.46%） | 牙科测试 501 | —（复用） | 75.65% / 80.64%，超 +3.19 / +8.18 |
+
+> 英文牙科（28）不单独训练：直接复用英文全科（27）训练出的 adapter，在 501 题牙科测试集上评测。
+
+### 复现命令
+
+```bash
+source setup.env
+PY="$HOME/anaconda3/bin/python3"
+
+# 1) 中文牙科：Qwen3-32B 学生，3-seed 训练 + 评估
+bash 22_chinese_dental_surpass/scripts/run_train.sh
+"$PY" 22_chinese_dental_surpass/scripts/eval_dental.py
+
+# 2) 英文全科·无印度：Qwen2.5-32B 学生（seed 42）
+bash 27_english_general_noindia/scripts/run_train_noindia.sh
+"$PY" 27_english_general_noindia/scripts/eval_noindia_full.py
+
+# 2b) 英文全科·无印度：Llama-3.3-70B 学生（QLoRA 4bit，seed 42）
+bash 27_english_general_noindia/scripts/run_train_noindia_llama.sh
+"$PY" 27_english_general_noindia/scripts/eval_noindia_full_llama.py
+
+# 3) 英文牙科·无印度：复用 27 的 adapter 评测
+"$PY" 28_english_dental_noindia/scripts/eval_noindia_dental.py         # Qwen2.5-32B
+"$PY" 28_english_dental_noindia/scripts/eval_noindia_dental_llama.py   # Llama-70B
+```
+
+### 数据文件
+
+| 场景 | 数据 | 位置 |
+|------|------|------|
+| 中文牙科 | 训练 4,608 / 牙科测试 125 / 牙科验证 125 | `22_chinese_dental_surpass/data/` |
+| 英文·无印度 | 训练 10,168 / 全科测试 4,110 / 牙科测试 501 | `27_english_general_noindia/data/`、`28_english_dental_noindia/data/` |
+
+训练统一入口：`shared/train_choice_head_distill.py`（`--rank 16 --lora_alpha 32 --learning_rate 1e-4 --batch_size 1 --gradient_accumulation_steps 8 --num_epochs 1 --alpha 0.0`）。
+
+---
+
 ## 运行单个模块
 
 不同模块保留的入口脚本并不完全一致，建议以各模块 `scripts/` 目录中的现有文件为准。标准训练模块常见入口如下：

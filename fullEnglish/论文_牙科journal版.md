@@ -85,7 +85,17 @@ L = (1 − α) · CE(y, ŷ) + α · KL(p_teacher ∥ p_student)
 
 本文采用 **α = 0**，即纯标准答案监督、完全不使用教师输出——消融验证为最优（KL 权重越高越差），且天然规避商用 API 的蒸馏条款限制。
 
-训练配置：LoRA（rank 16, alpha 32），学习率 1e-4，batch size 1 × 梯度累积 8，训练 1 轮；中文牙科用 3 个随机种子（11/42/8）取均值，英文用种子 42。Qwen3 系列关闭思考模式（enable_thinking=False）。
+训练配置（三个场景**完全一致**，见表 5）：LoRA（rank 16, alpha 32），学习率 1e-4，batch size 1 × 梯度累积 8，训练 1 轮，α=0；仅 Llama-3.3-70B 因 70B 显存限制改用 QLoRA 4bit（其余 bf16）。中文牙科用 3 个随机种子（11/42/8）取均值，英文用种子 42。Qwen3 系列关闭思考模式（enable_thinking=False）。
+
+**表 5　三场景训练配置与实验文件夹**
+
+| 场景 | 实验文件夹 | 学生模型 | 教师基准 | 训练数据 | 种子 | 训练产物 |
+|---|---|---|---|---|---|---|
+| 中文牙科 | `22_chinese_dental_surpass` | Qwen3-32B | DeepSeek-V4-flash（79.20%） | CMExam 全学科 4,608 | 11/42/8 | 3 个 adapter |
+| 英文全科·无印度 | `27_english_general_noindia` | Qwen2.5-32B / Llama-3.3-70B | Qwen3-32B（80.22%） | 无印度 10,168 | 42 | 2 个 adapter |
+| 英文牙科·无印度 | `28_english_dental_noindia` | 复用 27 的 adapter | Qwen3-32B（72.46%） | 牙科测试 501 | —（复用 27） | 复用 27 |
+
+> 英文牙科（28）不单独训练：直接复用英文全科（27）训练出的 adapter，在 501 题牙科测试集上评测；两者训练数据与超参数完全一致。训练统一入口为 `shared/train_choice_head_distill.py`。
 
 ### 2.4 评测指标
 
